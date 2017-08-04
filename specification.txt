@@ -1,0 +1,52 @@
+ Ultimate Calander / To-Do list / Organiser application: Manage.
+
+Initial Idea:
+Maintaining productivity is difficult over long periods of time, due to the 
+many distractions we allow ourselves to be susceptible to. I tend to make lists 
+in multiple formats; in my notebook, on my desk planner on my phone - but theres
+no way to access these multiple lists if I do not have all three mediums on me
+at the same time. I want to make an application which will combine all of these 
+mediums into one place. To-Do lists as well as notes, all organised nicely with 
+an adjoining calendar. It'll be like all the lists youve made on paper and the 
+notes you make on google keep all together synced with a vastly improved google 
+calendar - all inside "manage."
+
+Functions:
+
+====================================================================================================
+
+# Get up to date with the Java book
+# Hand drawn design ideas
+# Sumarise initial functionality (with potential extensions)
+# Finalise the design of the program (hierarchys, user interface and so forth)
+# Design the code (how it will be structured)
+# Plan the implementation
+# Begin coding
+
+** Currently trying to work out how I will code the project in terms of classes
+and what will be objects, and when they will be created and by what. And what
+will then subsequently be created by creating that object. (Make a list button 
+will be made by the window, so now I need to plan how the window will be coded)
+Need to get plain paper to draw window and then annotate so establish how I
+will code it. 
+
+====================================================================================================
+
+Research and Planning:
+  # TabbedPane
+  # Trees
+  # Checkbox
+  # See changing the look and feel of the JComponent
+  
+See this website for info on custom Java components:
+https://java-swing-tips.blogspot.co.uk/
+https://java-swing-tips.blogspot.co.uk/2008/11/rounded-corner-jbutton.html
+
+Look and Feel of JComponent:
+https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+
+JavaFX package
+
+Maybe change the way I was going to develop the program, do the underlying components first
+then work on the GUI, as that would allow me to adapt the GUI whenever I like - this will require
+serious planning and continuous editing whilst making the GUI
