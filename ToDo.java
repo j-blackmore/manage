@@ -30,7 +30,7 @@ public class ToDo {
   
   // calls change desc method of the Task specified by taskNum
   public void changeTaskDesc(int taskNum, String newTaskDesc) {
-    if (taskNum > numOfTasks || taskNum < 0)
+    if (taskNum > numOfTasks || taskNum < 1)
       System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
     else
       tasks.get(taskNum - 1).changeTaskDesc(newTaskDesc);
@@ -43,7 +43,7 @@ public class ToDo {
   
   // calls complete method of the Task specified by taskNum
   public void completeTask(int taskNum) {
-    if (taskNum > numOfTasks || taskNum < 0)
+    if (taskNum > numOfTasks || taskNum < 1)
       System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
     else
       tasks.get(taskNum - 1).completeTask();
@@ -61,7 +61,7 @@ public class ToDo {
   
   // returns string of the Task specified by taskNumber (the index in the list of tasks)
   public String getTask(int taskNum) {
-    if (taskNum > numOfTasks || taskNum < 0)
+    if (taskNum > numOfTasks || taskNum < 1)
       return "Task number invalid, please enter a value between 1 and " + numOfTasks;
     else
       return tasks.get(taskNum - 1).toString();
@@ -72,14 +72,14 @@ public class ToDo {
     String tempReturn;
     
     for (Task task : tasks) {
-      tempReturn += task + "\n";
+      tempReturn += task.toString() + "\n";
     }
     return tempReturn;
   }
   
   // removes Task specified by taskNum
   public void removeTask(int taskNum) {
-    if (taskNum > numOfTasks || taskNum < 0)
+    if (taskNum > numOfTasks || taskNum < 1)
       System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
     else {
       tasks.remove(taskNum - 1);
@@ -89,7 +89,7 @@ public class ToDo {
   
   // calls uncomplete method of the Task specified by taskNum
   public void unCompleteTask(int taskNum) {
-    if (taskNum > numOfTasks || taskNum < 0)
+    if (taskNum > numOfTasks || taskNum < 1)
       System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
     else
       tasks.get(taskNum - 1).unCompleteTask(); 

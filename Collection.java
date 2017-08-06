@@ -35,6 +35,24 @@ public class Collection {
     return name;
   }
   
+  // returns string of a to-do list specified by todoNumber (index in the list)
+  public String getToDo(int todoNumber) {
+    if (todoNumber > numOfToDos || todoNumber < 0)
+      return "ToDo number invalid, please enter a number between 1 and " + numOfToDos;
+    else
+      return todos.get(todoNumber -1).toString();
+  }
+  
+  // returns string representation of all the To-Dos in the collection
+  public String getToDos() {
+    String tempReturn;
+    
+    for (ToDo todo : todos) {
+      tempReturn += todo.toString() + "\n";
+    }
+    return tempReturn;
+  }
+  
   // returns name of Collection and list of its ToDos
   public String listCollection() {
     String tempReturn = name + "\n";
