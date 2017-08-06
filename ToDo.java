@@ -67,6 +67,16 @@ public class ToDo {
       return tasks.get(taskNum - 1).toString();
   }
   
+  // returns string representation of all the tasks in the To-Do
+  public String getTasks() {
+    String tempReturn;
+    
+    for (Task task : tasks) {
+      tempReturn += task + "\n";
+    }
+    return tempReturn;
+  }
+  
   // removes Task specified by taskNum
   public void removeTask(int taskNum) {
     if (taskNum > numOfTasks || taskNum < 0)
