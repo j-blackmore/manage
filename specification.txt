@@ -15,11 +15,11 @@ Functions:
 
 ====================================================================================================
 
-  # Finish data structures
-  # write test program for command line
-  # test data structures
-  # research and learn custom GUI
-  # write GUI and functionality
+  # Finish data structures [done]
+  # test data structures  []
+  # write test program for command line []
+  # research and learn custom GUI []
+  # write GUI and functionality []
   
 
 ** Currently trying to work out how I will code the project in terms of classes

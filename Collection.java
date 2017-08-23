@@ -3,14 +3,15 @@
 import java.util.ArrayList;
 
 public class Collection {
-  private ArrayList<ToDo> todos = null; // no ToDOs by default
+  private ArrayList<ToDo> todos = null; // no ToDos by default
   private String name = null; // no name by default
   private int order = 0;  // no ordering by default
-  private int numOfToDos = todos.size();
+  private int numOfToDos = 0;
   
   // name only constructor
   public Collection(String requiredName) {
     name = requiredName;
+    todos = new ArrayList<ToDo>();
   }
   
   // ordering constructor - calls name only constructor
@@ -45,7 +46,7 @@ public class Collection {
   
   // returns string representation of all the To-Dos in the collection
   public String getToDos() {
-    String tempReturn;
+    String tempReturn = "";
     
     for (ToDo todo : todos) {
       tempReturn += todo.toString() + "\n";
@@ -58,7 +59,7 @@ public class Collection {
     String tempReturn = name + "\n";
     
     for (ToDo todo : todos) {
-      tempReturn += todo.getName + "\n";
+      tempReturn += todo.getName() + "\n";
     }
     return tempReturn;
   }

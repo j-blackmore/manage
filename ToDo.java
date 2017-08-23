@@ -5,15 +5,16 @@
 import java.util.ArrayList;
 
 public class ToDo {
-  private ArrayList<Task> tasks = null;  // no tasks by default
+  private ArrayList<Task> tasks;  // no tasks by default
   private String name = null; // no name by default
   private int order = 0;  // no ordering by default
   private boolean complete = false; // incomplete as default
-  private int numOfTasks = tasks.size();
+  private int numOfTasks = 0;
   
   // name only constructor
   public ToDo(String requiredName) {
     name = requiredName;
+    tasks = new ArrayList<Task>();
   }
   
   // ordering constructor - calls name only constructor
@@ -69,7 +70,7 @@ public class ToDo {
   
   // returns string representation of all the tasks in the To-Do
   public String getTasks() {
-    String tempReturn;
+    String tempReturn = "";
     
     for (Task task : tasks) {
       tempReturn += task.toString() + "\n";
