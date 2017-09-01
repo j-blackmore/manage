@@ -1,7 +1,5 @@
 // Data object, represents a ToDo list of tasks. Holds these tasks in an ArrayList.
 
-// TODO: Test the class. Check taskNum - 1 is correct index. //
-
 import java.util.ArrayList;
 
 public class ToDo {
@@ -13,33 +11,33 @@ public class ToDo {
   
   // name only constructor
   public ToDo(String requiredName) {
-    name = requiredName;
-    tasks = new ArrayList<Task>();
+    this.name = requiredName;
+    this.tasks = new ArrayList<Task>();
   }
   
   // ordering constructor - calls name only constructor
   public ToDo(String requiredName, int requiredOrder) {
     this(requiredName);
-    order = requiredOrder;
+    this.order = requiredOrder;
   }
   
   // adds a Task to the ToDo
   public void addTask(String taskDesc) {
     tasks.add(new Task(taskDesc, numOfTasks));
-    numOfTasks = tasks.size();
+    this.numOfTasks = tasks.size();
   }
   
   // calls change desc method of the Task specified by taskNum
-  public void changeTaskDesc(int taskNum, String newTaskDesc) {
+  public void changeTaskDesc(String newTaskDesc, int taskNum) {
     if (taskNum > numOfTasks || taskNum < 1)
       System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
     else
-      tasks.get(taskNum - 1).changeTaskDesc(newTaskDesc);
+      tasks.get(taskNum - 1).changeDesc(newTaskDesc);
   }
   
   // changes the ToDo name to newName
-  public void changeToDoName(String newName) {
-    name = newName;
+  public void changeName(String newName) {
+    this.name = newName;
   }
   
   // calls complete method of the Task specified by taskNum
@@ -47,12 +45,12 @@ public class ToDo {
     if (taskNum > numOfTasks || taskNum < 1)
       System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
     else
-      tasks.get(taskNum - 1).completeTask();
+      tasks.get(taskNum - 1).complete();
   }
   
   // change completion status to true
-  public void completeToDo() {
-    complete = true;
+  public void complete() {
+    this.complete = true;
   }
   
   // returns the name of the ToDo
@@ -60,16 +58,25 @@ public class ToDo {
     return name;
   }
   
-  // returns string of the Task specified by taskNumber (the index in the list of tasks)
-  public String getTask(int taskNum) {
+  // returns Task specified by taskNumber (the index in the list of tasks)
+  public Task getTask(int taskNum) {
+    if (taskNum > numOfTasks || taskNum < 1) {
+      System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
+      return null;
+    } else
+      return tasks.get(taskNum - 1);
+  }
+  
+  // returns task description specified by taskNum
+  public String getTaskDesc(int taskNum) {
     if (taskNum > numOfTasks || taskNum < 1)
       return "Task number invalid, please enter a value between 1 and " + numOfTasks;
     else
-      return tasks.get(taskNum - 1).toString();
+      return tasks.get(taskNum - 1).getDesc();
   }
   
   // returns string representation of all the tasks in the To-Do
-  public String getTasks() {
+  public String printTasks() {
     String tempReturn = "";
     
     for (Task task : tasks) {
@@ -93,12 +100,12 @@ public class ToDo {
     if (taskNum > numOfTasks || taskNum < 1)
       System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
     else
-      tasks.get(taskNum - 1).unCompleteTask(); 
+      tasks.get(taskNum - 1).unComplete(); 
   }
   
   // change completion status to false
-  public void unCompleteToDo() {
-    complete = false;
+  public void unComplete() {
+    this.complete = false;
   }
   
   // returns string representation of a ToDo with all its Tasks

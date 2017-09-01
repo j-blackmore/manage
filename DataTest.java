@@ -86,6 +86,24 @@ public class DataTest {
   }
   
   public static void testCollection() {
+    // test the constructors
+    Collection c1 = new Collection("Study");
+    Collection c2 = new Collection("Personal", 1);
+    System.out.println(c1.toString() + c2.toString());
+    
+    // test adding todos
+    c1.addToDo("Labs");
+    c1.addToDo("Homework");
+    c2.addToDo("Coding Projects");
+    c2.addToDo("Origami");
+    c2.addToDo("Chores");
+    System.out.println(c1.toString() + c2.toString());
+    
+    c1.changeCollectionName("Study Tasks");
+    System.out.println(c1.getName();
+    
+    c1.getToDo(1).addTask("Java Lab 1");
+    c1.getToDo(1).
     
   }
 }
