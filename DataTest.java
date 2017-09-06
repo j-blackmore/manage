@@ -32,7 +32,44 @@ public class DataTest {
   }
   
   public static void testToDo() {
-  
+    ToDo td1 = new ToDo("Homework");
+    System.out.println(td1);
+    
+    td1.changeName("Personal");
+    System.out.println(td1.getName());
+    td1.complete();
+    System.out.println(td1);
+    td1.unComplete();
+    System.out.println(td1);
+    System.out.println(td1.printTasks());
+    td1.addTask("java lab");
+    System.out.println(td1);
+    td1.addTask("sort spotify");
+    System.out.println(td1);
+    td1.completeTask(1);
+    System.out.println(td1);
+    td1.changeTaskDesc("complete manage",1);
+    System.out.println(td1);
+    td1.unCompleteTask(2);
+    td1.completeTask(1);
+    td1.completeTask(2);
+    td1.complete();
+    td1.unCompleteTask(1);
+    System.out.println(td1);
+    
+    td1.addTask("tidy room");
+    td1.addTask("go shopping");
+    td1.completeTask(3);
+    System.out.println(td1.printTasks());
+    ToDo td2 = new ToDo("Fun tings");
+    System.out.println(td2);
+    System.out.println(td2.printTasks());
+    System.out.println(td1.getTaskDesc(3));
+    System.out.println(td1.getTask(6));
+    td1.changeTaskDesc("laundry", 4);
+    System.out.println(td1);
+    
+    System.out.println("---------------------------------------");
   }
   
   public static void testCollection() {

@@ -79,9 +79,15 @@ public class ToDo {
   public String printTasks() {
     String tempReturn = "";
     
-    for (Task task : tasks) {
-      tempReturn += task.toString() + "\n";
+    // add all but one task with new line character
+    for (int i = 0; i < numOfTasks - 1; i++){
+      tempReturn += tasks.get(i).toString() + "\n";
     }
+    
+    // add final task without new line character
+    if (numOfTasks > 0)
+      tempReturn += tasks.get(numOfTasks - 1).toString();
+    
     return tempReturn;
   }
   
@@ -110,10 +116,10 @@ public class ToDo {
   
   // returns string representation of a ToDo with all its Tasks
   public String toString() {
-    String tempReturn = (complete ? "[COMPLETE] " : "") + getName() + ": \n";
+    String tempReturn = (complete ? "[COMPLETE] " : "") + getName() + ": ";
     
     for (Task task : tasks) {
-      tempReturn += task + "\n"; 
+      tempReturn += "\n" + task; 
     }
     return tempReturn;
   }
