@@ -10,6 +10,9 @@ public class DataTest {
       case "COLLECTION":  testCollection();
                           break;
     }
+    
+    // final line to show end of output
+    System.out.println("------------------");
   }
   
   public static void testTask() {
@@ -73,6 +76,23 @@ public class DataTest {
   }
   
   public static void testCollection() {
+    // test empty collections
+    /*
+    Collection c1 = new Collection("uni work");
+    Collection c2 = new Collection("personal projects", 34343);
+    System.out.println(c1);
+    System.out.println(c2);
+    c1.changeName("uni tasks");
+    System.out.println(c1.getName());
+    */
     
+    // test with empty todos
+    Collection c = new Collection("Uni work");
+    c.addToDo("Maths");
+    c.addToDo("Java");
+    c.addToDo("soft. eng.");
+    System.out.println(c);
+    
+    // test with todos and tasks
   }
 }

@@ -112,10 +112,10 @@ public class Collection {
   
   // returns name of Collection and list of its ToDos
   public String listCollection() {
-    String tempReturn = name + "\n";
+    String tempReturn = name;
     
     for (ToDo todo : todos) {
-      tempReturn += todo.getName() + "\n";
+      tempReturn += "\n" + todo.getName() ;
     }
     return tempReturn;
   }
@@ -174,10 +174,10 @@ public class Collection {
   
   // returns a string representation of a Collection with all its ToDos and their Tasks
   public String toString() {
-    String tempReturn = name + "\n";
+    String tempReturn = name  + ":";
     
     for (ToDo todo: todos) {
-      tempReturn += todo + "\n" + "\n";
+      tempReturn += "\n" + todo ;
     }
     return tempReturn;
   }
