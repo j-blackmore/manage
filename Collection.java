@@ -112,10 +112,10 @@ public class Collection {
   
   // returns name of Collection and list of its ToDos
   public String listCollection() {
-    String tempReturn = name;
+    String tempReturn = name + ":";
     
     for (ToDo todo : todos) {
-      tempReturn += "\n" + todo.getName() ;
+      tempReturn += "\n  " + todo.getName() ;
     }
     return tempReturn;
   }
@@ -131,10 +131,16 @@ public class Collection {
   // returns string representation of all the To-Dos in the collection
   public String printToDos() {
     String tempReturn = "";
-    
-    for (ToDo todo : todos) {
-      tempReturn += todo.toString() + "\n";
+
+    // add all but one todo with newline character, (adds none if there is only 1 todo)
+    for (int i = 0; i < numOfToDos - 1; i++) {
+      tempReturn += todos.get(i).toString() + "\n";
     }
+    
+    // add final task without new line character, only if there is atleast 1 todo
+    if (numOfToDos > 0)
+      tempReturn += todos.get(numOfToDos - 1).toString();
+    
     return tempReturn;
   }
   
@@ -151,7 +157,7 @@ public class Collection {
     if (todoNum > numOfToDos || todoNum < 0)
       System.out.println("ToDo number invalid, please enter a value between 1 and " + numOfToDos);
     else {
-      todos.remove(todoNum);
+      todos.remove(todoNum - 1);
       numOfToDos = todos.size();
     }
   }
@@ -177,7 +183,7 @@ public class Collection {
     String tempReturn = name  + ":";
     
     for (ToDo todo: todos) {
-      tempReturn += "\n" + todo ;
+      tempReturn += "\n  " + todo ;
     }
     return tempReturn;
   }

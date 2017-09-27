@@ -3,16 +3,20 @@
 public class DataTest {
   public static void main(String[] args) {
     switch (args[0].toUpperCase()) {
-      case "TASK":  testTask();
-                    break;
-      case "TODO":  testToDo();
-                    break;
-      case "COLLECTION":  testCollection();
-                          break;
+      case "TASK": 
+        testTask();
+        break;
+      case "TODO":
+        testToDo();
+        break;
+      case "COLLECTION":
+      case "C":
+        testCollection();
+        break;
     }
     
     // final line to show end of output
-    System.out.println("------------------");
+    System.out.println("------------------------------------------------------------------");
   }
   
   public static void testTask() {
@@ -92,7 +96,23 @@ public class DataTest {
     c.addToDo("Java");
     c.addToDo("soft. eng.");
     System.out.println(c);
+    System.out.println("--------------------------------");
+    c.removeToDo(3);
+    System.out.println(c.printToDos());
+    System.out.println("--------------------------------");
+    c.unCompleteToDo(1);
+    System.out.println(c);
+    System.out.println("--------------------------------");
+    c.completeToDo(1);
+    c.completeToDo(2);
+    System.out.println(c);
+    System.out.println("--------------------------------");
+    c.unCompleteToDo(2);
+    System.out.println(c.listCollection());
+    System.out.println("--------------------------------");
+    
     
     // test with todos and tasks
   }
+  
 }
