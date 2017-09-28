@@ -16,7 +16,7 @@ public class DataTest {
     }
     
     // final line to show end of output
-    System.out.println("------------------------------------------------------------------");
+    System.out.println("==================================================================");
   }
   
   public static void testTask() {
@@ -88,13 +88,18 @@ public class DataTest {
     System.out.println(c2);
     c1.changeName("uni tasks");
     System.out.println(c1.getName());
-    */
+    System.out.println("--------------------------------");
+    System.out.println(c1.listCollection());
+    System.out.println("--------------------------------");
+    System.out.println(c2.printToDos());
+    
     
     // test with empty todos
     Collection c = new Collection("Uni work");
     c.addToDo("Maths");
     c.addToDo("Java");
     c.addToDo("soft. eng.");
+    
     System.out.println(c);
     System.out.println("--------------------------------");
     c.removeToDo(3);
@@ -111,8 +116,41 @@ public class DataTest {
     System.out.println(c.listCollection());
     System.out.println("--------------------------------");
     
+    c.addToDo("soft eng");
+    System.out.println(c.getToDoName(1));
+    System.out.println(c.getToDoName(3));
+    c.changeToDoName("Algorithms", 1);
+    c.changeToDoName("Software Engineering", 3);
+    System.out.println("--------------------------------");
+    System.out.println(c.getToDoName(1));
+    System.out.println(c.getToDoName(3));
+    System.out.println("--------------------------------");
+    System.out.println(c.listCollection());
+    System.out.println("--------------------------------");
+    System.out.println(c.printTasks(1));
+    System.out.println("--------------------------------");
+    c.removeToDo(2);
+    System.out.println(c.printTasks(3));
+    System.out.println("--------------------------------");
+    ToDo td2 = c.getToDo(2);
+    System.out.println(td2.getName());
+    System.out.println("--------------------------------");
+    c.completeToDo(1);
+    System.out.println(c);
+    c.unCompleteToDo(1);
+    System.out.println(c);
+    */
     
     // test with todos and tasks
+    Collection col1 = new Collection("Semester 1");
+    col1.addToDo("Software Engineering");
+    col1.addToDo("Databases");
+    col1.addToDo("Computer Networks");
+    
+    Collection col2 = new Collection("Personal");
+    col2.addToDo("Personal Coding Ideas");
+    col2.addToDo("Films to watch");
+    col2.addToDo("Reading list");
   }
   
 }
