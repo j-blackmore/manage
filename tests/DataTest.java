@@ -146,6 +146,13 @@ public class DataTest {
     col1.addToDo("Software Engineering");
     col1.addToDo("Databases");
     col1.addToDo("Computer Networks");
+    col1.addTask("lab task", 1);
+    col1.addTask("mock exam", 1);
+    col1.addTask("lab Ex7", 2);
+    col1.addTask("exam prep", 2);
+    col1.addTask("re watch lecture", 3);
+    col1.addTask("catch up on lecture notes", 3);
+    System.out.println(col1);
     
     Collection col2 = new Collection("Personal");
     col2.addToDo("Personal Coding Ideas");
