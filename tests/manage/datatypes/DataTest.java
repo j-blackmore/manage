@@ -1,7 +1,11 @@
 // test class for testing the data structures
+package manage.datatypes;
+
+import manage.datatypes.*;
 
 public class DataTest {
   public static void main(String[] args) {
+    System.out.println(args[0]);
     switch (args[0].toUpperCase()) {
       case "TASK": 
         testTask();
