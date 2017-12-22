@@ -49,3 +49,28 @@ JavaFX package
 Maybe change the way I was going to develop the program, do the underlying components first
 then work on the GUI, as that would allow me to adapt the GUI whenever I like - this will require
 serious planning and continuous editing whilst making the GUI
+
+
+
+Command line planning:
+[x] Read the command the user typed in
+[ ] Is the command valid (e.g. 'Hack' isnt a command but 'add' is)
+[ ] Is the format of the command valid (e.g. cant just type add) - correct num of args
+[ ] Is the command semantically correct (e.g. add task "help" to todo1 - but todo1 doesn't exist)
+[ ] Now execute the command and repeat
+
+
+Command Data Structures:
+
+Command: class
+Command(String)
+- String command
++ numOfArgs(): int
++ getArg(int): String
+- removeFirstArg(String): String
++ toString(): String
+
+DefinedCommand: Interface
+- String[] pseudoNames
+
+Create: extends Command implements DefinedCommand
