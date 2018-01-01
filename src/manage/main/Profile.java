@@ -19,6 +19,54 @@ public class Profile {
         tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Returns string representation of all collections, todos and tasks in the profile.
+     * 
+     * @return String of contents in profile
+     */
+    public String getAll() {
+        return getCollections() + getTodos() + getTasks();
+    }
+
+    /**
+     * Returns string representation of all Collections in the profile.
+     * 
+     * @return String of all collections.
+     */
+    public String getCollections() {
+        String allCollections = "";
+        for (Collection collection : collections){
+            allCollections += collection.toString() + "\n";
+        }
+        return allCollections;
+    }
+
+    /**
+     * Returns string representation of all Tasks in the profile, not in todos or collections.
+     * 
+     * @return String of all Tasks.
+     */
+    public String getTasks() {
+        String allTasks = "";
+        for (Task task : tasks) {
+            allTasks += task.toString() + "\n";
+        }
+        return allTasks;
+    }
+
+    /**
+     * Returns string representation of all Todos in the profile, not in collections.
+     * 
+     * @return String of all Todos.
+     */
+    public String getTodos() {
+        String allTodos = "";
+        for (Todo todo : todos) {
+            allTodos += todo.toString() + "\n";
+        }
+        return allTodos;
+    }
+
     public String getUserName() {
         return userName;
     }

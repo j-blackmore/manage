@@ -3,7 +3,12 @@ package manage.commands;
 import java.util.ArrayList;
 
 import manage.main.Profile;
-
+/**
+ * Default Command for Manage, contains static info about all Commands.
+ * Created whenever a command is entered in Manage.
+ * 
+ * @author J Blackmore
+ */
 public class Command {
 
     /** Unknown Command */
@@ -15,6 +20,9 @@ public class Command {
     /** Create Command */
     public static final int CREATE_COMMAND = 2;
 
+    /** Print Command */
+    public static final int PRINT_COMMAND = 10;
+
     /** The command without it's arguments */
     private String command;
 
@@ -25,16 +33,24 @@ public class Command {
     private ArrayList<String> args;
 
     public Command(String command) {
-        this.command = command.trim().substring(0, command.indexOf(" "));
+        if(command.contains(" "))
+            this.command = command.trim().substring(0, command.indexOf(" "));
+        else
+            this.command = command;
+
         args = splitArgs(command);
         commandType = classifyCommand(this);
     }
 
-    // returns the type of the command. returns unknown if cannot be classified.
+    // returns the type of the command - unknown if cannot be classified.
     private static int classifyCommand(Command command) {
         switch(command.getCommand().toLowerCase()) {
-            case "create": if (command.numOfArgs() == 2) { return CREATE_COMMAND; }
-            case "exit": case "quit": case "close": return EXIT_COMMAND;
+            case "create": 
+                if(command.numOfArgs() == 2) { return CREATE_COMMAND; }
+            case "print": 
+                if(command.numOfArgs() == 1 || command.numOfArgs() == 2) { return PRINT_COMMAND; }
+            case "exit": case "quit": case "close": 
+                return EXIT_COMMAND;
             default: return UNKNOWN_COMMAND;
         }
     }
@@ -96,26 +112,30 @@ public class Command {
     private static ArrayList<String> splitArgs(String command) {
         ArrayList<String> args = new ArrayList<String>();
         String remainingCommand = command.trim();
-        remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ")).trim();
 
-        while(remainingCommand.contains(" ")) {
-            if(Character.compare(remainingCommand.charAt(0), '\"') == 0) {
-                args.add(remainingCommand.substring(0, remainingCommand.indexOf('"', 1)));
-                remainingCommand = remainingCommand.substring(remainingCommand.indexOf('"', 1));
-            } else if(Character.compare(remainingCommand.charAt(0), '\'') == 0) {
-                args.add(remainingCommand.substring(0, remainingCommand.indexOf("'", 1)));
-                remainingCommand = remainingCommand.substring(remainingCommand.indexOf("'", 1));
-            } else {
-                args.add(remainingCommand.substring(0, remainingCommand.indexOf(" ", 1)));
-                remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ", 1));
+        // avoids StringIndexOutOfBounds if no spaces in command
+        if(remainingCommand.contains(" ")) {
+            remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ") + 1).trim();
+
+            while(remainingCommand.contains(" ")) {
+                if(Character.compare(remainingCommand.charAt(0), '\"') == 0) {
+                    args.add(remainingCommand.substring(1, remainingCommand.indexOf('\"', 1)));
+                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf('\"', 1) + 1);
+                } else if(Character.compare(remainingCommand.charAt(0), '\'') == 0) {
+                    args.add(remainingCommand.substring(1, remainingCommand.indexOf("\'", 1)));
+                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf("\'", 1) + 1);
+                } else {
+                    args.add(remainingCommand.substring(0, remainingCommand.indexOf(" ", 1)));
+                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ", 1) + 1);
+                }
+
+                remainingCommand = remainingCommand.trim();
             }
 
-            remainingCommand = remainingCommand.trim();
-        }
-
-        // add final argument, if it exists
-        if(remainingCommand.length() != 0) {
-            args.add(remainingCommand);
+            // add final argument, if it exists
+            if(remainingCommand.length() != 0) {
+                args.add(remainingCommand);
+            }
         }
 
         return args;
