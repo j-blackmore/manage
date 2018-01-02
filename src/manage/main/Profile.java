@@ -29,6 +29,21 @@ public class Profile {
     }
 
     /**
+     * Returns Collection object of Collection with name of collectionName if it exists, else null.
+     * 
+     * @param collectionName String of Collection name.
+     * @return Collection with name of collectionName.
+     */
+    public Collection gCollection(Strig collectionName) {
+        for(int i = 0; i < collections.size(); i++) {
+            if(collections.get(i).getName() == collectionName) {
+                return collections.get(i);
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns string representation of all Collections in the profile.
      * 
      * @return String of all collections.
@@ -42,6 +57,20 @@ public class Profile {
     }
 
     /**
+     * Returns Task object of Task with description of taskDesc if it exists, else null.
+     * 
+     * @param tasDesc String of Task description.
+     * @return Task with description of taskDesc.
+     */
+    public Task getTask(String taskDesc) {
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDesc() == taskDesc)
+                return tasks.get(i); 
+        }
+        return null;
+    }
+
+    /**
      * Returns string representation of all Tasks in the profile, not in todos or collections.
      * 
      * @return String of all Tasks.
@@ -52,6 +81,21 @@ public class Profile {
             allTasks += task.toString() + "\n";
         }
         return allTasks;
+    }
+
+    /**
+     * Returns Todo object of Todo with name of todoName if it exists, else null.
+     * 
+     * @param todoName String of Todo name.
+     * @return Todo with name of todoName.
+     */
+    public Todo getTodo(String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName() == todoName) {
+                return todos.get(i);
+            }
+        }
+        return null;
     }
 
     /**
