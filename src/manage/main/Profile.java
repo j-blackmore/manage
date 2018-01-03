@@ -34,9 +34,9 @@ public class Profile {
      * @param collectionName String of Collection name.
      * @return Collection with name of collectionName.
      */
-    public Collection gCollection(Strig collectionName) {
-        for(int i = 0; i < collections.size(); i++) {
-            if(collections.get(i).getName() == collectionName) {
+    public Collection getCollection(String collectionName) {
+        for (int i = 0; i < collections.size(); i++) {
+            if (collections.get(i).getName() == collectionName) {
                 return collections.get(i);
             }
         }
@@ -57,14 +57,57 @@ public class Profile {
     }
 
     /**
+     * Returns index in List of Collections of Collection specified by collectionName if it exists,
+     * else -1.
+     * 
+     * @param collectionName String of the Collection name.
+     * @return Index of the Collection's position in List.
+     */
+    public int getIndexOfCollection(String collectionName) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (collections.get(i).getName() == collectionName)
+                return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Returns index in List of Tasks of Task specified by taskDesc if it exists, else -1.
+     * 
+     * @param taskDesc String of the Task description.
+     * @return Index of the Task's position in List.
+     */
+    public int getIndexOfTask(String taskDesc) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDesc() == taskDesc)
+                return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Returns index in List of Todos of Todo's specified by todoName if it exists, else -1.
+     * 
+     * @param todoName String of the Todo name.
+     * @return Index of the Todo's position in List.
+     */
+    public int getIndexOfTodo(String todoName) {
+        for (int i = 0; i < todos.size(); i++) {
+            if (todos.get(i).getName() == todoName)
+                return i;
+        }
+        return -1;
+    }
+
+    /**
      * Returns Task object of Task with description of taskDesc if it exists, else null.
      * 
      * @param tasDesc String of Task description.
      * @return Task with description of taskDesc.
      */
     public Task getTask(String taskDesc) {
-        for(int i = 0; i < tasks.size(); i++) {
-            if(tasks.get(i).getDesc() == taskDesc)
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDesc() == taskDesc)
                 return tasks.get(i); 
         }
         return null;
@@ -90,8 +133,8 @@ public class Profile {
      * @return Todo with name of todoName.
      */
     public Todo getTodo(String todoName) {
-        for(int i = 0; i < todos.size(); i++) {
-            if(todos.get(i).getName() == todoName) {
+        for (int i = 0; i < todos.size(); i++) {
+            if (todos.get(i).getName() == todoName) {
                 return todos.get(i);
             }
         }
