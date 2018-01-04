@@ -36,7 +36,7 @@ public class Profile {
      */
     public Collection getCollection(String collectionName) {
         for (int i = 0; i < collections.size(); i++) {
-            if (collections.get(i).getName() == collectionName) {
+            if (collections.get(i).getName().equalsIgnoreCase(collectionName)) {
                 return collections.get(i);
             }
         }
@@ -64,8 +64,8 @@ public class Profile {
      * @return Index of the Collection's position in List.
      */
     public int getIndexOfCollection(String collectionName) {
-        for (int i = 0; i < tasks.size(); i++) {
-            if (collections.get(i).getName() == collectionName)
+        for (int i = 0; i < collections.size(); i++) {
+            if (collections.get(i).getName().equalsIgnoreCase(collectionName))
                 return i;
         }
         return -1;
@@ -79,7 +79,7 @@ public class Profile {
      */
     public int getIndexOfTask(String taskDesc) {
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDesc() == taskDesc)
+            if (tasks.get(i).getDesc().equalsIgnoreCase(taskDesc))
                 return i;
         }
         return -1;
@@ -93,7 +93,7 @@ public class Profile {
      */
     public int getIndexOfTodo(String todoName) {
         for (int i = 0; i < todos.size(); i++) {
-            if (todos.get(i).getName() == todoName)
+            if (todos.get(i).getName().equalsIgnoreCase(todoName))
                 return i;
         }
         return -1;
@@ -102,12 +102,12 @@ public class Profile {
     /**
      * Returns Task object of Task with description of taskDesc if it exists, else null.
      * 
-     * @param tasDesc String of Task description.
+     * @param taskDesc String of Task description.
      * @return Task with description of taskDesc.
      */
     public Task getTask(String taskDesc) {
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDesc() == taskDesc)
+            if (tasks.get(i).getDesc().equalsIgnoreCase(taskDesc))
                 return tasks.get(i); 
         }
         return null;
@@ -134,7 +134,7 @@ public class Profile {
      */
     public Todo getTodo(String todoName) {
         for (int i = 0; i < todos.size(); i++) {
-            if (todos.get(i).getName() == todoName) {
+            if (todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 return todos.get(i);
             }
         }
