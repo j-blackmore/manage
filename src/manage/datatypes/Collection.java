@@ -41,9 +41,22 @@ public class Collection {
      */
     public void addTask(String taskDesc, int todoNum) {
         if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo Number invalid, please enter a value between 1 and " + numOfTodos);
+            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
         else
             todos.get(todoNum - 1).addTask(taskDesc);
+    }
+
+    /**
+     * Adds a pre-existing task object to an already existing todo, inside this collection.
+     * 
+     * @param taskToAdd the task to add.
+     * @param todoNum the target todo's position in the collection.
+     */
+    public void addTask(Task taskToAdd, int todoNum) {
+        if (todoNum > numOfTodos || todoNum < 1)
+            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        else
+            todos.get(todoNum - 1).addTask(taskToAdd);
     }
     
     /**
@@ -53,6 +66,16 @@ public class Collection {
      */
     public void addTodo(String todoName) {
         todos.add(new Todo(todoName, numOfTodos));
+        this.numOfTodos = todos.size();
+    }
+
+    /**
+     * Adds a pre-existing todo object to this collection.
+     * 
+     * @param todoToAdd the todo to add.
+     */
+    public void addTodo(Todo todoToAdd) {
+        todos.add(todoToAdd);
         this.numOfTodos = todos.size();
     }
     

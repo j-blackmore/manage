@@ -44,6 +44,16 @@ public class Todo {
         tasks.add(new Task(taskDesc, numOfTasks));
         this.numOfTasks = tasks.size();
     }
+
+    /**
+     * Adds a pre-existing task object to this todo.
+     * 
+     * @param taskToAdd the task to add.
+     */
+    public void addTask(Task taskToAdd) {
+        tasks.add(taskToAdd);
+        this.numOfTasks = tasks.size();
+    }
     
     /**
      * Sets a task's description to the new given description. Task is specified by position in todo.
