@@ -62,10 +62,10 @@ public class Todo {
      * @param taskNum the target task's position in the todo.
      */
     public void changeTaskDesc(String newTaskDesc, int taskNum) {
-        if (taskNum > numOfTasks || taskNum < 1)
-            System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
+        if (taskNum > (numOfTasks - 1) || taskNum < 0)
+            System.out.println("Task number invalid, please enter a value between 0 and " + (numOfTasks - 1));
         else
-            tasks.get(taskNum - 1).changeDesc(newTaskDesc);
+            tasks.get(taskNum).changeDesc(newTaskDesc);
     }
     
     /**
@@ -83,10 +83,10 @@ public class Todo {
      * @param taskNum the target task's position in the todo.
      */
     public void completeTask(int taskNum) {
-        if (taskNum > numOfTasks || taskNum < 1)
-            System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
+        if (taskNum > (numOfTasks - 1) || taskNum < 0)
+            System.out.println("Task number invalid, please enter a value between 0 and " + (numOfTasks - 1));
         else
-            tasks.get(taskNum - 1).complete();
+            tasks.get(taskNum).complete();
     }
     
     /**
@@ -112,11 +112,11 @@ public class Todo {
      * @return Task object.
      */
     public Task getTask(int taskNum) {
-        if (taskNum > numOfTasks || taskNum < 1) {
-            System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
+        if (taskNum > (numOfTasks - 1) || taskNum < 0) {
+            System.out.println("Task number invalid, please enter a value between 0 and " + (numOfTasks - 1));
             return null;
         } else
-            return tasks.get(taskNum - 1);
+            return tasks.get(taskNum);
     }
     
     /**
@@ -126,10 +126,10 @@ public class Todo {
      * @return The description of the task.
      */
     public String getTaskDesc(int taskNum) {
-        if (taskNum > numOfTasks || taskNum < 1)
-            return "Task number invalid, please enter a value between 1 and " + numOfTasks;
+        if (taskNum > (numOfTasks - 1) || taskNum < 0)
+            return "Task number invalid, please enter a value between 0 and " + (numOfTasks - 1);
         else
-            return tasks.get(taskNum - 1).getDesc();
+            return tasks.get(taskNum).getDesc();
     }
     
     /**
@@ -158,10 +158,10 @@ public class Todo {
      * @param taskNum the target task's position in the todo.
      */
     public void removeTask(int taskNum) {
-        if (taskNum > numOfTasks || taskNum < 1)
-            System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
+        if (taskNum > (numOfTasks - 1)|| taskNum < 0)
+            System.out.println("Task number invalid, please enter a value between 0 and " + (numOfTasks - 1));
         else {
-            tasks.remove(taskNum - 1);
+            tasks.remove(taskNum);
             numOfTasks = tasks.size();
         }
     }
@@ -172,10 +172,10 @@ public class Todo {
      * @param taskNum the target task's position in the todo.
      */
     public void unCompleteTask(int taskNum) {
-        if (taskNum > numOfTasks || taskNum < 1)
-            System.out.println("Task number invalid, please enter a value between 1 and " + numOfTasks);
+        if (taskNum > (numOfTasks - 1) || taskNum < 0)
+            System.out.println("Task number invalid, please enter a value between 0 and " + (numOfTasks - 1));
         else
-            tasks.get(taskNum - 1).unComplete(); 
+            tasks.get(taskNum).unComplete(); 
     }
     
     /**
