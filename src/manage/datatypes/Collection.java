@@ -40,23 +40,24 @@ public class Collection {
      * @param todoNum the target todo's position in the collection.
      */
     public void addTask(String taskDesc, int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
-        else
-            todos.get(todoNum - 1).addTask(taskDesc);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
+        else 
+            todos.get(todoNum).addTask(taskDesc);
     }
 
     /**
      * Adds a pre-existing task object to an already existing todo, inside this collection.
+     * Indexing begins at 0.
      * 
      * @param taskToAdd the task to add.
      * @param todoNum the target todo's position in the collection.
      */
     public void addTask(Task taskToAdd, int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
-            todos.get(todoNum - 1).addTask(taskToAdd);
+            todos.get(todoNum).addTask(taskToAdd);
     }
     
     /**
@@ -96,36 +97,38 @@ public class Collection {
      * @param taskNum the target task's position in the todo.
      */
     public void changeTaskDesc(String newTaskDesc, int todoNum, int taskNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
-            todos.get(todoNum - 1).changeTaskDesc(newTaskDesc, taskNum);
+            todos.get(todoNum).changeTaskDesc(newTaskDesc, taskNum);
     }
     
     /**
      * Sets a todo's name to the new given name. Todo is specified by position in this collection.
+     * Indexing begins at 0.
      * 
      * @param newTodoName the new name of the todo.
      * @param todoNum the target todo's position in the collection.
      */
     public void changeTodoName(String newTodoName, int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
-            todos.get(todoNum - 1).changeName(newTodoName);
+            todos.get(todoNum).changeName(newTodoName);
     }
     
     /**
-     * Sets a task's completion status to true. Task is specified by position in a todo, and that todo's position in this collection.
+     * Sets a task's completion status to true. Task is specified by position in a todo, 
+     * and that todo's position in this collection. Indexing begins at 0.
      * 
      * @param todoNum the todo's position in the collection.
      * @param taskNum the target task's position in the todo.
      */
     public void completeTask(int todoNum, int taskNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
-            todos.get(todoNum - 1).completeTask(taskNum);
+            todos.get(todoNum).completeTask(taskNum);
     }
     
     /**
@@ -134,10 +137,24 @@ public class Collection {
      * @param todoNum the target todo's position in the collection.
      */
     public void completeTodo(int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 1) 
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1)|| todoNum < 0) 
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
-            todos.get(todoNum - 1).complete();
+            todos.get(todoNum).complete();
+    }
+
+    /**
+     * Returns index of todo specified by todoName if it exists, else -1.
+     * 
+     * @param todoName String of the Todo name.
+     * @return Index of the Todo's position in List.
+     */
+    public int getIndexOfTodo(String todoName) {
+        for (int i = 0; i < todos.size(); i++) {
+            if (todos.get(i).getName().equalsIgnoreCase(todoName))
+                return i;
+        }
+        return -1;
     }
     
     /**
@@ -150,18 +167,19 @@ public class Collection {
     }
     
     /**
-     * Gets the task object specified by its position in a todo, and that todo's position in this collection.
+     * Gets the task object specified by its position in a todo, and that todo's  position 
+     * in this collection. Indexing begins at 0.
      * 
      * @param todoNum the todo's position in the collection.
      * @param taskNum the target task's position in the todo.
      * @return Task object.
      */
     public Task getTask(int todoNum, int taskNum) {
-        if (todoNum > numOfTodos || todoNum < 0){
-            System.out.println("Todo number invalid, please enter a number between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1)|| todoNum < 0){
+            System.out.println("Todo number invalid, please enter a number between 0 and " + (numOfTodos - 1));
             return null;
         } else
-            return todos.get(todoNum - 1).getTask(taskNum);
+            return todos.get(todoNum).getTask(taskNum);
     }
     
     /**
@@ -172,10 +190,10 @@ public class Collection {
      * @return The description of the task.
      */
     public String getTaskDesc(int todoNum, int taskNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            return "Todo number invalid, please enter a number between 1 and " + numOfTodos;
+        if (todoNum > (numOfTodos - 1)|| todoNum < 0)
+            return "Todo number invalid, please enter a number between 0 and " + (numOfTodos - 1);
         else
-            return todos.get(todoNum -1).getTaskDesc(taskNum);
+            return todos.get(todoNum).getTaskDesc(taskNum);
     }
     
     /**
@@ -185,11 +203,11 @@ public class Collection {
      * @return Todo object.
      */
     public Todo getTodo(int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 0) {
-            System.out.println("Todo number invalid, please enter a number between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0) {
+            System.out.println("Todo number invalid, please enter a number between 0 and " + (numOfTodos - 1));
             return null;
         } else
-            return todos.get(todoNum -1);
+            return todos.get(todoNum);
     }
     
     /**
@@ -199,10 +217,10 @@ public class Collection {
      * @return The name of the todo.
      */
     public String getTodoName(int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 1) 
-            return "Todo number invalid, please enter a number between 1 and " + numOfTodos;
+        if (todoNum > (numOfTodos - 1)|| todoNum < 0) 
+            return "Todo number invalid, please enter a number between 0 and " + (numOfTodos- 1);
         else
-            return todos.get(todoNum - 1).getName();
+            return todos.get(todoNum).getName();
     }
     
     /**
@@ -226,10 +244,10 @@ public class Collection {
      * @return String representation of the tasks in a todo.
      */
     public String printTasks(int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            return "Todo number invalid, please enter a number between 1 and " + numOfTodos;
+        if (todoNum > (numOfTodos - 1)|| todoNum < 0)
+            return "Todo number invalid, please enter a number between 0 and " + (numOfTodos - 1);
         else
-            return todos.get(todoNum -1).printTasks();
+            return todos.get(todoNum).printTasks();
     }
     
     /**
@@ -259,10 +277,10 @@ public class Collection {
      * @param taskNum the target task's position in the todo.
      */
     public void removeTask(int todoNum, int taskNum) {
-        if (todoNum > numOfTodos || todoNum < 0)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
-            todos.get(todoNum - 1).removeTask(taskNum);
+            todos.get(todoNum).removeTask(taskNum);
     }
     
     /**
@@ -271,10 +289,10 @@ public class Collection {
      * @param todoNum the target todo's position in this collection.
      */
     public void removeTodo(int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 0)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else {
-            todos.remove(todoNum - 1);
+            todos.remove(todoNum);
             numOfTodos = todos.size();
         }
     }
@@ -286,10 +304,10 @@ public class Collection {
      * @param taskNum the target task's position in the todo.
      */
     public void unCompleteTask(int todoNum, int taskNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1) || todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
-            todos.get(todoNum - 1).unCompleteTask(taskNum);
+            todos.get(todoNum).unCompleteTask(taskNum);
     }
     
     /**
@@ -298,10 +316,10 @@ public class Collection {
      * @param todoNum the target todo's position in this collection.
      */
     public void unCompleteTodo(int todoNum) {
-        if (todoNum > numOfTodos || todoNum < 1)
-            System.out.println("Todo number invalid, please enter a value between 1 and " + numOfTodos);
+        if (todoNum > (numOfTodos - 1)|| todoNum < 0)
+            System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos- 1));
         else
-            todos.get(todoNum - 1).unComplete();
+            todos.get(todoNum).unComplete();
     }
     
     /**
