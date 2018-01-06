@@ -20,6 +20,9 @@ public class Command {
     /** Create Command */
     public static final int CREATE_COMMAND = 2;
 
+    /** Add Command */
+    public static final int ADD_COMMAND = 3;
+
     /** Print Command */
     public static final int PRINT_COMMAND = 10;
 
@@ -47,6 +50,8 @@ public class Command {
         switch(command.getCommand().toLowerCase()) {
             case "create": 
                 if(command.numOfArgs() == 2) { return CREATE_COMMAND; }
+            case "add":
+                if(command.numOfArgs() == 3 || command.numOfArgs() == 4) { return ADD_COMMAND; }
             case "print": 
                 if(command.numOfArgs() == 1 || command.numOfArgs() == 2) { return PRINT_COMMAND; }
             case "exit": case "quit": case "close": 
@@ -134,7 +139,12 @@ public class Command {
 
             // add final argument, if it exists
             if(remainingCommand.length() != 0) {
-                args.add(remainingCommand);
+                if(Character.compare(remainingCommand.charAt(0), '\"') == 0 ||
+                   Character.compare(remainingCommand.charAt(0), '\'') == 0) {
+                    args.add(remainingCommand.substring(1, remainingCommand.length() - 1));
+                } else {
+                    args.add(remainingCommand);
+                }
             }
         }
 

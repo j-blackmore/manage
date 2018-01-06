@@ -1,6 +1,5 @@
 package manage.commands;
 
-import manage.datatypes.*;
 import manage.main.Profile;
 
 public class PrintCommand extends Command {
