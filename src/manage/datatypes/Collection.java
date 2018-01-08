@@ -181,6 +181,23 @@ public class Collection {
         else
             todos.get(todoNum).completeTask(taskNum);
     }
+
+    /**
+     * Set's task's completion status to true. Task is specified by its name in a todo,
+     * which is also specified by its name in the collection.
+     * 
+     * @param taskDesc the description of the task.
+     * @param todoName the name of the todo.
+     */
+    public void completeTask(String taskDesc, String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).completeTask(taskDesc);
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception
+    }
     
     /**
      * Sets a todo's completion status to true. Todo is specified by position in this collection.
@@ -192,6 +209,21 @@ public class Collection {
             System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
             todos.get(todoNum).complete();
+    }
+
+    /**
+     * Sets a todo's completion status to true. Todo is specified by its name.
+     * 
+     * @param todoName the name of the todo.
+     */
+    public void completeTodo(String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).complete();
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
     }
 
     /**

@@ -104,6 +104,21 @@ public class Todo {
         else
             tasks.get(taskNum).complete();
     }
+
+    /**
+     * Set's a task's completion status to true. Task is specified by its description.
+     * 
+     * @param taskDesc the description of the todo.
+     */
+    public void completeTask(String taskDesc) {
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
+                tasks.get(i).complete();
+                return;
+            }
+        }
+        System.out.println("Task: \'" + taskDesc + "\' not found.");    //TODO: Exception
+    }
     
     /**
      * Sets this todo's completion status to true.
