@@ -59,6 +59,22 @@ public class Collection {
         else
             todos.get(todoNum).addTask(taskToAdd);
     }
+
+    /**
+     * Adds the given task to a todo in the collection, if it exists.
+     * 
+     * @param taskToAdd the task to add.
+     * @param todoName the target todo's name.
+     */
+    public void addTask(Task taskToAdd, String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).addTask(taskToAdd);
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");
+    }
     
     /**
      * Creates then adds a new todo to this collection.
@@ -90,7 +106,8 @@ public class Collection {
     }
     
     /**
-     * Sets the description of a task in a todo to the new given description. Task is specified by position in a todo, and that todo's position in this collection.
+     * Sets the description of a task in a todo to the new given description. Task is specified 
+     * by position in a todo, and that todo's position in this collection.
      * 
      * @param newTaskDesc the new description of the task.
      * @param todoNum the todo's position in the collection.
@@ -102,7 +119,7 @@ public class Collection {
         else
             todos.get(todoNum).changeTaskDesc(newTaskDesc, taskNum);
     }
-    
+
     /**
      * Sets a todo's name to the new given name. Todo is specified by position in this collection.
      * Indexing begins at 0.
@@ -116,7 +133,7 @@ public class Collection {
         else
             todos.get(todoNum).changeName(newTodoName);
     }
-    
+
     /**
      * Sets a task's completion status to true. Task is specified by position in a todo, 
      * and that todo's position in this collection. Indexing begins at 0.

@@ -27,13 +27,8 @@ public class AddCommand extends Command{
                         System.out.println("No collection \'" + getArg(4) + "\' exists.");
                         break;
                     }
-
-                    int targetTodo = targetCollection.getIndexOfTodo(getArg(3));
-                    if (targetTodo == -1) {
-                        System.out.println("No todo \'" + getArg(3) + "\' exists.");
-                        break;
-                    }
-                    targetCollection.addTask(taskToAdd, targetCollection.getIndexOfTodo(getArg(3)));
+                    
+                    targetCollection.addTask(taskToAdd, getArg(3));
                 } else if (numOfArgs() == 3) {
                     Todo targetTodo = user.getTodo(getArg(3));
                     if (targetTodo == null) {
