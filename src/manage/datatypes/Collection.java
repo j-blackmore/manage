@@ -121,6 +121,24 @@ public class Collection {
     }
 
     /**
+     * Set's the description of a task in a todo in this collection to the new given description.
+     * Task is specified by its description in a todo also specified by its name.
+     * 
+     * @param taskDesc the target task's description.
+     * @param newTaskDesc the new description of the task.
+     * @param todoName the name of the todo.
+     */
+    public void changeTaskDesc(String taskDesc, String newTaskDesc, String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).changeTaskDesc(taskDesc, newTaskDesc);
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+    }
+    
+    /**
      * Sets a todo's name to the new given name. Todo is specified by position in this collection.
      * Indexing begins at 0.
      * 
@@ -134,6 +152,22 @@ public class Collection {
             todos.get(todoNum).changeName(newTodoName);
     }
 
+    /**
+     * Set's a todo's name to the new given name. Todo is specified by its name.
+     * 
+     * @param todoName the name of the todo.
+     * @param newTodoName the new name of the todo.
+     */
+    public void changeTodoName(String todoName, String newTodoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(newTodoName)) {
+                todos.get(i).changeName(newTodoName);
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+    }
+    
     /**
      * Sets a task's completion status to true. Task is specified by position in a todo, 
      * and that todo's position in this collection. Indexing begins at 0.

@@ -67,6 +67,22 @@ public class Todo {
         else
             tasks.get(taskNum).changeDesc(newTaskDesc);
     }
+
+    /**
+     * Sets a task's description to the new given description. Task is specified by its name.
+     * 
+     * @param taskDesc the target task's description.
+     * @param newTaskDesc the new description of the task.
+     */
+    public void changeTaskDesc(String taskDesc, String newTaskDesc) {
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDesc().equalsIgnoreCase(newTaskDesc)) {
+                tasks.get(i).changeDesc(newTaskDesc);
+                break;
+            }
+        }
+        System.out.println("Task: \'" + taskDesc + "\' not found.");    //TODO: Exception.
+    }
     
     /**
      * Sets this todo's name to the given name.
