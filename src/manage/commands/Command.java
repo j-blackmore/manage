@@ -50,10 +50,13 @@ public class Command {
         switch(command.getCommand().toLowerCase()) {
             case "create": 
                 if(command.numOfArgs() == 2) { return CREATE_COMMAND; }
+                else { return UNKNOWN_COMMAND; }    //TODO: Exception instead of Unknown.
             case "add":
                 if(command.numOfArgs() == 3 || command.numOfArgs() == 4) { return ADD_COMMAND; }
+                else { return UNKNOWN_COMMAND; }
             case "print": 
                 if(command.numOfArgs() == 1 || command.numOfArgs() == 2) { return PRINT_COMMAND; }
+                else { return UNKNOWN_COMMAND; }
             case "exit": case "quit": case "close": 
                 return EXIT_COMMAND;
             default: return UNKNOWN_COMMAND;

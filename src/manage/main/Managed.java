@@ -35,6 +35,12 @@ public class Managed {
                     case Command.PRINT_COMMAND:
                         inputCommand = new PrintCommand(inputCommand.toString());
                         break;
+                    case Command.UNKNOWN_COMMAND:
+                        inputCommand = new Command(inputCommand.toString());
+                        break;
+                    default:
+                        System.out.println("Error with command type");  //TODO: Exception
+                        break;
                 }
 
                 inputCommand.completeAction(myProfile);
