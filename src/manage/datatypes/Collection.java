@@ -399,6 +399,23 @@ public class Collection {
         else
             todos.get(todoNum).removeTask(taskNum);
     }
+
+    /**
+     * Removes a task specified by its description in a todo which is also specified by its name,
+     * from the the todo in this collections.
+     * 
+     * @param taskDesc the description of the task.
+     * @param todoName the name of the todo. 
+     */
+    public void removeTask(String taskDesc, String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).removeTask(taskDesc);
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+    }
     
     /**
      * Removes a todo specified by its position in this collection, from the collection - as well as all its tasks.

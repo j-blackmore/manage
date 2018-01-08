@@ -212,6 +212,21 @@ public class Todo {
             numOfTasks = tasks.size();
         }
     }
+
+    /**
+     * Removes a task specified by its description, from this todo.
+     * 
+     * @param taskDesc the description of the task.
+     */
+    public void removeTask(String taskDesc) {
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
+                tasks.remove(i);
+                return;
+            }
+        }
+        System.out.println("Task: \'" + taskDesc + "\' not found.");
+    }
     
     /**
      * Sets a task's completion status to false. The task is specified by the position in the todo.
