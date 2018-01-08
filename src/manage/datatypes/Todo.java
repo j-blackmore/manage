@@ -149,6 +149,22 @@ public class Todo {
         } else
             return tasks.get(taskNum);
     }
+
+    /**
+     * Gets the task specified by its description.
+     * 
+     * @param taskDesc the description of the task.
+     * @return Task object.
+     */
+    public Task getTask(String taskDesc) {
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
+                return tasks.get(i);
+            }
+        }
+        System.out.println("Task: \'" + taskDesc + "\' not found.");
+        return null;
+    }
     
     /**
      * Gets the description of the task specified by its position in the todo.

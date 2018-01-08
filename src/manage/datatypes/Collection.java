@@ -264,6 +264,24 @@ public class Collection {
         } else
             return todos.get(todoNum).getTask(taskNum);
     }
+
+    /**
+     * Gets the task object specified by its description in a todo which is also specified by
+     * its name in this collection.
+     * 
+     * @param taskDesc the description of the desired task.
+     * @param todoName the name of the todo.
+     * @return Task object.
+     */
+    public Task getTask(String taskDesc, String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).getTask(taskDesc);
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");
+        return null;
+    }
     
     /**
      * Get the description of the task specified by its position in a todo, and that todo's position in this collection.
