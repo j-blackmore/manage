@@ -298,7 +298,7 @@ public class Collection {
     }
     
     /**
-     * Gets the todo object specified by its position in this collection.
+     * Gets the todo specified by its position in this collection.
      * 
      * @param todoNum the target todo's position in the collection.
      * @return Todo object.
@@ -309,6 +309,22 @@ public class Collection {
             return null;
         } else
             return todos.get(todoNum);
+    }
+
+    /**
+     * Gets the todo specified by its name.
+     * 
+     * @param todoName the name of the todo.
+     * @return Todo object.
+     */
+    public Todo getTodo(String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                return todos.get(i);
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");
+        return null;
     }
     
     /**
