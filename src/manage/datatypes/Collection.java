@@ -488,6 +488,21 @@ public class Collection {
         else
             todos.get(todoNum).unComplete();
     }
+
+    /**
+     * Sets the completion status for a todo specified by its name, to false.
+     * 
+     * @param todoName the name of the todo.
+     */
+    public void unCompleteTodo(String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).unComplete();
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+    }
     
     /**
      * Gets a string representation of this collection, including all its todo's, their completion status, all its tasks and their completion status'.
