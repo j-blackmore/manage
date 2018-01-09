@@ -239,6 +239,21 @@ public class Todo {
         else
             tasks.get(taskNum).unComplete(); 
     }
+
+    /**
+     * Set's a task's completion status to false. The task is specified by its description.
+     * 
+     * @param taskDesc the description of the task.
+     */
+    public void unCompleteTask(String taskDesc) {
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)){
+                tasks.get(i).unComplete();
+                return;
+            }
+        }
+        System.out.println("Task: \'" + taskDesc + "\' not found.");    //TODO: Exception.
+    }
     
     /**
      * Sets this todo's completion status to false.

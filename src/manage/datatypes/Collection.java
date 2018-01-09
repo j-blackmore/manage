@@ -447,7 +447,8 @@ public class Collection {
     }
     
     /**
-     * Sets the completion status for a task specified by its position in a todo, and that todo's position in this collection, to false.
+     * Sets the completion status for a task specified by its position in a todo, and that todo's 
+     * position in this collection, to false.
      * 
      * @param todoNum the todo's position in this collection.
      * @param taskNum the target task's position in the todo.
@@ -457,6 +458,23 @@ public class Collection {
             System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
         else
             todos.get(todoNum).unCompleteTask(taskNum);
+    }
+
+    /**
+     * Sets the completion status for a task specified by its description in a todo which is also
+     * specified by its name, to false.
+     * 
+     * @param taskDesc the description of the task.
+     * @param todoName the name of the todo.
+     */
+    public void unCompleteTask(String taskDesc, String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.get(i).unCompleteTask(taskDesc);
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
     }
     
     /**
