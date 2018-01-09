@@ -430,6 +430,21 @@ public class Collection {
             numOfTodos = todos.size();
         }
     }
+
+    /**
+     * Removes a todo specified by its name in this collection.
+     * 
+     * @param todoName the name of the todo.
+     */
+    public void removeTodo(String todoName) {
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
+                todos.remove(i);
+                return;
+            }
+        }
+        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception
+    }
     
     /**
      * Sets the completion status for a task specified by its position in a todo, and that todo's position in this collection, to false.
