@@ -35,6 +35,9 @@ public class Managed {
                     case Command.PRINT_COMMAND:
                         inputCommand = new PrintCommand(inputCommand.toString());
                         break;
+                    case Command.REMOVE_COMMAND:
+                        inputCommand = new RemoveCommand(inputCommand.toString());
+                        break;
                     case Command.UNKNOWN_COMMAND:
                         inputCommand = new Command(inputCommand.toString());
                         break;

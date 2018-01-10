@@ -23,6 +23,9 @@ public class Command {
     /** Add Command */
     public static final int ADD_COMMAND = 3;
 
+    /** Remove Command */
+    public static final int REMOVE_COMMAND = 4;
+
     /** Print Command */
     public static final int PRINT_COMMAND = 10;
 
@@ -56,6 +59,10 @@ public class Command {
                 else { return UNKNOWN_COMMAND; }
             case "print": 
                 if(command.numOfArgs() == 1 || command.numOfArgs() == 2) { return PRINT_COMMAND; }
+                else { return UNKNOWN_COMMAND; }
+            case "remove":
+                if(command.numOfArgs() == 2 || command.numOfArgs() == 3 
+                   || command.numOfArgs() == 4) { return REMOVE_COMMAND; } 
                 else { return UNKNOWN_COMMAND; }
             case "exit": case "quit": case "close": 
                 return EXIT_COMMAND;
