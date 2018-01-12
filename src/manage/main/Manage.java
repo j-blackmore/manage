@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import manage.commands.*;
 
-public class Managed {
+public class Manage {
     public static void main(String[] args) {
         Profile myProfile = new Profile("Joe");
         
