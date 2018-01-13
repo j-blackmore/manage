@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import manage.commands.*;
+import manage.commands.exceptions.*;
 
 public class Manage {
     public static void main(String[] args) {
@@ -46,8 +47,14 @@ public class Manage {
                         break;
                 }
 
-                inputCommand.completeAction(myProfile);
-                System.out.print("> ");
+                try {
+                    inputCommand.completeAction(myProfile);
+                } catch (InvalidCreateCommandException e) {
+                    System.out.println("Invalid create command: \'" + e.getMessage() + "\', must "
+                                     + "follow format: \'create [task|todo|collection] name\'");
+                } finally {
+                    System.out.println("> ");
+                }
             }
             try { input.close(); } catch(Exception e) { System.err.println(e); }
         } catch (Exception e) {

@@ -38,6 +38,12 @@ public class Command {
     /** Command's arguments */
     private ArrayList<String> args;
 
+    /**
+     * Constructs a new command from the command string. First argument is the command,
+     * the subsequent ones are it's arguments.
+     * 
+     * @param command the command string which the new command should be constructed from.
+     */
     public Command(String command) {
         if(command.contains(" "))
             this.command = command.trim().substring(0, command.indexOf(" "));
@@ -75,8 +81,9 @@ public class Command {
      * Method must be overwritten in subclasses.
      * 
      * @param user Profile of the user
+     * @throws Exception for any error caused when trying to execute the command action.
      */
-    public void completeAction(Profile user) {
+    public void completeAction(Profile user) throws Exception {
         System.out.println("Unknown Command, type 'help' for a list of commands");
     }
     
