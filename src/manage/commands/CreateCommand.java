@@ -12,6 +12,12 @@ import manage.main.Profile;
  */
 public class CreateCommand extends Command {
 
+    /**
+     * Constructs a new Create Command from the command string. First argument must be 'create',
+     * the second is the data object to create and the third is it's name.
+     * 
+     * @param command the command string which the new command should be constructed from.
+     */
     public CreateCommand(String command) {
         super(command);
     }
