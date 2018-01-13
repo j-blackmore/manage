@@ -1,15 +1,35 @@
 package manage.commands;
 
+import manage.commands.exceptions.InvalidPrintCommandException;
 import manage.main.Profile;
 
+/**
+ * Print command for Manage. Overrides the completeAction method, by printing what is specified
+ * by the command. For invalid commands, exception is thrown.
+ * 
+ * @author J Blackmore
+ */
 public class PrintCommand extends Command {
 
+    /** 
+     * Constructs a new Print Command from the command string. First argument must be 'print', 
+     * the subsequent one is what to print.
+     * 
+     * @param command the command string which the new command should be constructed from.
+     */
     public PrintCommand(String command) {
         super(command);
     }
 
+    /**
+     * Performs the action for the print command - print what is specified by the commands first
+     * argument. For invalid comamnds (unknown first argument) an exception is thrown.
+     * 
+     * @param user The profile the command is to be executed on.
+     * @throws InvalidPrintCommandException for invalid print commands.
+     */
     @Override
-    public void completeAction(Profile user) {
+    public void completeAction(Profile user) throws InvalidPrintCommandException {
         switch(getArg(1).toLowerCase()) {
             case "all":
                 System.out.println(user.getAll());
@@ -24,9 +44,7 @@ public class PrintCommand extends Command {
                 System.out.println(user.getCollections());
                 break;
             default:
-                System.out.print("Invalid print command, must be in format: ");
-                System.out.print("'print [all|tasks|todos|collections]'.\n");
-                break;
+                throw new InvalidPrintCommandException(this.toString());
         }
     }
 }

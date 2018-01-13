@@ -52,8 +52,11 @@ public class Manage {
                 } catch (InvalidCreateCommandException e) {
                     System.out.println("Invalid create command: \'" + e.getMessage() + "\', must "
                                      + "follow format: \'create [task|todo|collection] name\'");
+                } catch (InvalidPrintCommandException e) {
+                    System.out.println("Invalid print command: \'" + e.getMessage() + "\', must "
+                                     + "follow format: \'print [all|tasks|todos|collections]\'");
                 } finally {
-                    System.out.println("> ");
+                    System.out.print("> ");
                 }
             }
             try { input.close(); } catch(Exception e) { System.err.println(e); }
