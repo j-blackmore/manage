@@ -58,16 +58,22 @@ public class Manage {
                     System.out.println("Collection \'" + e.getMessage() + "\' not found");
                 } catch (InvalidCreateCommandException e) {
                     System.out.println("Invalid create command: \'" + e.getMessage() + "\', must "
-                                     + "follow format: \'create [task|todo|collection] name\'");
+                        + "follow format: \'create [task|todo|collection] name\'");
                 } catch (InvalidPrintCommandException e) {
                     System.out.println("Invalid print command: \'" + e.getMessage() + "\', must "
-                                     + "follow format: \'print [all|tasks|todos|collections]\'");
+                        + "follow format: \'print [all|tasks|todos|collections]\'");
                 } catch (InvalidAddCommandException e) {
                     System.out.println("Invalid add command: \'" + e.getMessage() + "\', must "
-                                     + "follow format: "
-                                     + "\'add [task|todo] name [destination1] (destination2)\'\n"
-                                     + "Second destination is for adding a task to a todo which is "
-                                     + "already in a collection." );
+                        + "follow format: "
+                        + "\'add [task|todo] name [destination1] (destination2)\'\n"
+                        + "Second destination is for adding a task to a todo which is already "
+                        + "in a collection." );
+                } catch (InvalidRemoveCommandException e) {
+                    System.out.println("Invalid remove command: \'" + e.getMessage() + "\', must "
+                        + "follow format: "
+                        + "\'remove [task|todo|collection] name [destination1] (destination2)\'\n"
+                        + "Second destination is for removing a task from a todo "
+                        + "which is already in a collection");
                 } finally {
                     System.out.print("> ");
                 }

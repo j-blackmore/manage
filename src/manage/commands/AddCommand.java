@@ -15,8 +15,8 @@ public class AddCommand extends Command{
 
     /**
      * Constructs a new Add Command from the command string. First argument must be 'add', the 
-     * second must be the data object type to add and the subsequent arguments are the destination
-     * of where the data object should be added to.
+     * second must be the data object type to add, the third its name and the subsequent arguments 
+     * are the destination of where the data object should be added to.
      * 
      * @param command the command string which the new command should be constructed from.
      */
