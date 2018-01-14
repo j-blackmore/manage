@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import manage.commands.*;
 import manage.commands.exceptions.*;
+import manage.datatypes.exceptions.*;
 
 public class Manage {
     public static void main(String[] args) {
@@ -49,12 +50,24 @@ public class Manage {
 
                 try {
                     inputCommand.completeAction(myProfile);
+                } catch (TaskNotFoundException e) {
+                    System.out.println("Task \'" + e.getMessage() + "\' not found");
+                } catch (TodoNotFoundException e) {
+                    System.out.println("Todo \'" + e.getMessage() + "\' not found");
+                } catch (CollectionNotFoundException e) {
+                    System.out.println("Collection \'" + e.getMessage() + "\' not found");
                 } catch (InvalidCreateCommandException e) {
                     System.out.println("Invalid create command: \'" + e.getMessage() + "\', must "
                                      + "follow format: \'create [task|todo|collection] name\'");
                 } catch (InvalidPrintCommandException e) {
                     System.out.println("Invalid print command: \'" + e.getMessage() + "\', must "
                                      + "follow format: \'print [all|tasks|todos|collections]\'");
+                } catch (InvalidAddCommandException e) {
+                    System.out.println("Invalid add command: \'" + e.getMessage() + "\', must "
+                                     + "follow format: "
+                                     + "\'add [task|todo] name [destination1] (destination2)\'\n"
+                                     + "Second destination is for adding a task to a todo which is "
+                                     + "already in a collection." );
                 } finally {
                     System.out.print("> ");
                 }

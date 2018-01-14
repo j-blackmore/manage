@@ -5,7 +5,7 @@ import manage.datatypes.*;
 import manage.main.Profile;
 
 /**
- * Create command for Manage. Overrides the completeAction method, by creating the data object
+ * Create command for Manage. Overrides the completeAction method - to create the data object
  * specified by the command. For invalid commands, exception is thrown.
  * 
  * @author J Blackmore

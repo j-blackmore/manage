@@ -4,7 +4,7 @@ import manage.commands.exceptions.InvalidPrintCommandException;
 import manage.main.Profile;
 
 /**
- * Print command for Manage. Overrides the completeAction method, by printing what is specified
+ * Print command for Manage. Overrides the completeAction method - to print what is specified
  * by the command. For invalid commands, exception is thrown.
  * 
  * @author J Blackmore
