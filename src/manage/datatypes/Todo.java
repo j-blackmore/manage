@@ -2,6 +2,8 @@ package manage.datatypes;
 
 import java.util.ArrayList;
 
+import manage.datatypes.exceptions.TaskNotFoundException;
+
 /**
  * Todo data structure for manage. It consists of Tasks, with various methods for manipulating a Todo.
  * 
@@ -73,15 +75,16 @@ public class Todo {
      * 
      * @param taskDesc the target task's description.
      * @param newTaskDesc the new description of the task.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found. 
      */
-    public void changeTaskDesc(String taskDesc, String newTaskDesc) {
+    public void changeTaskDesc(String taskDesc, String newTaskDesc) throws TaskNotFoundException {
         for(int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getDesc().equalsIgnoreCase(newTaskDesc)) {
                 tasks.get(i).changeDesc(newTaskDesc);
                 break;
             }
         }
-        System.out.println("Task: \'" + taskDesc + "\' not found.");    //TODO: Exception.
+        throw new TaskNotFoundException(taskDesc, "Todo \'" + this.getName() +"\'");
     }
     
     /**
@@ -109,15 +112,16 @@ public class Todo {
      * Set's a task's completion status to true. Task is specified by its description.
      * 
      * @param taskDesc the description of the todo.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public void completeTask(String taskDesc) {
+    public void completeTask(String taskDesc) throws TaskNotFoundException {
         for(int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
                 tasks.get(i).complete();
                 return;
             }
         }
-        System.out.println("Task: \'" + taskDesc + "\' not found.");    //TODO: Exception
+        throw new TaskNotFoundException(taskDesc, "Todo \'" + this.getName() +"\'");
     }
     
     /**
@@ -155,15 +159,15 @@ public class Todo {
      * 
      * @param taskDesc the description of the task.
      * @return Task object.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public Task getTask(String taskDesc) {
+    public Task getTask(String taskDesc) throws TaskNotFoundException {
         for(int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
                 return tasks.get(i);
             }
         }
-        System.out.println("Task: \'" + taskDesc + "\' not found.");
-        return null;
+        throw new TaskNotFoundException(taskDesc, "Todo \'" + this.getName() +"\'");
     }
     
     /**
@@ -217,15 +221,16 @@ public class Todo {
      * Removes a task specified by its description, from this todo.
      * 
      * @param taskDesc the description of the task.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public void removeTask(String taskDesc) {
+    public void removeTask(String taskDesc) throws TaskNotFoundException {
         for(int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
                 tasks.remove(i);
                 return;
             }
         }
-        System.out.println("Task: \'" + taskDesc + "\' not found.");
+        throw new TaskNotFoundException(taskDesc, "Todo \'" + this.getName() +"\'");
     }
     
     /**
@@ -244,15 +249,16 @@ public class Todo {
      * Set's a task's completion status to false. The task is specified by its description.
      * 
      * @param taskDesc the description of the task.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public void unCompleteTask(String taskDesc) {
+    public void unCompleteTask(String taskDesc) throws TaskNotFoundException {
         for(int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)){
                 tasks.get(i).unComplete();
                 return;
             }
         }
-        System.out.println("Task: \'" + taskDesc + "\' not found.");    //TODO: Exception.
+        throw new TaskNotFoundException(taskDesc, "Todo \'" + this.getName() +"\'");
     }
     
     /**

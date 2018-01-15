@@ -51,9 +51,19 @@ public class Manage {
                 try {
                     inputCommand.completeAction(myProfile);
                 } catch (TaskNotFoundException e) {
-                    System.out.println("Task \'" + e.getMessage() + "\' not found");
+                    if(e.getSearchLocation() != null) {
+                        System.out.println("Task \'" + e.getMessage() + "\' not found in "
+                            + e.getSearchLocation());
+                    } else {    
+                        System.out.println("Task \'" + e.getMessage() + "\' not found");
+                    }
                 } catch (TodoNotFoundException e) {
-                    System.out.println("Todo \'" + e.getMessage() + "\' not found");
+                    if(e.getSearchLocation() != null) {
+                        System.out.println("Todo \'" + e.getMessage() + "\' not found in"
+                            + e.getSearchLocation());
+                    } else {
+                        System.out.println("Todo \'" + e.getMessage() + "\' not found");
+                    }
                 } catch (CollectionNotFoundException e) {
                     System.out.println("Collection \'" + e.getMessage() + "\' not found");
                 } catch (InvalidCreateCommandException e) {
