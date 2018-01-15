@@ -1,6 +1,9 @@
 package manage.datatypes;
 
 import java.util.ArrayList;
+
+import manage.datatypes.exceptions.TaskNotFoundException;
+import manage.datatypes.exceptions.TodoNotFoundException;
 /**
  * Collection data structure for manage. It consists of Todos, with various methods for manipulating a Collection.
  * 
@@ -65,15 +68,16 @@ public class Collection {
      * 
      * @param taskToAdd the task to add.
      * @param todoName the target todo's name.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
      */
-    public void addTask(Task taskToAdd, String todoName) {
+    public void addTask(Task taskToAdd, String todoName) throws TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 todos.get(i).addTask(taskToAdd);
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -127,15 +131,23 @@ public class Collection {
      * @param taskDesc the target task's description.
      * @param newTaskDesc the new description of the task.
      * @param todoName the name of the todo.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public void changeTaskDesc(String taskDesc, String newTaskDesc, String todoName) {
+    public void changeTaskDesc(String taskDesc, String newTaskDesc, String todoName) throws 
+                                                    TodoNotFoundException, TaskNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
-                todos.get(i).changeTaskDesc(taskDesc, newTaskDesc);
+                try {
+                    todos.get(i).changeTaskDesc(taskDesc, newTaskDesc);
+                } catch (TaskNotFoundException e) {
+                    throw new TaskNotFoundException(e.getMessage(), e.getSearchLocation() 
+                        + " in Collection \'" + this.getName() + "\'");
+                }
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -157,15 +169,16 @@ public class Collection {
      * 
      * @param todoName the name of the todo.
      * @param newTodoName the new name of the todo.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
      */
-    public void changeTodoName(String todoName, String newTodoName) {
+    public void changeTodoName(String todoName, String newTodoName) throws TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(newTodoName)) {
                 todos.get(i).changeName(newTodoName);
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -188,15 +201,23 @@ public class Collection {
      * 
      * @param taskDesc the description of the task.
      * @param todoName the name of the todo.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public void completeTask(String taskDesc, String todoName) {
+    public void completeTask(String taskDesc, String todoName) throws 
+                                                    TaskNotFoundException, TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
-                todos.get(i).completeTask(taskDesc);
+                try {
+                    todos.get(i).completeTask(taskDesc);
+                } catch (TaskNotFoundException e) {
+                    throw new TaskNotFoundException(e.getMessage(), e.getSearchLocation()
+                        + "in Collection \'" + this.getName() + "\'");
+                }
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -215,15 +236,16 @@ public class Collection {
      * Sets a todo's completion status to true. Todo is specified by its name.
      * 
      * @param todoName the name of the todo.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
      */
-    public void completeTodo(String todoName) {
+    public void completeTodo(String todoName) throws TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 todos.get(i).complete();
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
 
     /**
@@ -272,15 +294,23 @@ public class Collection {
      * @param taskDesc the description of the desired task.
      * @param todoName the name of the todo.
      * @return Task object.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public Task getTask(String taskDesc, String todoName) {
+    public Task getTask(String taskDesc, String todoName) throws 
+                                                    TaskNotFoundException, TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
-                todos.get(i).getTask(taskDesc);
+                try {
+                    todos.get(i).getTask(taskDesc);
+                } catch (TaskNotFoundException e) {
+                    throw new TaskNotFoundException(e.getMessage(), e.getSearchLocation() 
+                        + " in Collection \'" + this.getName() + "\'");
+                }
+                return null;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");
-        return null;
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -316,15 +346,15 @@ public class Collection {
      * 
      * @param todoName the name of the todo.
      * @return Todo object.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
      */
-    public Todo getTodo(String todoName) {
+    public Todo getTodo(String todoName) throws TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 return todos.get(i);
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");
-        return null;
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -406,15 +436,24 @@ public class Collection {
      * 
      * @param taskDesc the description of the task.
      * @param todoName the name of the todo. 
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public void removeTask(String taskDesc, String todoName) {
+    public void removeTask(String taskDesc, String todoName) throws 
+                                                    TaskNotFoundException, TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
-                todos.get(i).removeTask(taskDesc);
+                try {
+                    todos.get(i).removeTask(taskDesc);
+                } catch (TaskNotFoundException e) {
+                    System.out.println("TaskNotF exception caught");
+                    throw new TaskNotFoundException(e.getMessage(), e.getSearchLocation() 
+                        + " in Collection \'" + this.getName() + "\'");
+                }
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -435,15 +474,16 @@ public class Collection {
      * Removes a todo specified by its name in this collection.
      * 
      * @param todoName the name of the todo.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
      */
-    public void removeTodo(String todoName) {
+    public void removeTodo(String todoName) throws TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 todos.remove(i);
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -466,15 +506,23 @@ public class Collection {
      * 
      * @param taskDesc the description of the task.
      * @param todoName the name of the todo.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
+     * @throws TaskNotFoundException when the task with description taskDesc, could not be found.
      */
-    public void unCompleteTask(String taskDesc, String todoName) {
+    public void unCompleteTask(String taskDesc, String todoName) throws 
+                                                    TaskNotFoundException, TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
-                todos.get(i).unCompleteTask(taskDesc);
+                try {
+                    todos.get(i).unCompleteTask(taskDesc);
+                } catch (TaskNotFoundException e) {
+                    throw new TaskNotFoundException(e.getMessage(), e.getSearchLocation()
+                        + " in Collection \'" + this.getName() + "\'");
+                }
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**
@@ -493,15 +541,16 @@ public class Collection {
      * Sets the completion status for a todo specified by its name, to false.
      * 
      * @param todoName the name of the todo.
+     * @throws TodoNotFoundException when the todo with name todoName, could not be found.
      */
-    public void unCompleteTodo(String todoName) {
+    public void unCompleteTodo(String todoName) throws TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 todos.get(i).unComplete();
                 return;
             }
         }
-        System.out.println("Todo: \'" + todoName + "\' not found.");    //TODO: Exception.
+        throw new TodoNotFoundException(todoName, "Collection \'" + this.getName() + "\'");
     }
     
     /**

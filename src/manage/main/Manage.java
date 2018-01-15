@@ -59,7 +59,7 @@ public class Manage {
                     }
                 } catch (TodoNotFoundException e) {
                     if(e.getSearchLocation() != null) {
-                        System.out.println("Todo \'" + e.getMessage() + "\' not found in"
+                        System.out.println("Todo \'" + e.getMessage() + "\' not found in "
                             + e.getSearchLocation());
                     } else {
                         System.out.println("Todo \'" + e.getMessage() + "\' not found");
