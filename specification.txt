@@ -70,7 +70,13 @@ Command(String)
 - removeFirstArg(String): String
 + toString(): String
 
-DefinedCommand: Interface
-- String[] pseudoNames
-
-Create: extends Command implements DefinedCommand
+Commands to add:
+[x] print
+[x] create
+[x] add
+[x] remove
+[ ] complete
+[ ] uncomplete
+[ ] rename
+[ ] save (requires saving first)
+[ ] exit
