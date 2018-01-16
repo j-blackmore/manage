@@ -3,7 +3,16 @@ package manage.main;
 import java.util.ArrayList;
 
 import manage.datatypes.*;
+import manage.datatypes.exceptions.CollectionNotFoundException;
+import manage.datatypes.exceptions.TaskNotFoundException;
+import manage.datatypes.exceptions.TodoNotFoundException;
 
+/**
+ * A users Profile for manage. Contains list of collections, todos and tasks and various methods 
+ * to access them.
+ * 
+ * @author J Blackmore
+ */
 public class Profile {
     public ArrayList<Collection> collections;
     public ArrayList<Todo> todos;
@@ -11,6 +20,11 @@ public class Profile {
 
     private String userName;
 
+    /**
+     * Creates a profile with a user name of userName.
+     * 
+     * @param userName the user name.
+     */
     public Profile(String userName) {
         this.userName = userName;
 
@@ -33,14 +47,15 @@ public class Profile {
      * 
      * @param collectionName String of Collection name.
      * @return Collection with name of collectionName.
+     * @throws CollectionNotFoundException when the collection of collectionName could not be found.
      */
-    public Collection getCollection(String collectionName) {
+    public Collection getCollection(String collectionName) throws CollectionNotFoundException {
         for (int i = 0; i < collections.size(); i++) {
             if (collections.get(i).getName().equalsIgnoreCase(collectionName)) {
                 return collections.get(i);
             }
         }
-        return null;
+        throw new CollectionNotFoundException(collectionName);
     }
 
     /**
@@ -61,13 +76,14 @@ public class Profile {
      * 
      * @param taskDesc String of Task description.
      * @return Task with description of taskDesc.
+     * @throws TaskNotFoundException when the task of taskDesc could not be found.
      */
-    public Task getTask(String taskDesc) {
+    public Task getTask(String taskDesc) throws TaskNotFoundException {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDesc().equalsIgnoreCase(taskDesc))
                 return tasks.get(i); 
         }
-        return null;
+        throw new TaskNotFoundException(taskDesc);
     }
 
     /**
@@ -88,13 +104,15 @@ public class Profile {
      * 
      * @param todoName String of Todo name.
      * @return Todo with name of todoName.
+     * @throws TodoNotFoundException when the todo with todoName could not be found.
      */
-    public Todo getTodo(String todoName) {
+    public Todo getTodo(String todoName) throws TodoNotFoundException {
         for (int i = 0; i < todos.size(); i++) {
             if (todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 return todos.get(i);
             }
         }
+        throw new TodoNotFoundException(todoName);
         return null;
     }
 
@@ -111,6 +129,11 @@ public class Profile {
         return allTodos;
     }
 
+    /**
+     * Returns the user name of this profile.
+     * 
+     * @return the user name.
+     */
     public String getUserName() {
         return userName;
     }
