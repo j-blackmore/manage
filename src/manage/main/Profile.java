@@ -3,9 +3,7 @@ package manage.main;
 import java.util.ArrayList;
 
 import manage.datatypes.*;
-import manage.datatypes.exceptions.CollectionNotFoundException;
-import manage.datatypes.exceptions.TaskNotFoundException;
-import manage.datatypes.exceptions.TodoNotFoundException;
+import manage.datatypes.exceptions.*;
 
 /**
  * A users Profile for manage. Contains list of collections, todos and tasks and various methods 
