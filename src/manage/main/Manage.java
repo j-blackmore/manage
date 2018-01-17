@@ -40,6 +40,9 @@ public class Manage {
                     case Command.REMOVE_COMMAND:
                         inputCommand = new RemoveCommand(inputCommand.toString());
                         break;
+                    case Command.COMPLETE_COMMAND:
+                        inputCommand = new CompleteCommand(inputCommand.toString());
+                        break;
                     case Command.UNKNOWN_COMMAND:
                         inputCommand = new Command(inputCommand.toString());
                         break;
@@ -81,8 +84,14 @@ public class Manage {
                 } catch (InvalidRemoveCommandException e) {
                     System.out.println("Invalid remove command: \'" + e.getMessage() + "\', must "
                         + "follow format: "
-                        + "\'remove [task|todo|collection] name [destination1] (destination2)\'\n"
+                        + "\'remove [task|todo|collection] name (destination1) (destination2)\'\n"
                         + "Second destination is for removing a task from a todo "
+                        + "which is already in a collection");
+                } catch (InvalidCompleteCommandException e) {
+                    System.out.println("Invalid complete command: \'" + e.getMessage() + "\', must"
+                        + "follow format: "
+                        + "\'complete [task|todo] name (destination1) (destination2)\'\n"
+                        + "Second destination is for completing a task in a todo "
                         + "which is already in a collection");
                 } finally {
                     System.out.print("> ");

@@ -111,7 +111,6 @@ public class Profile {
             }
         }
         throw new TodoNotFoundException(todoName);
-        return null;
     }
 
     /**
