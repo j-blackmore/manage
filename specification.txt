@@ -73,9 +73,9 @@ Command(String)
 Commands to add:
 [x] print
 [x] create
-[x] add
+[x] adds
 [x] remove
-[ ] complete
+[x] complete
 [ ] uncomplete
 [ ] rename
 [ ] save (requires saving first)
