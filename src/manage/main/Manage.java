@@ -43,6 +43,9 @@ public class Manage {
                     case Command.COMPLETE_COMMAND:
                         inputCommand = new CompleteCommand(inputCommand.toString());
                         break;
+                    case Command.UNCOMPLETE_COMMAND:
+                        inputCommand = new UncompleteCommand(inputCommand.toString());
+                        break;
                     case Command.UNKNOWN_COMMAND:
                         inputCommand = new Command(inputCommand.toString());
                         break;
@@ -93,6 +96,12 @@ public class Manage {
                         + "\'complete [task|todo] name (destination1) (destination2)\'\n"
                         + "Second destination is for completing a task in a todo "
                         + "which is already in a collection");
+                } catch (InvalidUncompleteCommandException e) {
+                    System.out.println("Invalid uncomplete command: \'" + e.getMessage() + "\', "
+                    + "must follow format: "
+                    + "\'uncomplete [task|todo] name (destination1) (destination2)\'\n"
+                    + "Second destination is for uncompleting a task in a todo "
+                    + "which is already in a collection");
                 } finally {
                     System.out.print("> ");
                 }

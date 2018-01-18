@@ -29,6 +29,9 @@ public class Command {
     /** Complete Command */
     public static final int COMPLETE_COMMAND = 5;
 
+    /** Uncomplete Command */
+    public static final int UNCOMPLETE_COMMAND = 6;
+
     /** Print Command */
     public static final int PRINT_COMMAND = 10;
 
@@ -77,6 +80,10 @@ public class Command {
                 if(command.numOfArgs() == 2 || command.numOfArgs() == 3
                     || command.numOfArgs() == 4) { return COMPLETE_COMMAND; }
                 else { return UNKNOWN_COMMAND; }
+            case "uncomplete":
+                if(command.numOfArgs() == 2 || command.numOfArgs() == 3
+                    || command.numOfArgs() == 4) { return UNCOMPLETE_COMMAND; }
+                else { return UNCOMPLETE_COMMAND; }
             case "exit": case "quit": case "close": 
                 return EXIT_COMMAND;
             default: return UNKNOWN_COMMAND;
