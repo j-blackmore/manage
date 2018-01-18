@@ -29,6 +29,9 @@ public class CompleteCommand extends Command {
      * command. For invalid commands (non-existing objects) an exception is thrown.
      * 
      * @param user The profile the command is to be executed on.
+     * @throws TaskNotFoundException when the task to be completed was not found.
+     * @throws TodoNotFoundException when the todo to completed or accessed was not found.
+     * @throws CollectionNotFoundException when the collection to be accessed was not found.
      * @throws InvalidCompleteCommandException for invalid complete commands.
      */
     @Override
