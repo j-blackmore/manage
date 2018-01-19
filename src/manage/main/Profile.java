@@ -32,6 +32,33 @@ public class Profile {
     }
 
     /**
+     * Add collection to this profile.
+     * 
+     * @param collectionToAdd the collection to add.
+     */
+    public void add(Collection collectionToAdd) {
+        collections.add(collectionToAdd);
+    }
+
+    /**
+     * Add task to this profile.
+     * 
+     * @param taskToAdd the task to add.
+     */
+    public void add(Task taskToAdd) {
+        tasks.add(taskToAdd);
+    }
+
+    /**
+     * Add todo to this profile.
+     * 
+     * @param todoToAdd the todo to add.
+     */
+    public void add(Todo todoToAdd) {
+        todos.add(todoToAdd);
+    }
+
+    /**
      * Returns string representation of all collections, todos and tasks in the profile.
      * 
      * @return String of contents in profile
