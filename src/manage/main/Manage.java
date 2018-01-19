@@ -16,14 +16,6 @@ public class Manage {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         Command inputCommand;
 
-        //***** EXAMPLE COMMANDS *****//
-        //> create todo -N the name of the todo
-        //> add task -N the name of the task
-        //> verb noun [Number flag of ordering] the rest will be info you pass to the command you wrote
-        //*****                  *****//
-
-        // use methods to break down input, and determine if flags exist etc
-
         try {
             System.out.print("Welcome to Manage.\nUser logged in: " + myProfile.getUserName() + "\n> ");
             while((inputCommand = new Command(input.readLine())).getCommandType() != Command.EXIT_COMMAND) {
