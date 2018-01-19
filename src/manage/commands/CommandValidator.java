@@ -1,8 +1,6 @@
 package manage.commands;
 
-import manage.commands.exceptions.InvalidAddCommandException;
-import manage.commands.exceptions.InvalidCommandException;
-import manage.commands.exceptions.InvalidCreateCommandException;
+import manage.commands.exceptions.*;
 
 /**
  * Command Validator for checking commands inputted by users in Manage, are valid.
@@ -32,6 +30,8 @@ public class CommandValidator {
                 return validateAddCommand(command);
             case "create":
                 return validateCreateCommand(command);
+            case "print":
+                return validatePrintCommand(command);
             default:
                 throw new InvalidCommandException(command.toString());
         }
@@ -42,18 +42,13 @@ public class CommandValidator {
         if(command.getArg(1).equalsIgnoreCase("task")) {
             if(command.numOfArgs() == 3 || command.numOfArgs() == 4) {
                 return true;
-            } else {
-                throw new InvalidAddCommandException(command.toString());
             }
         } else if(command.getArg(1).equalsIgnoreCase("todo")) {
             if(command.numOfArgs() == 3) {
                 return true;
-            } else {
-                throw new InvalidAddCommandException(command.toString());
             }
-        } else {
-            throw new InvalidAddCommandException(command.toString());
         }
+        throw new InvalidAddCommandException(command.toString());
     }
 
     // create command format: "create [task|todo|collection] <name>"
@@ -62,12 +57,20 @@ public class CommandValidator {
             if(command.getArg(1).equalsIgnoreCase("task") || command.getArg(1).equalsIgnoreCase("todo") ||
                command.getArg(1).equalsIgnoreCase("collection")) {
                 return true;
-            } else {
-                throw new InvalidCreateCommandException(command.toString());
             }
-        } else {
-            throw new InvalidCreateCommandException(command.toString());
         }
+        throw new InvalidCreateCommandException(command.toString());
+    }
+
+    // print command format: "print [tasks|todos|collections|all]"
+    private boolean validatePrintCommand(Command command) throws InvalidPrintCommandException {
+        if(command.numOfArgs() == 1) {
+            if(command.getArg(1).equalsIgnoreCase("tasks") || command.getArg(1).equalsIgnoreCase("todos") ||
+               command.getArg(1).equalsIgnoreCase("collections") || command.getArg(1).equalsIgnoreCase("all")) {
+                return true;
+               }
+        }
+        throw new InvalidPrintCommandException(command.toString());
     }
 
 }
