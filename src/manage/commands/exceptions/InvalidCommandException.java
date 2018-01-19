@@ -1,5 +1,7 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
+
 /**
  * Exception which is thrown when an invalid/unknown command is created.
  * 
@@ -14,5 +16,14 @@ public class InvalidCommandException extends Exception {
      */
     public InvalidCommandException(String command) {
         super(command);
+    }
+
+    /**
+     * Creates an InvalidCommandException from a command.
+     * 
+     * @param command the command that caused the exception.
+     */
+    public InvalidCommandException(Command command) {
+        this(command.toString());
     }
 }

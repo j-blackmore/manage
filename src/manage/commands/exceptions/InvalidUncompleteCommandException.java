@@ -1,5 +1,7 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
+
 /**
  * Exception which is thrown when an invalid uncomplete command is created.
  * 
@@ -14,5 +16,14 @@ public class InvalidUncompleteCommandException extends InvalidCommandException {
      */
     public InvalidUncompleteCommandException(String command) {
         super(command);
+    }
+
+    /**
+     * Creates an InvalidUncompleteCommandException from a command.
+     * 
+     * @param command the command that caused the exception.
+     */
+    public InvalidUncompleteCommandException(Command command) {
+        this(command.toString());
     }
 }
