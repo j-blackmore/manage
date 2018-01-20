@@ -42,8 +42,7 @@ public class Manage {
                         inputCommand = new Command(inputCommand.toString());
                         break;
                     default:
-                        System.out.println("Error with command type");  //TODO: Exception
-                        break;
+                        throw new InvalidCommandException(command);
                 }
 
                 try {

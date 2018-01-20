@@ -44,6 +44,8 @@ public class CommandValidator {
             case "uncomplete":
                 if(isUncompleteCommandValid(command)) return Command.UNCOMPLETE_COMMAND;
                 else throw new InvalidUncompleteCommandException(command);
+            case "exit": case "quit": case "close":
+                return Command.EXIT_COMMAND;
             default:
                 throw new InvalidCommandException(command.toString());
         }

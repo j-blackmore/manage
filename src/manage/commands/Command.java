@@ -2,6 +2,7 @@ package manage.commands;
 
 import java.util.ArrayList;
 
+import manage.commands.exceptions.InvalidCommandException;
 import manage.main.Profile;
 /**
  * Default Command for Manage, contains static info about all Commands.
@@ -38,8 +39,8 @@ public class Command {
     /** The command without it's arguments */
     private String command;
 
-    /** The commands type */
-    private int commandType;
+    /** The commands type, default is unknown command */
+    private int commandType = UNKNOWN_COMMAND;
 
     /** Command's arguments */
     private ArrayList<String> args;
@@ -49,8 +50,9 @@ public class Command {
      * the subsequent ones are it's arguments.
      * 
      * @param command the command string which the new command should be constructed from.
+     * @throws InvalidCommandException when the command created is an unknown command.
      */
-    public Command(String command) {
+    public Command(String command) throws InvalidCommandException {
         if(command.contains(" "))
             this.command = command.trim().substring(0, command.indexOf(" "));
         else
@@ -61,33 +63,9 @@ public class Command {
     }
 
     // returns the type of the command - unknown if cannot be classified.
-    private static int classifyCommand(Command command) {
-        switch(command.getCommand().toLowerCase()) {
-            case "create": 
-                if(command.numOfArgs() == 2) { return CREATE_COMMAND; }
-                else { return UNKNOWN_COMMAND; }    //TODO: Exception instead of Unknown.
-            case "add":
-                if(command.numOfArgs() == 3 || command.numOfArgs() == 4) { return ADD_COMMAND; }
-                else { return UNKNOWN_COMMAND; }
-            case "print": 
-                if(command.numOfArgs() == 1 || command.numOfArgs() == 2) { return PRINT_COMMAND; }
-                else { return UNKNOWN_COMMAND; }
-            case "remove":
-                if(command.numOfArgs() == 2 || command.numOfArgs() == 3 
-                   || command.numOfArgs() == 4) { return REMOVE_COMMAND; } 
-                else { return UNKNOWN_COMMAND; }
-            case "complete":
-                if(command.numOfArgs() == 2 || command.numOfArgs() == 3
-                    || command.numOfArgs() == 4) { return COMPLETE_COMMAND; }
-                else { return UNKNOWN_COMMAND; }
-            case "uncomplete":
-                if(command.numOfArgs() == 2 || command.numOfArgs() == 3
-                    || command.numOfArgs() == 4) { return UNCOMPLETE_COMMAND; }
-                else { return UNCOMPLETE_COMMAND; }
-            case "exit": case "quit": case "close": 
-                return EXIT_COMMAND;
-            default: return UNKNOWN_COMMAND;
-        }
+    private static int classifyCommand(Command command) throws InvalidCommandException {
+        CommandValidator commandValidator = new CommandValidator();
+        return commandValidator.validateCommand(command);
     }
 
     /**
