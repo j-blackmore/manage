@@ -28,12 +28,22 @@ public class CommandValidator {
         switch(command.getCommand().toLowerCase()) {
             case "add":
                 if(isAddCommandValid(command)) return Command.ADD_COMMAND;
+                else throw new InvalidAddCommandException(command);
+            case "complete":
+                if(isCompleteCommandValid(command)) return Command.COMPLETE_COMMAND;
+                else throw new InvalidCompleteCommandException(command);
             case "create":
                 if(isCreateCommandValid(command)) return Command.CREATE_COMMAND;
+                else throw new InvalidCreateCommandException(command);
             case "print":
                 if(isPrintCommandValid(command)) return Command.PRINT_COMMAND;
+                else throw new InvalidPrintCommandException(command);
             case "remove":
                 if(isRemoveCommandValid(command)) return Command.REMOVE_COMMAND;
+                else throw new InvalidRemoveCommandException(command);
+            case "uncomplete":
+                if(isUncompleteCommandValid(command)) return Command.UNCOMPLETE_COMMAND;
+                else throw new InvalidUncompleteCommandException(command);
             default:
                 throw new InvalidCommandException(command.toString());
         }
@@ -51,6 +61,20 @@ public class CommandValidator {
             }
         }
         throw new InvalidAddCommandException(command.toString());
+    }
+
+    // complete command format: "complete [task|todo] <name> <location1> <location2>"
+    private boolean isCompleteCommandValid(Command command) throws InvalidCompleteCommandException {
+        if(command.getArg(1).equalsIgnoreCase("task")) {
+            if(command.numOfArgs() == 2 || command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+                return true;
+            }
+        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
+            if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
+                return true;
+            }
+        }
+        throw new InvalidCompleteCommandException(command);
     }
 
     // create command format: "create [task|todo|collection] <name>"
@@ -91,6 +115,20 @@ public class CommandValidator {
             }
         }
         throw new InvalidRemoveCommandException(command);
+    }
+
+    // uncomplete command format: "uncomplete [task|todo] <name> <destination1> <destination2>"
+    private boolean isUncompleteCommandValid(Command command) throws InvalidUncompleteCommandException {
+        if(command.getArg(1).equalsIgnoreCase("task")) {
+            if(command.numOfArgs() == 2 || command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+                return true;
+            }
+        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
+            if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
+                return true;
+            }
+        }
+        throw new InvalidUncompleteCommandException(command);
     }
 
 }
