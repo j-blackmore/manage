@@ -1,6 +1,7 @@
 package manage.commands;
 
 import manage.commands.exceptions.InvalidAddCommandException;
+import manage.commands.exceptions.InvalidCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
 import manage.main.Profile;
@@ -19,8 +20,9 @@ public class AddCommand extends Command{
      * are the destination of where the data object should be added to.
      * 
      * @param command the command string which the new command should be constructed from.
+     * @throws InvalidCommandException for invalid commands.
      */
-    public AddCommand(String command) {
+    public AddCommand(String command) throws InvalidCommandException {
         super(command);
     }
 
@@ -40,23 +42,12 @@ public class AddCommand extends Command{
         switch (getArg(1).toLowerCase()) {
             case "task":
                 Task taskToAdd = user.getTask(getArg(2));
-                if (taskToAdd == null) {
-                    throw new TaskNotFoundException(getArg(2));
-                }
 
                 if (numOfArgs() == 4) {
                     Collection targetCollection = user.getCollection(getArg(4));
-                    if (targetCollection == null) {
-                        throw new CollectionNotFoundException(getArg(4));
-                    }
-                    
                     targetCollection.addTask(taskToAdd, getArg(3));
                 } else if (numOfArgs() == 3) {
                     Todo targetTodo = user.getTodo(getArg(3));
-                    if (targetTodo == null) {
-                        throw new TodoNotFoundException(getArg(3));
-                    }
-
                     targetTodo.addTask(getArg(2));
                 }
 
@@ -64,14 +55,7 @@ public class AddCommand extends Command{
                 break;
             case "todo":
                 Todo todoToAdd = user.getTodo(getArg(2));
-                if (todoToAdd == null) {
-                    throw new TodoNotFoundException(getArg(2));
-                }
-
                 Collection targetCollection = user.getCollection(getArg(3));
-                if (targetCollection == null) {
-                    throw new CollectionNotFoundException(getArg(3));
-                }
 
                 targetCollection.addTodo(todoToAdd);
                 user.todos.remove(todoToAdd);

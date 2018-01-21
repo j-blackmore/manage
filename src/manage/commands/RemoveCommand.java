@@ -1,5 +1,6 @@
 package manage.commands;
 
+import manage.commands.exceptions.InvalidCommandException;
 import manage.commands.exceptions.InvalidRemoveCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
@@ -19,8 +20,9 @@ public class RemoveCommand extends Command {
      * arguments are the destination of where the object should be removed from.
      * 
      * @param command the command string which the new command should be constructed from.
+     * @throws InvalidCommandException for invalid commands.
      */
-    public RemoveCommand(String command) {
+    public RemoveCommand(String command) throws InvalidCommandException {
         super(command);
     }
 
@@ -41,44 +43,24 @@ public class RemoveCommand extends Command {
             case "task":
                 if(numOfArgs() == 4) {
                     Collection targetCollection = user.getCollection(getArg(4));
-                    if(targetCollection == null) {
-                        throw new CollectionNotFoundException(getArg(4));
-                    }
-
                     targetCollection.removeTask(getArg(2), getArg(3));
                     break;
                 } else if(numOfArgs() == 3) {
                     Todo targetTodo = user.getTodo(getArg(3));
-                    if(targetTodo == null) {
-                        throw new TodoNotFoundException(getArg(3));
-                    }
-
                     targetTodo.removeTask(getArg(2));
                     break;
                 } else {
                     Task taskToRemove = user.getTask(getArg(2));
-                    if(taskToRemove == null) {
-                        throw new TaskNotFoundException(getArg(2));
-                    }
-
                     user.tasks.remove(taskToRemove);
                     break;
                 }
             case "todo":
                 if(numOfArgs() == 3) {
                     Collection targetCollection = user.getCollection(getArg(3));
-                    if(targetCollection == null) {
-                        throw new CollectionNotFoundException(getArg(3));
-                    }
-
                     targetCollection.removeTodo(getArg(2));
                     break;
                 } else if(numOfArgs() == 2) {
                     Todo todoToRemove = user.getTodo(getArg(2));
-                    if(todoToRemove == null) {
-                        throw new TodoNotFoundException(getArg(2));
-                    }
-
                     user.todos.remove(todoToRemove);
                     break;
                 } else {
@@ -87,10 +69,6 @@ public class RemoveCommand extends Command {
             case "collection":
                 if(numOfArgs() == 2) {
                     Collection collectionToRemove = user.getCollection(getArg(2));
-                    if(collectionToRemove == null) {
-                        throw new CollectionNotFoundException(getArg(2));
-                    }
-
                     user.collections.remove(collectionToRemove);
                     break;
                 } else {

@@ -1,6 +1,7 @@
 package manage.commands;
 
 import manage.commands.exceptions.InvalidUncompleteCommandException;
+import manage.commands.exceptions.InvalidCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
 import manage.main.Profile;
@@ -19,8 +20,9 @@ public class UncompleteCommand extends Command {
      * the subsequent arguments are the location of the object.
      * 
      * @param command the command string which the new command should be constructed from.
+     * @throws InvalidCommandException for invalid commands.
      */
-    public UncompleteCommand(String command) {
+    public UncompleteCommand(String command) throws InvalidCommandException {
         super(command);
     }
 
@@ -29,7 +31,10 @@ public class UncompleteCommand extends Command {
      * the command. For invalid commands (non-existing objects) an exception is thrown.
      * 
      * @param user The profile the command is to be executed on.
-     * @throws
+     * @throws TaskNotFoundException when the task to be uncompleted was not found.
+     * @throws TodoNotFoundException when the todo to uncompleted or accessed was not found.
+     * @throws CollectionNotFoundException when the collection to be accessed was not found.
+     * @throws InvalidUncompleteCommandException for invalid uncomplete commands.
      */
     @Override
     public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException, 

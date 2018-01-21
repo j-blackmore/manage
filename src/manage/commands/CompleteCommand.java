@@ -1,5 +1,6 @@
 package manage.commands;
 
+import manage.commands.exceptions.InvalidCommandException;
 import manage.commands.exceptions.InvalidCompleteCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
@@ -19,8 +20,9 @@ public class CompleteCommand extends Command {
      * arguments are the location of the object.
      * 
      * @param command the command string which the new command should be constructed from.
+     * @throws InvalidCommandException for invalid commands..
      */
-    public CompleteCommand(String command) {
+    public CompleteCommand(String command) throws InvalidCommandException {
         super(command);
     }
 

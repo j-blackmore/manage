@@ -1,6 +1,7 @@
 package manage.commands;
 
 import manage.commands.exceptions.InvalidCreateCommandException;
+import manage.commands.exceptions.InvalidCommandException;
 import manage.datatypes.*;
 import manage.main.Profile;
 
@@ -17,8 +18,9 @@ public class CreateCommand extends Command {
      * the second is the data object to create and the third is it's name.
      * 
      * @param command the command string which the new command should be constructed from.
+     * @throws InvalidCommandException for invalid commands.
      */
-    public CreateCommand(String command) {
+    public CreateCommand(String command) throws InvalidCommandException {
         super(command);
     }
 
@@ -33,13 +35,13 @@ public class CreateCommand extends Command {
     public void completeAction(Profile user) throws InvalidCreateCommandException {
         switch(getArg(1).toLowerCase()) {
             case "task":
-                user.tasks.add(new Task(getArg(2)));
+                user.add(new Task(getArg(2)));
                 break;
             case "todo":
-                user.todos.add(new Todo(getArg(2)));
+                user.add(new Todo(getArg(2)));
                 break;
             case "collection":
-                user.collections.add(new Collection(getArg(2)));
+                user.add(new Collection(getArg(2)));
                 break;
             default:
                 throw new InvalidCreateCommandException(this.toString());

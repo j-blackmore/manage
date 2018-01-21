@@ -1,5 +1,6 @@
 package manage.commands;
 
+import manage.commands.exceptions.InvalidCommandException;
 import manage.commands.exceptions.InvalidPrintCommandException;
 import manage.main.Profile;
 
@@ -16,8 +17,9 @@ public class PrintCommand extends Command {
      * the subsequent one is what to print.
      * 
      * @param command the command string which the new command should be constructed from.
+     * @throws InvalidCommandException for invalid commands.
      */
-    public PrintCommand(String command) {
+    public PrintCommand(String command) throws InvalidCommandException {
         super(command);
     }
 

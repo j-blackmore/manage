@@ -81,8 +81,6 @@ Commands to add:
 [ ] save (requires saving first)
 [ ] exit
 
-// TODO: //
-# Command Validator for all current commands
-# Change completeActions to simply perform action, no checks for all commands. 
+// TODO: // 
 # Store exception messages (format of commands) in the exception
 # New class for getting input from user
