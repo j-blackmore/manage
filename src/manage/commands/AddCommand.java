@@ -14,6 +14,11 @@ import manage.main.Profile;
  */
 public class AddCommand extends Command{
 
+    /** Correct format of this command */
+    private String correctCommandFormat = 
+        "\'add [task|todo] <name> <destination1>\'\n" + 
+        "\'add [task] <name> <destination1> <destination2>\'";
+
     /**
      * Constructs a new Add Command from the command string. First argument must be 'add', the 
      * second must be the data object type to add, the third its name and the subsequent arguments 
@@ -61,7 +66,16 @@ public class AddCommand extends Command{
                 user.todos.remove(todoToAdd);
                 break;
             default:
-                throw new InvalidAddCommandException(this.toString());
+                throw new InvalidAddCommandException(this);
         }
+    }
+
+    /**
+     * Returns the correct format for this command.
+     * 
+     * @return correct add command format.
+     */
+    public String getCorrectCommandFormat() {
+        return correctCommandFormat;
     }
 }

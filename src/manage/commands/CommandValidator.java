@@ -28,7 +28,7 @@ public class CommandValidator {
         switch(command.getCommand().toLowerCase()) {
             case "add":
                 if(isAddCommandValid(command)) return Command.ADD_COMMAND;
-                else throw new InvalidAddCommandException(command);
+                else throw new InvalidAddCommandException((AddCommand)command);
             case "complete":
                 if(isCompleteCommandValid(command)) return Command.COMPLETE_COMMAND;
                 else throw new InvalidCompleteCommandException(command);
@@ -62,7 +62,7 @@ public class CommandValidator {
                 return true;
             }
         }
-        throw new InvalidAddCommandException(command.toString());
+        throw new InvalidAddCommandException((AddCommand)command);
     }
 
     // complete command format: "complete [task|todo] <name> <location1> <location2>"

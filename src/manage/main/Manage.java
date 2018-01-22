@@ -70,11 +70,7 @@ public class Manage {
                     System.out.println("Invalid print command: \'" + e.getMessage() + "\', must "
                         + "follow format: \'print [all|tasks|todos|collections]\'");
                 } catch (InvalidAddCommandException e) {
-                    System.out.println("Invalid add command: \'" + e.getMessage() + "\', must "
-                        + "follow format: "
-                        + "\'add [task|todo] name [destination1] (destination2)\'\n"
-                        + "Second destination is for adding a task to a todo which is already "
-                        + "in a collection." );
+                    System.out.println(e.getMessage());
                 } catch (InvalidRemoveCommandException e) {
                     System.out.println("Invalid remove command: \'" + e.getMessage() + "\', must "
                         + "follow format: "
