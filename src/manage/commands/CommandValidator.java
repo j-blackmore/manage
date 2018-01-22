@@ -31,7 +31,7 @@ public class CommandValidator {
                 else throw new InvalidAddCommandException((AddCommand)command);
             case "complete":
                 if(isCompleteCommandValid(command)) return Command.COMPLETE_COMMAND;
-                else throw new InvalidCompleteCommandException(command);
+                else throw new InvalidCompleteCommandException((CompleteCommand)command);
             case "create":
                 if(isCreateCommandValid(command)) return Command.CREATE_COMMAND;
                 else throw new InvalidCreateCommandException(command);
@@ -76,7 +76,7 @@ public class CommandValidator {
                 return true;
             }
         }
-        throw new InvalidCompleteCommandException(command);
+        throw new InvalidCompleteCommandException((CompleteCommand)command);
     }
 
     // create command format: "create [task|todo|collection] <name>"

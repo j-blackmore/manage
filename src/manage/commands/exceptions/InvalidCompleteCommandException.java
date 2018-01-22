@@ -1,6 +1,6 @@
 package manage.commands.exceptions;
 
-import manage.commands.Command;
+import manage.commands.CompleteCommand;
 
 /**
  * Exception which is thrown when an invalid complete command is created.
@@ -10,12 +10,12 @@ import manage.commands.Command;
 public class InvalidCompleteCommandException extends InvalidCommandException {
 
     /**
-     * Creates an InvalidCompleteCommandException where the message is the invalid command.
+     * Creates an InvalidCompleteCommandException with an error message.
      * 
-     * @param command message of the exception, the command.
+     * @param message error message of the exception.
      */
-    public InvalidCompleteCommandException(String command) {
-        super(command);
+    public InvalidCompleteCommandException(String message) {
+        super(message);
     }
 
     /**
@@ -23,7 +23,8 @@ public class InvalidCompleteCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidCompleteCommandException(Command command) {
-        this(command.toString());
+    public InvalidCompleteCommandException(CompleteCommand command) {
+        this("Invalid complete command: \'" + command + "\', must follow format:\n" + 
+             command.getCorrectCommandFormat());
     }
 }

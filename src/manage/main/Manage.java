@@ -42,7 +42,7 @@ public class Manage {
                         inputCommand = new Command(inputCommand.toString());
                         break;
                     default:
-                        throw new InvalidCommandException(command);
+                        throw new InvalidCommandException(inputCommand);
                 }
 
                 try {
@@ -78,11 +78,7 @@ public class Manage {
                         + "Second destination is for removing a task from a todo "
                         + "which is already in a collection");
                 } catch (InvalidCompleteCommandException e) {
-                    System.out.println("Invalid complete command: \'" + e.getMessage() + "\', must"
-                        + "follow format: "
-                        + "\'complete [task|todo] name (destination1) (destination2)\'\n"
-                        + "Second destination is for completing a task in a todo "
-                        + "which is already in a collection");
+                    System.out.println(e.getMessage());
                 } catch (InvalidUncompleteCommandException e) {
                     System.out.println("Invalid uncomplete command: \'" + e.getMessage() + "\', "
                     + "must follow format: "

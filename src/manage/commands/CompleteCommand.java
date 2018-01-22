@@ -14,6 +14,11 @@ import manage.main.Profile;
  */
 public class CompleteCommand extends Command {
 
+    /** Correct format of this command */
+    private String correctCommandFormat = 
+        "\'complete [task|todo] <name> <destination1>\'\n" +
+        "\'complete [task] <name> <destination1> <destination2>\'";
+
     /**
      * Constructs a new Complete Command from the command string. First argument must be 'complete',
      * the second must be the data object type to complete, the third its name and the subsequent 
@@ -64,10 +69,19 @@ public class CompleteCommand extends Command {
                     todoToComplete.complete();
                     break;
                 } else {
-                    throw new InvalidCompleteCommandException(this.toString());
+                    throw new InvalidCompleteCommandException(this);
                 }
             default:
-                throw new InvalidCompleteCommandException(this.toString());
+                throw new InvalidCompleteCommandException(this);
         }
+    }
+
+    /**
+     * Returns the correct format for this command.
+     * 
+     * @return correct add command format.
+     */
+    public String getCorrectCommandFormat() {
+        return correctCommandFormat;
     }
 }
