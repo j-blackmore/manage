@@ -12,6 +12,10 @@ import manage.main.Profile;
  */
 public class PrintCommand extends Command {
 
+    /** Correct format of this command */
+    private String correctCommandFormat = 
+        "\'print [all|tasks|todos|collections]\'";
+
     /** 
      * Constructs a new Print Command from the command string. First argument must be 'print', 
      * the subsequent one is what to print.
@@ -46,7 +50,16 @@ public class PrintCommand extends Command {
                 System.out.println(user.getCollections());
                 break;
             default:
-                throw new InvalidPrintCommandException(this.toString());
+                throw new InvalidPrintCommandException(this);
         }
+    }
+
+    /**
+     * Returns the correct format for this command.
+     * 
+     * @return correct print command format.
+     */
+    public String getCorrectCommandFormat() {
+        return correctCommandFormat;
     }
 }

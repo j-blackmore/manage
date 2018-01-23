@@ -1,6 +1,6 @@
 package manage.commands.exceptions;
 
-import manage.commands.Command;
+import manage.commands.PrintCommand;
 
 /**
  * Exception which is thrown when an invalid print command is created.
@@ -10,12 +10,12 @@ import manage.commands.Command;
 public class InvalidPrintCommandException extends InvalidCommandException {
 
     /**
-     * Creates an InvalidPrintCommandException where the message is the invalid command.
+     * Creates an InvalidPrintCommandException with an error message.
      * 
-     * @param command message of the exception, the command.
+     * @param message error message of the exception.
      */
-    public InvalidPrintCommandException(String command) {
-        super(command);
+    public InvalidPrintCommandException(String message) {
+        super(message);
     }
 
     /**
@@ -23,7 +23,8 @@ public class InvalidPrintCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidPrintCommandException(Command command) {
-        this(command.toString());
+    public InvalidPrintCommandException(PrintCommand command) {
+        this("Invalid print command: \'" + command + "\', must follow format:\n" +
+             command.getCorrectCommandFormat());
     }
 }

@@ -37,7 +37,7 @@ public class CommandValidator {
                 else throw new InvalidCreateCommandException((CreateCommand)command);
             case "print":
                 if(isPrintCommandValid(command)) return Command.PRINT_COMMAND;
-                else throw new InvalidPrintCommandException(command);
+                else throw new InvalidPrintCommandException((PrintCommand)command);
             case "remove":
                 if(isRemoveCommandValid(command)) return Command.REMOVE_COMMAND;
                 else throw new InvalidRemoveCommandException(command);
@@ -98,7 +98,7 @@ public class CommandValidator {
                 return true;
                }
         }
-        throw new InvalidPrintCommandException(command.toString());
+        throw new InvalidPrintCommandException((PrintCommand)command);
     }
 
     // remove command format: "remove [task|todo|collection] <name> <destination1> <destination2>"

@@ -66,8 +66,7 @@ public class Manage {
                 } catch (InvalidCreateCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidPrintCommandException e) {
-                    System.out.println("Invalid print command: \'" + e.getMessage() + "\', must "
-                        + "follow format: \'print [all|tasks|todos|collections]\'");
+                    System.out.println(e.getMessage());
                 } catch (InvalidAddCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidRemoveCommandException e) {
