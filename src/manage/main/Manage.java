@@ -64,8 +64,7 @@ public class Manage {
                 } catch (CollectionNotFoundException e) {
                     System.out.println("Collection \'" + e.getMessage() + "\' not found");
                 } catch (InvalidCreateCommandException e) {
-                    System.out.println("Invalid create command: \'" + e.getMessage() + "\', must "
-                        + "follow format: \'create [task|todo|collection] name\'");
+                    System.out.println(e.getMessage());
                 } catch (InvalidPrintCommandException e) {
                     System.out.println("Invalid print command: \'" + e.getMessage() + "\', must "
                         + "follow format: \'print [all|tasks|todos|collections]\'");

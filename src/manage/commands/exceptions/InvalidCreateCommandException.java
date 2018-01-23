@@ -1,6 +1,6 @@
 package manage.commands.exceptions;
 
-import manage.commands.Command;
+import manage.commands.CreateCommand;
 
 /**
  * Exception which is thrown when an invalid create command is created.
@@ -10,12 +10,12 @@ import manage.commands.Command;
 public class InvalidCreateCommandException extends InvalidCommandException {
 
     /**
-     * Creates an InvalidCreateCommandException where the message is the invalid command.
+     * Creates an InvalidCreateCommandException with an error message.
      * 
-     * @param command message of the exception, the command.
+     * @param message error message of the exception.
      */
-    public InvalidCreateCommandException(String command) {
-        super(command);
+    public InvalidCreateCommandException(String message) {
+        super(message);
     }
 
     /**
@@ -23,7 +23,8 @@ public class InvalidCreateCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidCreateCommandException(Command command) {
-        this(command.toString());
+    public InvalidCreateCommandException(CreateCommand command) {
+        this("Invalid create command: \'" + command + "\', must follow format:\n" + 
+             command.getCorrectCommandFormat());
     }
 }

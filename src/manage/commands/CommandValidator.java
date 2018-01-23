@@ -34,7 +34,7 @@ public class CommandValidator {
                 else throw new InvalidCompleteCommandException((CompleteCommand)command);
             case "create":
                 if(isCreateCommandValid(command)) return Command.CREATE_COMMAND;
-                else throw new InvalidCreateCommandException(command);
+                else throw new InvalidCreateCommandException((CreateCommand)command);
             case "print":
                 if(isPrintCommandValid(command)) return Command.PRINT_COMMAND;
                 else throw new InvalidPrintCommandException(command);
@@ -87,7 +87,7 @@ public class CommandValidator {
                 return true;
             }
         }
-        throw new InvalidCreateCommandException(command.toString());
+        throw new InvalidCreateCommandException((CreateCommand)command);
     }
 
     // print command format: "print [tasks|todos|collections|all]"

@@ -13,6 +13,10 @@ import manage.main.Profile;
  */
 public class CreateCommand extends Command {
 
+    /** Correct format of this command */
+    private String correctCommandFormat = 
+        "\'create [task|todo|collection] <name>\'";
+
     /**
      * Constructs a new Create Command from the command string. First argument must be 'create',
      * the second is the data object to create and the third is it's name.
@@ -44,7 +48,16 @@ public class CreateCommand extends Command {
                 user.add(new Collection(getArg(2)));
                 break;
             default:
-                throw new InvalidCreateCommandException(this.toString());
+                throw new InvalidCreateCommandException(this);
         }
+    }
+
+    /**
+     * Returns the correct format for this command.
+     * 
+     * @return correct create command format.
+     */
+    public String getCorrectCommandFormat() {
+        return correctCommandFormat;
     }
 }
