@@ -74,11 +74,7 @@ public class Manage {
                 } catch (InvalidCompleteCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidUncompleteCommandException e) {
-                    System.out.println("Invalid uncomplete command: \'" + e.getMessage() + "\', "
-                    + "must follow format: "
-                    + "\'uncomplete [task|todo] name (destination1) (destination2)\'\n"
-                    + "Second destination is for uncompleting a task in a todo "
-                    + "which is already in a collection");
+                    System.out.println(e.getMessage());
                 } finally {
                     System.out.print("> ");
                 }

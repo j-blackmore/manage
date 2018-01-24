@@ -43,7 +43,7 @@ public class CommandValidator {
                 else throw new InvalidRemoveCommandException((RemoveCommand)command);
             case "uncomplete":
                 if(isUncompleteCommandValid(command)) return Command.UNCOMPLETE_COMMAND;
-                else throw new InvalidUncompleteCommandException(command);
+                else throw new InvalidUncompleteCommandException((UncompleteCommand)command);
             case "exit": case "quit": case "close":
                 return Command.EXIT_COMMAND;
             default:
@@ -130,7 +130,7 @@ public class CommandValidator {
                 return true;
             }
         }
-        throw new InvalidUncompleteCommandException(command);
+        throw new InvalidUncompleteCommandException((UncompleteCommand)command);
     }
 
 }

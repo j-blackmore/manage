@@ -14,6 +14,12 @@ import manage.main.Profile;
  */
 public class UncompleteCommand extends Command {
 
+    /** Correct format of this command */
+    private String correctCommandFormat =
+        "\'uncomplete [task|todo] <name>\'\n" +
+        "\'uncomplete [task|todo] <name> <destination1>\'\n" +
+        "\'uncomplete [task] <name> <destination1> <destination1>\'";
+
     /**
      * Constructs a new Uncomplete Command from the command string. First argument must be 
      * 'uncomplete', the second must be the data object type to uncomplete, the third its name and 
@@ -64,10 +70,19 @@ public class UncompleteCommand extends Command {
                     todoToUncomplete.unComplete();
                     break; 
                 } else {
-                    throw new InvalidUncompleteCommandException(this.toString());
+                    throw new InvalidUncompleteCommandException(this);
                 }
             default:
-                throw new InvalidUncompleteCommandException(this.toString());
+                throw new InvalidUncompleteCommandException(this);
         }
+    }
+
+    /**
+     * Returns the correct format for this command.
+     * 
+     * @return correct add command format.
+     */
+    public String getCorrectCommandFormat() {
+        return correctCommandFormat;
     }
 }
