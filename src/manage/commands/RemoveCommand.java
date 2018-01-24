@@ -14,6 +14,12 @@ import manage.main.Profile;
  */
 public class RemoveCommand extends Command {
 
+    /** Correct format of this command */
+    private String correctCommandFormat =
+        "\'remove [task|todo|collection] <name>\'\n" +
+        "\'remove [task|todo] <name> <destination1>\'\n" +
+        "\'remove [task] <name> <destination1> <destination2>\'";
+
     /**
      * Constructs a new Remove Command from the command string. First argument must be 'remove', 
      * the second must be the data object type to remove, the third its name and the subsequent
@@ -64,7 +70,7 @@ public class RemoveCommand extends Command {
                     user.todos.remove(todoToRemove);
                     break;
                 } else {
-                    throw new InvalidRemoveCommandException(this.toString());
+                    throw new InvalidRemoveCommandException(this);
                 }
             case "collection":
                 if(numOfArgs() == 2) {
@@ -72,10 +78,19 @@ public class RemoveCommand extends Command {
                     user.collections.remove(collectionToRemove);
                     break;
                 } else {
-                    throw new InvalidRemoveCommandException(this.toString());
+                    throw new InvalidRemoveCommandException(this);
                 }
             default:
-                throw new InvalidRemoveCommandException(this.toString());
+                throw new InvalidRemoveCommandException(this);
         }
+    }
+
+    /**
+     * Returns the correct format for this command.
+     * 
+     * @return correct remove command format.
+     */
+    public String getCorrectCommandFormat() {
+        return correctCommandFormat;
     }
 }

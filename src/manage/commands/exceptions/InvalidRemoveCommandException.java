@@ -1,6 +1,6 @@
 package manage.commands.exceptions;
 
-import manage.commands.Command;
+import manage.commands.RemoveCommand;
 
 /**
  * Exception which is thrown when an invalid remove command is created.
@@ -10,12 +10,12 @@ import manage.commands.Command;
 public class InvalidRemoveCommandException extends InvalidCommandException {
 
     /**
-     * Creates an InvalidRemoveCommandException where the message is the invalid command.
+     * Creates an InvalidRemoveCommandException with an error message.
      * 
-     * @param command message of the exception, the command.
+     * @param message error message of the exception.
      */
-    public InvalidRemoveCommandException(String command) {
-        super(command);
+    public InvalidRemoveCommandException(String message) {
+        super(message);
     }
 
     /**
@@ -23,7 +23,8 @@ public class InvalidRemoveCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidRemoveCommandException(Command command) {
-        this(command.toString());
+    public InvalidRemoveCommandException(RemoveCommand command) {
+        this("Invalid remove command :\'" + command + "\', must follow format:\n" +
+             command.getCorrectCommandFormat());
     }
 }

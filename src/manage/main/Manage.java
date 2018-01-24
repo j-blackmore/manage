@@ -70,11 +70,7 @@ public class Manage {
                 } catch (InvalidAddCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidRemoveCommandException e) {
-                    System.out.println("Invalid remove command: \'" + e.getMessage() + "\', must "
-                        + "follow format: "
-                        + "\'remove [task|todo|collection] name (destination1) (destination2)\'\n"
-                        + "Second destination is for removing a task from a todo "
-                        + "which is already in a collection");
+                    System.out.println(e.getMessage());
                 } catch (InvalidCompleteCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidUncompleteCommandException e) {

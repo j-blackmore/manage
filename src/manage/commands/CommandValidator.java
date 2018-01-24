@@ -40,7 +40,7 @@ public class CommandValidator {
                 else throw new InvalidPrintCommandException((PrintCommand)command);
             case "remove":
                 if(isRemoveCommandValid(command)) return Command.REMOVE_COMMAND;
-                else throw new InvalidRemoveCommandException(command);
+                else throw new InvalidRemoveCommandException((RemoveCommand)command);
             case "uncomplete":
                 if(isUncompleteCommandValid(command)) return Command.UNCOMPLETE_COMMAND;
                 else throw new InvalidUncompleteCommandException(command);
@@ -116,7 +116,7 @@ public class CommandValidator {
                 return true;
             }
         }
-        throw new InvalidRemoveCommandException(command);
+        throw new InvalidRemoveCommandException((RemoveCommand)command);
     }
 
     // uncomplete command format: "uncomplete [task|todo] <name> <destination1> <destination2>"
