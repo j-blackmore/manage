@@ -2,6 +2,8 @@ package manage.commands;
 
 import manage.commands.exceptions.InvalidRenameCommandException;
 import manage.commands.exceptions.InvalidCommandException;
+import manage.datatypes.*;
+import manage.datatypes.exceptions.*;
 import manage.main.Profile;
 
 /**
@@ -13,7 +15,10 @@ import manage.main.Profile;
 public class RenameCommand extends Command {
 
     /** Correct format of this command */
-    private String correctCommandFormat = "";
+    private String correctCommandFormat = 
+        "\'rename [task|todo|collection] <newname> <oldname>\'" +
+        "\'rename [task|todo] <newname> <oldname> <destination1>\'\n" +
+        "\'rename [task] <newname> <oldname> <destination1> <destination2>\'\n";
 
     /**
      * Constructs a new Rename Command from the command string. First argument must be 'rename', 
@@ -27,11 +32,58 @@ public class RenameCommand extends Command {
     }
 
     /**
-     * Complete action stub.
+     * Performs the action for the rename command - rename the data object specified by the command.
+     * For invalid commands (non-existing objects) an exception is thrown.
+     * 
+     * @param user The profile the command is to be executed on.
+     * @throws TaskNotFoundException when the task to be renamed was not found.
+     * @throws TodoNotFoundException when the todo to be renamed or accessed from was not found.
+     * @throws CollectionNotFoundException when the collection to be renamed or accessed from was not found.
+     * @throws InvalidRenameCommandException for invalid rename commands.
      */
     @Override
-    public void completeAction(Profile user) {
-
+    public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException, 
+                                    CollectionNotFoundException, InvalidRenameCommandException {
+        switch(getArg(1).toLowerCase()) {
+            case "task":
+                if(numOfArgs() == 5) {
+                    Collection targetCollection = user.getCollection(getArg(5));
+                    targetCollection.changeTaskDesc(getArg(3), getArg(2), getArg(4));
+                    break;
+                } else if(numOfArgs() == 4) {
+                    Todo targetTodo = user.getTodo(getArg(4));
+                    targetTodo.changeTaskDesc(getArg(3), getArg(2));
+                    break;
+                } else if(numOfArgs() == 3) {
+                    Task taskToRename = user.getTask(getArg(3));
+                    taskToRename.changeDesc(getArg(2));
+                    break;
+                } else {
+                    throw new InvalidRenameCommandException(this);
+                }
+            case "todo":
+                if(numOfArgs() == 4) {
+                    Collection targetCollection = user.getCollection(getArg(4));
+                    targetCollection.changeTodoName(getArg(3), getArg(2));
+                    break;
+                } else if(numOfArgs() == 3) {
+                    Todo todoToRename = user.getTodo(getArg(3));
+                    todoToRename.changeName(getArg(2));
+                    break;
+                } else {
+                    throw new InvalidRenameCommandException(this);
+                }
+            case "collection":
+                if(numOfArgs() == 3) {
+                    Collection collectionToRename = user.getCollection(getArg(3));
+                    collectionToRename.changeName(getArg(2));
+                    break;
+                } else {
+                    throw new InvalidRenameCommandException(this);
+                }
+            default:
+                throw new InvalidRenameCommandException(this);
+        }
     }
 
     /**
