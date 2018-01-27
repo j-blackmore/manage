@@ -77,9 +77,13 @@ Commands to add:
 [x] remove
 [x] complete
 [x] uncomplete
-[ ] rename
+[x] rename
 [ ] save (requires saving first)
 [ ] exit
 
 // TODO: // 
+
+# Save and load functionality
+# Remaining commands
 # New class for getting input from user
+# Tidy up code
