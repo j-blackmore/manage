@@ -41,6 +41,9 @@ public class CommandValidator {
             case "remove":
                 if(isRemoveCommandValid(command)) return Command.REMOVE_COMMAND;
                 else throw new InvalidRemoveCommandException((RemoveCommand)command);
+            case "rename":
+                if(isRenameCommandValid(command)) return Command.RENAME_COMMAND;
+                else throw new InvalidRenameCommandException((RenameCommand)command);
             case "uncomplete":
                 if(isUncompleteCommandValid(command)) return Command.UNCOMPLETE_COMMAND;
                 else throw new InvalidUncompleteCommandException((UncompleteCommand)command);
@@ -117,6 +120,24 @@ public class CommandValidator {
             }
         }
         throw new InvalidRemoveCommandException((RemoveCommand)command);
+    }
+
+    // rename command format: "rename [task|todo|collection] <newname> <oldname> <destination1> <destination2>"
+    private boolean isRenameCommandValid(Command command) throws InvalidRenameCommandException {
+        if(command.getArg(1).equalsIgnoreCase("task")) {
+            if(command.numOfArgs() == 3 || command.numOfArgs() == 4 || command.numOfArgs() == 5) {
+                return true;
+            }
+        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
+            if(command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+                return true;
+            }
+        } else if(command.getArg(1).equalsIgnoreCase("collection")) {
+            if(command.numOfArgs() == 3) {
+                return true;
+            }
+        }
+        throw new InvalidRenameCommandException((RenameCommand)command);
     }
 
     // uncomplete command format: "uncomplete [task|todo] <name> <destination1> <destination2>"

@@ -22,7 +22,8 @@ public class RenameCommand extends Command {
 
     /**
      * Constructs a new Rename Command from the command string. First argument must be 'rename', 
-     * the second must be the data object type to rename....
+     * the second must be the data object type to rename, the third it's new name and the fourth its 
+     * old name. Subsequent arguments are the destination of where the object to be renamed is.
      * 
      * @param command the command string which the new command should be constructed from.
      * @throws InvalidCommandException for invalid commands.

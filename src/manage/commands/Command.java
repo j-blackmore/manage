@@ -33,6 +33,9 @@ public class Command {
     /** Uncomplete Command */
     public static final int UNCOMPLETE_COMMAND = 6;
 
+    /** Rename Command */
+    public static final int RENAME_COMMAND = 7;
+
     /** Print Command */
     public static final int PRINT_COMMAND = 10;
 

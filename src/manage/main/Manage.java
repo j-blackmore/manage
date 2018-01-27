@@ -20,11 +20,14 @@ public class Manage {
             System.out.print("Welcome to Manage.\nUser logged in: " + myProfile.getUserName() + "\n> ");
             while((inputCommand = new Command(input.readLine())).getCommandType() != Command.EXIT_COMMAND) {
                 switch(inputCommand.getCommandType()) {
-                    case Command.CREATE_COMMAND:
-                        inputCommand = new CreateCommand(inputCommand.toString());
-                        break;
                     case Command.ADD_COMMAND:
                         inputCommand = new AddCommand(inputCommand.toString());
+                        break;
+                    case Command.COMPLETE_COMMAND:
+                        inputCommand = new CompleteCommand(inputCommand.toString());
+                        break;
+                    case Command.CREATE_COMMAND:
+                        inputCommand = new CreateCommand(inputCommand.toString());
                         break;
                     case Command.PRINT_COMMAND:
                         inputCommand = new PrintCommand(inputCommand.toString());
@@ -32,8 +35,8 @@ public class Manage {
                     case Command.REMOVE_COMMAND:
                         inputCommand = new RemoveCommand(inputCommand.toString());
                         break;
-                    case Command.COMPLETE_COMMAND:
-                        inputCommand = new CompleteCommand(inputCommand.toString());
+                    case Command.RENAME_COMMAND:
+                        inputCommand = new RenameCommand(inputCommand.toString());
                         break;
                     case Command.UNCOMPLETE_COMMAND:
                         inputCommand = new UncompleteCommand(inputCommand.toString());
@@ -63,15 +66,17 @@ public class Manage {
                     }
                 } catch (CollectionNotFoundException e) {
                     System.out.println("Collection \'" + e.getMessage() + "\' not found");
+                } catch (InvalidAddCommandException e) {
+                    System.out.println(e.getMessage());
+                } catch (InvalidCompleteCommandException e) {
+                    System.out.println(e.getMessage());
                 } catch (InvalidCreateCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidPrintCommandException e) {
                     System.out.println(e.getMessage());
-                } catch (InvalidAddCommandException e) {
-                    System.out.println(e.getMessage());
                 } catch (InvalidRemoveCommandException e) {
                     System.out.println(e.getMessage());
-                } catch (InvalidCompleteCommandException e) {
+                } catch (InvalidRenameCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidUncompleteCommandException e) {
                     System.out.println(e.getMessage());
