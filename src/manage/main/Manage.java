@@ -12,7 +12,7 @@ import manage.datatypes.exceptions.*;
 public class Manage {
     public static void main(String[] args) {
         Profile myProfile = new Profile("Joe");
-        
+
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         Command inputCommand;
 
