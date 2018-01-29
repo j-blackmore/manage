@@ -54,92 +54,15 @@ public class FileHandler {
             while((inputLine = userSave.readLine()) != null) {
                 switch(Integer.parseInt(inputLine.substring(0, inputLine.indexOf(":")))) {
                     case COLLECTION_ID:
-                        Collection collectionToAdd = new Collection(inputLine.substring(2, inputLine.indexOf(";")));
-                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-
-                        int numOfTodos = Integer.parseInt(inputLine.substring(0, inputLine.indexOf(";"))); 
-                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-
-                        if(numOfTodos != 0) {
-                            for(int i = 1; i <= numOfTodos; i++) {
-                                Todo todoToAdd = new Todo(inputLine.substring(2, inputLine.indexOf(";")));
-                                inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-        
-                                if(Boolean.parseBoolean(inputLine.substring(0, inputLine.indexOf(";")))) { 
-                                    todoToAdd.complete(); 
-                                } else { 
-                                    todoToAdd.unComplete();
-                                }
-                                inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-                                
-                                int numOfTasks = Integer.parseInt(inputLine.substring(0, inputLine.indexOf(";")));
-                                inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-                                
-                                if(numOfTasks == 0)
-                                    break;
-                                else {
-                                    for(int j = 1; j <= numOfTasks; j++) {
-                                        Task taskToAdd = new Task(inputLine.substring(2, inputLine.indexOf(";")));
-                                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-        
-                                        if(Boolean.parseBoolean(inputLine.substring(0, inputLine.indexOf(";")))) {
-                                            taskToAdd.complete();
-                                        } else {
-                                            taskToAdd.unComplete();
-                                        }
-                                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-                                        
-                                        todoToAdd.addTask(taskToAdd);
-                                    }
-                                }
-                                collectionToAdd.addTodo(todoToAdd);
-                            }
-                        }
+                        Collection collectionToAdd = createCollection(inputLine);
                         userProfile.add(collectionToAdd);
                         break;
                     case TODO_ID:
-                        Todo todoToAdd = new Todo(inputLine.substring(2, inputLine.indexOf(";")));
-                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-
-                        if(Boolean.parseBoolean(inputLine.substring(0, inputLine.indexOf(";")))) { 
-                            todoToAdd.complete(); 
-                        } else { 
-                            todoToAdd.unComplete();
-                        }
-                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-                        
-                        int numOfTasks = Integer.parseInt(inputLine.substring(0, inputLine.indexOf(";")));
-                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-                        
-                        if(numOfTasks != 0) {
-                            for(int i = 1; i <= numOfTasks; i++) {
-                                Task taskToAdd = new Task(inputLine.substring(2, inputLine.indexOf(";")));
-                                inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-
-                                if(Boolean.parseBoolean(inputLine.substring(0, inputLine.indexOf(";")))) {
-                                    taskToAdd.complete();
-                                } else {
-                                    taskToAdd.unComplete();
-                                }
-                                inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-                                
-                                todoToAdd.addTask(taskToAdd);
-                            }
-                        }
-
+                        Todo todoToAdd = createTodo(inputLine);
                         userProfile.add(todoToAdd);
                         break;
                     case TASK_ID:
-                        Task taskToAdd = new Task(inputLine.substring(2, inputLine.indexOf(";")));
-                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-
-                        if(Boolean.parseBoolean(inputLine.substring(0, inputLine.indexOf(";")))) {
-                            taskToAdd.complete();
-                        } else {
-                            taskToAdd.unComplete();
-                        }
-                        inputLine = inputLine.substring(inputLine.indexOf(";") + 1);
-                        
+                        Task taskToAdd = createTask(inputLine);
                         userProfile.add(taskToAdd);
                         break;
                 }
@@ -150,6 +73,65 @@ public class FileHandler {
         }
 
         return new Profile("User");
+    }
+
+    private Collection createCollection(String input) {
+        Collection newCollection = new Collection(input.substring(2, input.indexOf(";")));
+        input = input.substring(input.indexOf(";") + 1);
+
+        int numOfTodos = Integer.parseInt(input.substring(0, input.indexOf(";"))); 
+        input = input.substring(input.indexOf(";") + 1);
+
+        if(numOfTodos != 0) {
+            for(int i = 1; i <= numOfTodos; i++) {
+                newCollection.addTodo(createTodo(input));
+                if(i < numOfTodos) {
+                    input = input.substring(input.indexOf(TODO_ID + ":", 2) + 1);
+                }
+            }
+        }
+
+        return newCollection;
+    }
+
+    private Todo createTodo(String input) {
+        Todo newTodo = new Todo(input.substring(2, input.indexOf(";")));
+        input = input.substring(input.indexOf(";") + 1);
+
+        if(Boolean.parseBoolean(input.substring(0, input.indexOf(";")))) { 
+            newTodo.complete(); 
+        } else { 
+            newTodo.unComplete();
+        }
+        input = input.substring(input.indexOf(";") + 1);
+        
+        int numOfTasks = Integer.parseInt(input.substring(0, input.indexOf(";")));
+        input = input.substring(input.indexOf(";") + 1);
+        
+        if(numOfTasks != 0) {
+            for(int i = 1; i <= numOfTasks; i++) {
+                newTodo.addTask(createTask(input));
+                if(input.length() != 0) {
+                    input = input.substring(input.indexOf(":") - 1);
+                }
+            }
+        }
+
+        return newTodo;
+    }
+
+    private Task createTask(String input) {
+        Task newTask = new Task(input.substring(2, input.indexOf(";")));
+        input = input.substring(input.indexOf(";") + 1);
+
+        if(Boolean.parseBoolean(input.substring(0, input.indexOf(";")))) {
+            newTask.complete();
+        } else {
+            newTask.unComplete();
+        }
+        input = input.substring(input.indexOf(";") + 1);
+
+        return newTask;
     }
 
     /**
