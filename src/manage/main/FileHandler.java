@@ -25,6 +25,10 @@ public class FileHandler {
     private static final int TODO_ID = 2;
 
     private static final int COLLECTION_ID = 3;
+
+    private static final String TASK_END = ";;";
+
+    private static final String TODO_END = "::";
     
     /** The path for the save file */
     private String filePath = 
@@ -45,14 +49,15 @@ public class FileHandler {
      */
     public Profile load() throws FileNotFoundException {
         BufferedReader userSave = new BufferedReader(new FileReader(filePath + fileName));
-        Profile userProfile;
-        try {
-            String profileName = userSave.readLine().substring(2);
-            userProfile = new Profile(profileName);
+        Profile userProfile = null;
 
+        try {
             String inputLine = "";
             while((inputLine = userSave.readLine()) != null) {
                 switch(Integer.parseInt(inputLine.substring(0, inputLine.indexOf(":")))) {
+                    case NAME_ID:
+                        userProfile = new Profile(inputLine.substring(2));
+                        break;
                     case COLLECTION_ID:
                         Collection collectionToAdd = createCollection(inputLine);
                         userProfile.add(collectionToAdd);
@@ -72,9 +77,15 @@ public class FileHandler {
             System.out.println(e.getMessage());
         }
 
-        return new Profile("User");
+        if(userProfile == null) {
+            System.out.println("No user found, new user created.");
+            return new Profile("new-user");
+        } else {
+            return userProfile;
+        }
     }
 
+    // creates a collection from the save entry input
     private Collection createCollection(String input) {
         Collection newCollection = new Collection(input.substring(2, input.indexOf(";")));
         input = input.substring(input.indexOf(";") + 1);
@@ -85,15 +96,14 @@ public class FileHandler {
         if(numOfTodos != 0) {
             for(int i = 1; i <= numOfTodos; i++) {
                 newCollection.addTodo(createTodo(input));
-                if(i < numOfTodos) {
-                    input = input.substring(input.indexOf(TODO_ID + ":", 2) + 1);
-                }
+                input = input.substring(input.indexOf(TODO_END) + 2);
             }
         }
 
         return newCollection;
     }
 
+    // creates a todo for the save entry input
     private Todo createTodo(String input) {
         Todo newTodo = new Todo(input.substring(2, input.indexOf(";")));
         input = input.substring(input.indexOf(";") + 1);
@@ -111,15 +121,14 @@ public class FileHandler {
         if(numOfTasks != 0) {
             for(int i = 1; i <= numOfTasks; i++) {
                 newTodo.addTask(createTask(input));
-                if(input.length() != 0) {
-                    input = input.substring(input.indexOf(":") - 1);
-                }
+                input = input.substring(input.indexOf(TASK_END) + 2);
             }
         }
 
         return newTodo;
     }
 
+    // creates a task for the save entry input
     private Task createTask(String input) {
         Task newTask = new Task(input.substring(2, input.indexOf(";")));
         input = input.substring(input.indexOf(";") + 1);
@@ -129,7 +138,6 @@ public class FileHandler {
         } else {
             newTask.unComplete();
         }
-        input = input.substring(input.indexOf(";") + 1);
 
         return newTask;
     }

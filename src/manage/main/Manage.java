@@ -2,6 +2,7 @@
 package manage.main;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -10,14 +11,16 @@ import manage.commands.exceptions.*;
 import manage.datatypes.exceptions.*;
 
 public class Manage {
-    public static void main(String[] args) {
-        Profile myProfile = new Profile("Joe");
+    public static void main(String[] args) throws FileNotFoundException {
+        System.out.println("Welcome to Manage.");
+        FileHandler fileHandler = new FileHandler();
+        Profile userProfile = fileHandler.load();
 
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         Command inputCommand;
 
         try {
-            System.out.print("Welcome to Manage.\nUser logged in: " + myProfile.getUserName() + "\n> ");
+            System.out.print("User logged in: " + userProfile.getUserName() + "\n> ");
             while((inputCommand = new Command(input.readLine())).getCommandType() != Command.EXIT_COMMAND) {
                 switch(inputCommand.getCommandType()) {
                     case Command.ADD_COMMAND:
@@ -49,7 +52,7 @@ public class Manage {
                 }
 
                 try {
-                    inputCommand.completeAction(myProfile);
+                    inputCommand.completeAction(userProfile);
                 } catch (TaskNotFoundException e) {
                     if(e.getSearchLocation() != null) {
                         System.out.println("Task \'" + e.getMessage() + "\' not found in "
