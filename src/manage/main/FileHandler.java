@@ -3,14 +3,11 @@ package manage.main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import manage.datatypes.Collection;
-import manage.datatypes.Task;
-import manage.datatypes.Todo;
+import manage.datatypes.*;
 import manage.main.Profile;
 
 /**
@@ -31,60 +28,17 @@ public class FileHandler {
     private static final String TASK_END = ";;";
 
     private static final String TODO_END = "::";
-    
+
     /** The path for the save file */
     private String filePath = 
         System.getProperty("user.home") + File.separator + "manageApp" + File.separator;
 
+    /** The name of the save file */
     private String fileName = "manage_profile.m";
 
     /** Creates a FileHandler */
     public FileHandler() {
-
-    }
-
-    /**
-     * Loads the saved profile from file into Manage, and returns the profile.
-     * 
-     * @return the loaded profile
-     * @throws FileNotFoundException for invalid file open on save file.
-     */
-    public Profile load() throws FileNotFoundException {
-        BufferedReader userSave = new BufferedReader(new FileReader(filePath + fileName));
-        Profile userProfile = null;
-
-        try {
-            String inputLine = "";
-            while((inputLine = userSave.readLine()) != null) {
-                switch(Integer.parseInt(inputLine.substring(0, inputLine.indexOf(":")))) {
-                    case NAME_ID:
-                        userProfile = new Profile(inputLine.substring(2));
-                        break;
-                    case COLLECTION_ID:
-                        Collection collectionToAdd = createCollection(inputLine);
-                        userProfile.add(collectionToAdd);
-                        break;
-                    case TODO_ID:
-                        Todo todoToAdd = createTodo(inputLine);
-                        userProfile.add(todoToAdd);
-                        break;
-                    case TASK_ID:
-                        Task taskToAdd = createTask(inputLine);
-                        userProfile.add(taskToAdd);
-                        break;
-                }
-            }
-            try { userSave.close(); } catch(Exception e) { System.out.println(e.getMessage()); }
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        if(userProfile == null) {
-            System.out.println("No user found, new user created.");
-            return new Profile("new-user");
-        } else {
-            return userProfile;
-        }
+        //TODO - check that a file already exists, report back to user
     }
 
     // creates a collection from the save entry input
@@ -103,6 +57,16 @@ public class FileHandler {
         }
 
         return newCollection;
+    }
+
+    // creates a task for the save entry input
+    private Task createTask(String input) {
+        Task newTask = new Task(input.substring(2, input.indexOf(";")));
+        input = input.substring(input.indexOf(";") + 1);
+
+        newTask.setCompletionStatus(Boolean.parseBoolean(input.substring(0, input.indexOf(";"))));
+
+        return newTask;
     }
 
     // creates a todo for the save entry input
@@ -126,14 +90,48 @@ public class FileHandler {
         return newTodo;
     }
 
-    // creates a task for the save entry input
-    private Task createTask(String input) {
-        Task newTask = new Task(input.substring(2, input.indexOf(";")));
-        input = input.substring(input.indexOf(";") + 1);
+    /**
+     * Loads the saved profile from file into Manage, and returns the profile.
+     * 
+     * @return the loaded profile
+     */
+    public Profile load() {
+        BufferedReader userSave = null;
+        Profile userProfile = null;
 
-        newTask.setCompletionStatus(Boolean.parseBoolean(input.substring(0, input.indexOf(";"))));
+        try {
+            userSave = new BufferedReader(new FileReader(filePath + fileName));
+            String inputLine = "";
+            while((inputLine = userSave.readLine()) != null) {
+                switch(Integer.parseInt(inputLine.substring(0, inputLine.indexOf(":")))) {
+                    case NAME_ID:
+                        userProfile = new Profile(inputLine.substring(2));
+                        break;
+                    case COLLECTION_ID:
+                        Collection collectionToAdd = createCollection(inputLine);
+                        userProfile.add(collectionToAdd);
+                        break;
+                    case TODO_ID:
+                        Todo todoToAdd = createTodo(inputLine);
+                        userProfile.add(todoToAdd);
+                        break;
+                    case TASK_ID:
+                        Task taskToAdd = createTask(inputLine);
+                        userProfile.add(taskToAdd);
+                        break;
+                }
+            }
+            try { userSave.close(); } catch(Exception e) { System.out.println(e.getMessage()); }
+        } catch(Exception e) {
+            System.out.println("Error loading from file - close program and try again");
+        }
 
-        return newTask;
+        if(userProfile == null) {
+            System.out.println("No user found, new user created.");
+            return new Profile("new-user");
+        } else {
+            return userProfile;
+        }
     }
 
     /**
@@ -146,18 +144,18 @@ public class FileHandler {
         
         try {
             fileSave = new BufferedWriter(new PrintWriter(filePath + fileName));
-            fileSave.write("0:" + userProfile.getUserName());
+            fileSave.write("0:" + userProfile.getUserName() + "\n");
 
             for(int i = 0; i < userProfile.collections.size(); i++) {
-                fileSave.write(userProfile.collections.get(i).getSaveFormat());
+                fileSave.write(userProfile.collections.get(i).getSaveFormat() + "\n");
             }
 
             for(int j =0; j < userProfile.todos.size(); j++) {
-                fileSave.write(userProfile.todos.get(j).getSaveFormat());
+                fileSave.write(userProfile.todos.get(j).getSaveFormat() + "\n");
             }
 
             for(int k = 0; k < userProfile.tasks.size(); k++) {
-                fileSave.write(userProfile.tasks.get(k).getSaveFormat());
+                fileSave.write(userProfile.tasks.get(k).getSaveFormat() + "\n");
             }
         } catch(IOException e) {
             System.out.println("Error saving file, please try again");

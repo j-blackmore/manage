@@ -2,8 +2,8 @@
 package manage.main;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
+
 import java.util.ArrayList;
 
 import manage.commands.*;
@@ -11,15 +11,15 @@ import manage.commands.exceptions.*;
 import manage.datatypes.exceptions.*;
 
 public class Manage {
-    public static void main(String[] args) throws FileNotFoundException {
-        System.out.println("Welcome to Manage.");
-        FileHandler fileHandler = new FileHandler();
-        Profile userProfile = fileHandler.load();
-
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        Command inputCommand;
-
+    public static void main(String[] args) {
         try {
+            System.out.println("Welcome to Manage.");
+            FileHandler fileHandler = new FileHandler();
+            Profile userProfile = fileHandler.load();
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            Command inputCommand;
+
             System.out.print("User logged in: " + userProfile.getUserName() + "\n> ");
             while((inputCommand = new Command(input.readLine())).getCommandType() != Command.EXIT_COMMAND) {
                 switch(inputCommand.getCommandType()) {
@@ -83,13 +83,15 @@ public class Manage {
                     System.out.println(e.getMessage());
                 } catch (InvalidUncompleteCommandException e) {
                     System.out.println(e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("Unexpected error - seek administrator help");
                 } finally {
                     System.out.print("> ");
                 }
             }
             try { input.close(); } catch(Exception e) { System.err.println(e); }
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("Unexpected error - seek administrator help");
         }
     }
 }
