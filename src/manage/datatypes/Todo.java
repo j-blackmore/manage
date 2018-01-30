@@ -139,6 +139,20 @@ public class Todo {
     public String getName() {
         return name;
     }
+
+    /**
+     * Returns the save format of this todo.
+     * 
+     * @return save format.
+     */
+    public String getSaveFormat() {
+        String saveFormat = "2:" + name + ";" + Boolean.toString(complete) + ";" + numOfTasks + ";";
+        for (int i = 0; i < numOfTasks; i++) {
+            saveFormat += tasks.get(i).getSaveFormat();
+        }
+        
+        return saveFormat + "::";
+    }
     
     /**
      * Gets the task object specified by its position in the todo.

@@ -57,6 +57,15 @@ public class Task {
     }
 
     /**
+     * Returns the save format of this task.
+     * 
+     * @return save format.
+     */
+    public String getSaveFormat() {
+        return "1:" + description + ";" + Boolean.toString(complete) + ";;";
+    }
+
+    /**
      * Sets this tasks completion status to boolean value of status.
      * 
      * @param status completion status.

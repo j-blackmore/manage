@@ -2,6 +2,7 @@ package manage.datatypes;
 
 import java.util.ArrayList;
 
+import jdk.nashorn.internal.runtime.regexp.joni.SearchAlgorithm;
 import manage.datatypes.exceptions.TaskNotFoundException;
 import manage.datatypes.exceptions.TodoNotFoundException;
 /**
@@ -269,6 +270,21 @@ public class Collection {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Returns the save format for this collection.
+     * 
+     * @return save format.
+     */
+    public String getSaveFormat() {
+        String saveFormat = "3:" + name + ";" + numOfTodos + ";";
+
+        for (int i = 0; i < numOfTodos; i++) {
+            saveFormat += todos.get(i).getSaveFormat();
+        }
+
+        return saveFormat;
     }
     
     /**
