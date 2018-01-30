@@ -55,6 +55,15 @@ public class Task {
     public String getDesc() {
         return description;
     }
+
+    /**
+     * Sets this tasks completion status to boolean value of status.
+     * 
+     * @param status completion status.
+     */
+    public void setCompletionStatus(boolean status) {
+        complete = status;
+    }
     
     /**
      * Sets this tasks completetion status to false.

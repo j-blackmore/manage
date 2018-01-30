@@ -232,6 +232,15 @@ public class Todo {
         }
         throw new TaskNotFoundException(taskDesc, "Todo \'" + this.getName() +"\'");
     }
+
+    /**
+     * Sets this todos completion status to status.
+     * 
+     * @param status completion status.
+     */
+    public void setCompletionStatus(boolean status) {
+        complete = status;
+    }
     
     /**
      * Sets a task's completion status to false. The task is specified by the position in the todo.
