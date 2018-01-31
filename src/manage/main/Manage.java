@@ -41,6 +41,9 @@ public class Manage {
                     case Command.RENAME_COMMAND:
                         inputCommand = new RenameCommand(inputCommand.toString());
                         break;
+                    case Command.SAVE_COMMAND:
+                        inputCommand = new SaveCommand(inputCommand.toString());
+                        break;
                     case Command.UNCOMPLETE_COMMAND:
                         inputCommand = new UncompleteCommand(inputCommand.toString());
                         break;
@@ -80,6 +83,8 @@ public class Manage {
                 } catch (InvalidRemoveCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidRenameCommandException e) {
+                    System.out.println(e.getMessage());
+                } catch (InvalidSaveCommandException e) {
                     System.out.println(e.getMessage());
                 } catch (InvalidUncompleteCommandException e) {
                     System.out.println(e.getMessage());

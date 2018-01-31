@@ -36,6 +36,9 @@ public class Command {
     /** Rename Command */
     public static final int RENAME_COMMAND = 7;
 
+    /** Save Command */
+    public static final int SAVE_COMMAND = 8;
+
     /** Print Command */
     public static final int PRINT_COMMAND = 10;
 

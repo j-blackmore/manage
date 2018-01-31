@@ -44,6 +44,9 @@ public class CommandValidator {
             case "rename":
                 if(isRenameCommandValid(command)) return Command.RENAME_COMMAND;
                 else throw new InvalidRenameCommandException((RenameCommand)command);
+            case "save":
+                if(isSaveCommandValid(command)) return Command.SAVE_COMMAND;
+                else throw new InvalidSaveCommandException((SaveCommand)command);
             case "uncomplete":
                 if(isUncompleteCommandValid(command)) return Command.UNCOMPLETE_COMMAND;
                 else throw new InvalidUncompleteCommandException((UncompleteCommand)command);
@@ -138,6 +141,14 @@ public class CommandValidator {
             }
         }
         throw new InvalidRenameCommandException((RenameCommand)command);
+    }
+
+    // save command format: "save"
+    private boolean isSaveCommandValid(Command command) throws InvalidSaveCommandException {
+        if(command.numOfArgs() == 0) {
+            return true;
+        }
+        throw new InvalidSaveCommandException((SaveCommand)command);
     }
 
     // uncomplete command format: "uncomplete [task|todo] <name> <destination1> <destination2>"
