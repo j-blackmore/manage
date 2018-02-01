@@ -59,29 +59,33 @@ public class CommandValidator {
 
     // add command format: "add [task|todo] <name> <destination1> <destination2>"
     private boolean isAddCommandValid(Command command) throws InvalidAddCommandException {
-        if(command.getArg(1).equalsIgnoreCase("task")) {
-            if(command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+        if(command.numOfArgs() == 3) {
+            String firstArg = command.getArg(1);
+            if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
                 return true;
             }
-        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
-            if(command.numOfArgs() == 3) {
+        } else if(command.numOfArgs() == 4) {
+            if(command.getArg(1).equalsIgnoreCase("task")) {
                 return true;
             }
         }
+
         throw new InvalidAddCommandException((AddCommand)command);
     }
 
     // complete command format: "complete [task|todo] <name> <location1> <location2>"
     private boolean isCompleteCommandValid(Command command) throws InvalidCompleteCommandException {
-        if(command.getArg(1).equalsIgnoreCase("task")) {
-            if(command.numOfArgs() == 2 || command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+        if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
+            String firstArg = command.getArg(1);
+            if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
                 return true;
             }
-        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
-            if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
+        } else if(command.numOfArgs() == 4) {
+            if(command.getArg(1).equalsIgnoreCase("task")) {
                 return true;
             }
         }
+
         throw new InvalidCompleteCommandException((CompleteCommand)command);
     }
 
@@ -109,37 +113,37 @@ public class CommandValidator {
 
     // remove command format: "remove [task|todo|collection] <name> <destination1> <destination2>"
     private boolean isRemoveCommandValid(Command command) throws InvalidRemoveCommandException {
-        if(command.getArg(1).equalsIgnoreCase("task")) {
-            if(command.numOfArgs() == 2 || command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+        if(command.numOfArgs() == 2 || command.numOfArgs() == 3 ) {
+            String firstArg = command.getArg(1);
+            if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
+                return true;
+            } else if(firstArg.equalsIgnoreCase("collection") && command.numOfArgs() == 2) {
                 return true;
             }
-        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
-            if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
-                return true;
-            }
-        } else if(command.getArg(1).equalsIgnoreCase("collection")) {
-            if(command.numOfArgs() == 2) {
+        } else if(command.numOfArgs() == 4) {
+            if(command.getArg(1).equalsIgnoreCase("task")) {
                 return true;
             }
         }
+
         throw new InvalidRemoveCommandException((RemoveCommand)command);
     }
 
     // rename command format: "rename [task|todo|collection] <newname> <oldname> <destination1> <destination2>"
     private boolean isRenameCommandValid(Command command) throws InvalidRenameCommandException {
-        if(command.getArg(1).equalsIgnoreCase("task")) {
-            if(command.numOfArgs() == 3 || command.numOfArgs() == 4 || command.numOfArgs() == 5) {
+        if(command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+            String firstArg = command.getArg(1);
+            if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
+                return true;
+            } else if(firstArg.equalsIgnoreCase("collection") && command.numOfArgs() == 3) {
                 return true;
             }
-        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
-            if(command.numOfArgs() == 3 || command.numOfArgs() == 4) {
-                return true;
-            }
-        } else if(command.getArg(1).equalsIgnoreCase("collection")) {
-            if(command.numOfArgs() == 3) {
+        } else if(command.numOfArgs() == 5) {
+            if(command.getArg(1).equalsIgnoreCase("task")) {
                 return true;
             }
         }
+
         throw new InvalidRenameCommandException((RenameCommand)command);
     }
 
@@ -153,15 +157,17 @@ public class CommandValidator {
 
     // uncomplete command format: "uncomplete [task|todo] <name> <destination1> <destination2>"
     private boolean isUncompleteCommandValid(Command command) throws InvalidUncompleteCommandException {
-        if(command.getArg(1).equalsIgnoreCase("task")) {
-            if(command.numOfArgs() == 2 || command.numOfArgs() == 3 || command.numOfArgs() == 4) {
+        if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
+            String firstArg = command.getArg(1);
+            if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
                 return true;
             }
-        } else if(command.getArg(1).equalsIgnoreCase("todo")) {
-            if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
+        } else if(command.numOfArgs() == 4) {
+            if(command.getArg(1).equalsIgnoreCase("task")) {
                 return true;
             }
         }
+
         throw new InvalidUncompleteCommandException((UncompleteCommand)command);
     }
 
