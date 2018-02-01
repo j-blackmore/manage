@@ -11,92 +11,90 @@ import manage.commands.exceptions.*;
 import manage.datatypes.exceptions.*;
 
 public class Manage {
+
+    private static Profile userProfile = null;
+
+    private static BufferedReader input = null;
+
     public static void main(String[] args) {
-        try {
-            System.out.println("Welcome to Manage.");
-            FileHandler fileHandler = new FileHandler();
-            Profile userProfile = fileHandler.load();
+        initializeManage();
+        Command inputCommand = new Command();
 
-            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-            Command inputCommand;
+        do {
+            try {
+                System.out.print("> ");
+                inputCommand = new Command(input.readLine());
+                inputCommand = reclassifyCommand(inputCommand);
 
-            System.out.print("User logged in: " + userProfile.getUserName() + "\n> ");
-            while((inputCommand = new Command(input.readLine())).getCommandType() != Command.EXIT_COMMAND) {
-                switch(inputCommand.getCommandType()) {
-                    case Command.ADD_COMMAND:
-                        inputCommand = new AddCommand(inputCommand.toString());
-                        break;
-                    case Command.COMPLETE_COMMAND:
-                        inputCommand = new CompleteCommand(inputCommand.toString());
-                        break;
-                    case Command.CREATE_COMMAND:
-                        inputCommand = new CreateCommand(inputCommand.toString());
-                        break;
-                    case Command.PRINT_COMMAND:
-                        inputCommand = new PrintCommand(inputCommand.toString());
-                        break;
-                    case Command.REMOVE_COMMAND:
-                        inputCommand = new RemoveCommand(inputCommand.toString());
-                        break;
-                    case Command.RENAME_COMMAND:
-                        inputCommand = new RenameCommand(inputCommand.toString());
-                        break;
-                    case Command.SAVE_COMMAND:
-                        inputCommand = new SaveCommand(inputCommand.toString());
-                        break;
-                    case Command.UNCOMPLETE_COMMAND:
-                        inputCommand = new UncompleteCommand(inputCommand.toString());
-                        break;
-                    case Command.UNKNOWN_COMMAND:
-                        inputCommand = new Command(inputCommand.toString());
-                        break;
-                    default:
-                        throw new InvalidCommandException(inputCommand);
+                inputCommand.completeAction(userProfile);
+            } catch (InvalidCommandException e) {
+                System.err.println(e.getMessage());
+            } catch (TaskNotFoundException e) {
+                if(e.getSearchLocation() != null) {
+                    System.err.println("Task \'" + e.getMessage() + "\' not found in "
+                        + e.getSearchLocation());
+                } else {    
+                    System.err.println("Task \'" + e.getMessage() + "\' not found");
                 }
-
-                try {
-                    inputCommand.completeAction(userProfile);
-                } catch (TaskNotFoundException e) {
-                    if(e.getSearchLocation() != null) {
-                        System.out.println("Task \'" + e.getMessage() + "\' not found in "
-                            + e.getSearchLocation());
-                    } else {    
-                        System.out.println("Task \'" + e.getMessage() + "\' not found");
-                    }
-                } catch (TodoNotFoundException e) {
-                    if(e.getSearchLocation() != null) {
-                        System.out.println("Todo \'" + e.getMessage() + "\' not found in "
-                            + e.getSearchLocation());
-                    } else {
-                        System.out.println("Todo \'" + e.getMessage() + "\' not found");
-                    }
-                } catch (CollectionNotFoundException e) {
-                    System.out.println("Collection \'" + e.getMessage() + "\' not found");
-                } catch (InvalidAddCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvalidCompleteCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvalidCreateCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvalidPrintCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvalidRemoveCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvalidRenameCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvalidSaveCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvalidUncompleteCommandException e) {
-                    System.out.println(e.getMessage());
-                } catch (Exception e) {
-                    System.out.println("Unexpected error - seek administrator help");
-                } finally {
-                    System.out.print("> ");
+            } catch (TodoNotFoundException e) {
+                if(e.getSearchLocation() != null) {
+                    System.err.println("Todo \'" + e.getMessage() + "\' not found in "
+                        + e.getSearchLocation());
+                } else {
+                    System.err.println("Todo \'" + e.getMessage() + "\' not found");
                 }
+            } catch (CollectionNotFoundException e) {
+                System.err.println("Collection \'" + e.getMessage() + "\' not found");
+            } catch (Exception e) {
+                System.err.println("Unexpected error occurred - seek administrator help");
+                System.err.println(e);
+                e.printStackTrace();
+
             }
-            try { input.close(); } catch(Exception e) { System.err.println(e); }
+        } while (inputCommand.getCommandType() != Command.EXIT_COMMAND);
+
+        try { input.close(); } catch(Exception e) { System.err.println(e); }
+    }
+
+    // welcomes and loads the profile from file
+    private static void initializeManage() {
+        System.out.println("Manage. Version 1.0. Author J Blackmore.");
+        FileHandler fileHandler;
+        
+        try {
+            fileHandler = new FileHandler();
+            userProfile = fileHandler.load();
+            System.out.println(userProfile.getUserName() + "'s profile loaded.");
+
+            input = new BufferedReader(new InputStreamReader(System.in));
         } catch (Exception e) {
-            System.err.println("Unexpected error - seek administrator help");
+            System.err.println("Unexpected error, program restart advised");
+        }
+    }
+
+    // returns new command object for the specific command
+    private static Command reclassifyCommand(Command command) throws InvalidCommandException {
+        switch(command.getCommandType()) {
+            case Command.ADD_COMMAND:
+                return new AddCommand(command.toString());
+            case Command.COMPLETE_COMMAND:
+                return new CompleteCommand(command.toString());
+            case Command.CREATE_COMMAND:
+                return new CreateCommand(command.toString());
+            case Command.PRINT_COMMAND:
+                return new PrintCommand(command.toString());
+            case Command.REMOVE_COMMAND:
+                return new RemoveCommand(command.toString());
+            case Command.RENAME_COMMAND:
+                return new RenameCommand(command.toString());
+            case Command.SAVE_COMMAND:
+                return new SaveCommand(command.toString());
+            case Command.UNCOMPLETE_COMMAND:
+                return new UncompleteCommand(command.toString());
+            case Command.UNKNOWN_COMMAND:
+                return new Command(command.toString());
+            default:
+                throw new InvalidCommandException(command);
         }
     }
 }

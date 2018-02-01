@@ -68,6 +68,14 @@ public class Command {
         commandType = classifyCommand(this);
     }
 
+    /**
+     * Constructs a new blank unknown command. 
+     */
+    public Command() {
+        command = null;
+        args = null;
+    }
+
     // returns the type of the command - unknown if cannot be classified.
     private static int classifyCommand(Command command) throws InvalidCommandException {
         CommandValidator commandValidator = new CommandValidator();
@@ -88,14 +96,14 @@ public class Command {
     /**
      * Returns a string representation of the argument specified by arg. Indexing begins at 1.
      * Arguments are distinguished by spaces or quotes. Quotes are not returned if they are used.
+     * Returns null if arg exceeds the number of arguments this command has.
      * 
      * @param arg the specified argument
-     * @throws IndexOutOfBoundsException 290698
      * @return argument specified by arg
      */
-    public String getArg(int arg) throws IndexOutOfBoundsException {
+    public String getArg(int arg) {
         if(arg > args.size()) {
-            throw new IndexOutOfBoundsException("Command has no argument: " + arg);
+            return null;
         }
         return args.get(arg-1);
     }
