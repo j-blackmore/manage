@@ -35,8 +35,10 @@ public class SaveCommand extends Command {
      */
     @Override
     public void completeAction(Profile user) {
+        System.out.print("Saving... ");
         FileHandler fileHandler = new FileHandler();
         fileHandler.save(user);
+        System.out.println("Profile saved.");
     }
 
     /**

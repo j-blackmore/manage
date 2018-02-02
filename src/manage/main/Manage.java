@@ -97,6 +97,8 @@ public class Manage {
                 return new SaveCommand(command);
             case "uncomplete":
                 return new UncompleteCommand(command);
+            case "exit": case "quit": case "close":
+                return new ExitCommand(command);
             default:
                 throw new InvalidCommandException("Unknown command, type help for more commands");
         }

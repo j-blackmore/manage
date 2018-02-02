@@ -36,6 +36,8 @@ public class CommandValidator {
                 return isSaveCommandValid(command);
             case "uncomplete":
                 return isUncompleteCommandValid(command);
+            case "exit": case "quit": case "close":
+                return isExitCommandValid(command);
             default:
                 throw new InvalidCommandException(command);
         }
@@ -82,6 +84,13 @@ public class CommandValidator {
             }
         }
         throw new InvalidCreateCommandException(command);
+    }
+
+    private static boolean isExitCommandValid(Command command) throws InvalidExitCommandException {
+        if(command.numOfArgs() == 0) {
+            return true;
+        }
+        throw new InvalidExitCommandException(command);
     }
 
     // print command format: "print [tasks|todos|collections|all]"
