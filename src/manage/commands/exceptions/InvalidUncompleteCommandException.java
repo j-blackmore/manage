@@ -1,5 +1,6 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
 import manage.commands.UncompleteCommand;
 
 /**
@@ -23,8 +24,8 @@ public class InvalidUncompleteCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidUncompleteCommandException(UncompleteCommand command) {
+    public InvalidUncompleteCommandException(Command command) {
         this("Invalid uncomplete command: \'" + command + "\', must follow format:\n" +
-             command.getCorrectCommandFormat());
+             UncompleteCommand.getCorrectCommandFormat());
     }
 }

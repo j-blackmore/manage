@@ -1,6 +1,7 @@
 package manage.commands.exceptions;
 
 import manage.commands.AddCommand;
+import manage.commands.Command;
 
 /**
  * Exception which is thrown when an invalid add command is created.
@@ -23,8 +24,8 @@ public class InvalidAddCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidAddCommandException(AddCommand command) {
+    public InvalidAddCommandException(Command command) {
         this("Invalid add command: \'" + command + "\', must follow format:\n" + 
-             command.getCorrectCommandFormat());
+             AddCommand.getCorrectCommandFormat());
     }
 }

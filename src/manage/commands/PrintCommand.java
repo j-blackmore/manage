@@ -13,7 +13,7 @@ import manage.main.Profile;
 public class PrintCommand extends Command {
 
     /** Correct format of this command */
-    private String correctCommandFormat = 
+    private static String correctCommandFormat = 
         "\'print [all|tasks|todos|collections]\'";
 
     /** 
@@ -56,11 +56,11 @@ public class PrintCommand extends Command {
     }
 
     /**
-     * Returns the correct format for this command.
+     * Returns the correct format for the print command.
      * 
      * @return correct print command format.
      */
-    public String getCorrectCommandFormat() {
+    public static String getCorrectCommandFormat() {
         return correctCommandFormat;
     }
 }

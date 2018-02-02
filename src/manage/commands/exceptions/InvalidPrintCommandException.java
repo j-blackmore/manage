@@ -1,5 +1,6 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
 import manage.commands.PrintCommand;
 
 /**
@@ -23,8 +24,8 @@ public class InvalidPrintCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidPrintCommandException(PrintCommand command) {
+    public InvalidPrintCommandException(Command command) {
         this("Invalid print command: \'" + command + "\', must follow format:\n" +
-             command.getCorrectCommandFormat());
+             PrintCommand.getCorrectCommandFormat());
     }
 }

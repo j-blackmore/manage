@@ -15,7 +15,7 @@ import manage.main.Profile;
 public class RemoveCommand extends Command {
 
     /** Correct format of this command */
-    private String correctCommandFormat =
+    private static String correctCommandFormat =
         "\'remove [task|todo|collection] <name>\'\n" +
         "\'remove [task|todo] <name> <destination1>\'\n" +
         "\'remove [task] <name> <destination1> <destination2>\'";
@@ -87,11 +87,11 @@ public class RemoveCommand extends Command {
     }
 
     /**
-     * Returns the correct format for this command.
+     * Returns the correct format for the remove command.
      * 
      * @return correct remove command format.
      */
-    public String getCorrectCommandFormat() {
+    public static String getCorrectCommandFormat() {
         return correctCommandFormat;
     }
 }

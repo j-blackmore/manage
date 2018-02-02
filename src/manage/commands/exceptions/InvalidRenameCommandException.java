@@ -1,5 +1,6 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
 import manage.commands.RenameCommand;
 
 /**
@@ -23,9 +24,9 @@ public class InvalidRenameCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidRenameCommandException(RenameCommand command) {
+    public InvalidRenameCommandException(Command command) {
         this("Invalid rename command: \'" + command + "\', must follow format:\n" +
-             command.getCorrectCommandFormat());
+             RenameCommand.getCorrectCommandFormat());
     }
     
 }

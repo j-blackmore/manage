@@ -1,5 +1,6 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
 import manage.commands.CreateCommand;
 
 /**
@@ -23,8 +24,8 @@ public class InvalidCreateCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidCreateCommandException(CreateCommand command) {
+    public InvalidCreateCommandException(Command command) {
         this("Invalid create command: \'" + command + "\', must follow format:\n" + 
-             command.getCorrectCommandFormat());
+             CreateCommand.getCorrectCommandFormat());
     }
 }

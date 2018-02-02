@@ -15,7 +15,7 @@ import manage.main.Profile;
 public class AddCommand extends Command{
 
     /** Correct format of this command */
-    private String correctCommandFormat = 
+    private static String correctCommandFormat = 
         "\'add [task|todo] <name> <destination1>\'\n" + 
         "\'add [task] <name> <destination1> <destination2>\'";
 
@@ -72,11 +72,11 @@ public class AddCommand extends Command{
     }
 
     /**
-     * Returns the correct format for this command.
+     * Returns the correct format for the add command.
      * 
      * @return correct add command format.
      */
-    public String getCorrectCommandFormat() {
+    public static String getCorrectCommandFormat() {
         return correctCommandFormat;
     }
 }

@@ -14,7 +14,7 @@ import manage.main.Profile;
 public class CreateCommand extends Command {
 
     /** Correct format of this command */
-    private String correctCommandFormat = 
+    private static String correctCommandFormat = 
         "\'create [task|todo|collection] <name>\'";
 
     /**
@@ -54,11 +54,11 @@ public class CreateCommand extends Command {
     }
 
     /**
-     * Returns the correct format for this command.
+     * Returns the correct format for the create command.
      * 
      * @return correct create command format.
      */
-    public String getCorrectCommandFormat() {
+    public static String getCorrectCommandFormat() {
         return correctCommandFormat;
     }
 }

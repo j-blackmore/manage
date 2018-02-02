@@ -1,5 +1,6 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
 import manage.commands.RemoveCommand;
 
 /**
@@ -23,8 +24,8 @@ public class InvalidRemoveCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidRemoveCommandException(RemoveCommand command) {
+    public InvalidRemoveCommandException(Command command) {
         this("Invalid remove command :\'" + command + "\', must follow format:\n" +
-             command.getCorrectCommandFormat());
+             RemoveCommand.getCorrectCommandFormat());
     }
 }

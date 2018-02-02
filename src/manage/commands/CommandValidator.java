@@ -37,7 +37,7 @@ public class CommandValidator {
             case "uncomplete":
                 return isUncompleteCommandValid(command);
             default:
-                throw new InvalidCommandException(command.toString());
+                throw new InvalidCommandException(command);
         }
     }
 
@@ -54,7 +54,7 @@ public class CommandValidator {
             }
         }
 
-        throw new InvalidAddCommandException((AddCommand)command);
+        throw new InvalidAddCommandException(command);
     }
 
     // complete command format: "complete [task|todo] <name> <location1> <location2>"
@@ -70,7 +70,7 @@ public class CommandValidator {
             }
         }
 
-        throw new InvalidCompleteCommandException((CompleteCommand)command);
+        throw new InvalidCompleteCommandException(command);
     }
 
     // create command format: "create [task|todo|collection] <name>"
@@ -81,7 +81,7 @@ public class CommandValidator {
                 return true;
             }
         }
-        throw new InvalidCreateCommandException((CreateCommand)command);
+        throw new InvalidCreateCommandException(command);
     }
 
     // print command format: "print [tasks|todos|collections|all]"
@@ -92,7 +92,7 @@ public class CommandValidator {
                 return true;
                }
         }
-        throw new InvalidPrintCommandException((PrintCommand)command);
+        throw new InvalidPrintCommandException(command);
     }
 
     // remove command format: "remove [task|todo|collection] <name> <destination1> <destination2>"
@@ -110,7 +110,7 @@ public class CommandValidator {
             }
         }
 
-        throw new InvalidRemoveCommandException((RemoveCommand)command);
+        throw new InvalidRemoveCommandException(command);
     }
 
     // rename command format: "rename [task|todo|collection] <newname> <oldname> <destination1> <destination2>"
@@ -128,7 +128,7 @@ public class CommandValidator {
             }
         }
 
-        throw new InvalidRenameCommandException((RenameCommand)command);
+        throw new InvalidRenameCommandException(command);
     }
 
     // save command format: "save"
@@ -136,7 +136,7 @@ public class CommandValidator {
         if(command.numOfArgs() == 0) {
             return true;
         }
-        throw new InvalidSaveCommandException((SaveCommand)command);
+        throw new InvalidSaveCommandException(command);
     }
 
     // uncomplete command format: "uncomplete [task|todo] <name> <destination1> <destination2>"
@@ -152,7 +152,7 @@ public class CommandValidator {
             }
         }
 
-        throw new InvalidUncompleteCommandException((UncompleteCommand)command);
+        throw new InvalidUncompleteCommandException(command);
     }
 
 }

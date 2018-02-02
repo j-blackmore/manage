@@ -15,7 +15,7 @@ import manage.main.Profile;
 public class UncompleteCommand extends Command {
 
     /** Correct format of this command */
-    private String correctCommandFormat =
+    private static String correctCommandFormat =
         "\'uncomplete [task|todo] <name>\'\n" +
         "\'uncomplete [task|todo] <name> <destination1>\'\n" +
         "\'uncomplete [task] <name> <destination1> <destination1>\'";
@@ -79,11 +79,11 @@ public class UncompleteCommand extends Command {
     }
 
     /**
-     * Returns the correct format for this command.
+     * Returns the correct format for the uncomplete command.
      * 
      * @return correct add command format.
      */
-    public String getCorrectCommandFormat() {
+    public static String getCorrectCommandFormat() {
         return correctCommandFormat;
     }
 }

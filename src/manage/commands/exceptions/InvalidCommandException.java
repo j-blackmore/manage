@@ -24,6 +24,6 @@ public class InvalidCommandException extends Exception {
      * @param command the command that caused the exception.
      */
     public InvalidCommandException(Command command) {
-        this(command.toString());
+        this("Invalid command: \'" + command + "\', type 'help' for a list of commands");
     }
 }

@@ -14,7 +14,7 @@ import manage.main.Profile;
 public class SaveCommand extends Command {
 
     /** Correct format of this command */
-    private String correctCommandFormat = "\'save\'";
+    private static String correctCommandFormat = "\'save\'";
 
     /**
      * Constructs a new Save Command from the command string. First argument must be 'save' and it 
@@ -40,11 +40,11 @@ public class SaveCommand extends Command {
     }
 
     /**
-     * Returns the correct format for this command.
+     * Returns the correct format for the save command.
      * 
      * @return correct save command format.
      */
-    public String getCorrectCommandFormat() {
+    public static String getCorrectCommandFormat() {
         return correctCommandFormat;
     }
 }

@@ -1,5 +1,6 @@
 package manage.commands.exceptions;
 
+import manage.commands.Command;
 import manage.commands.SaveCommand;
 
 /**
@@ -23,8 +24,8 @@ public class InvalidSaveCommandException extends InvalidCommandException {
      * 
      * @param command the command that caused the exception.
      */
-    public InvalidSaveCommandException(SaveCommand command) {
+    public InvalidSaveCommandException(Command command) {
         this("Invalid save command: \'" + command + "\', must follow format:\n" +
-             command.getCorrectCommandFormat());
+             SaveCommand.getCorrectCommandFormat());
     }
 }

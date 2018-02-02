@@ -15,7 +15,7 @@ import manage.main.Profile;
 public class RenameCommand extends Command {
 
     /** Correct format of this command */
-    private String correctCommandFormat = 
+    private static String correctCommandFormat = 
         "\'rename [task|todo|collection] <newname> <oldname>\'" +
         "\'rename [task|todo] <newname> <oldname> <destination1>\'\n" +
         "\'rename [task] <newname> <oldname> <destination1> <destination2>\'\n";
@@ -89,11 +89,11 @@ public class RenameCommand extends Command {
     }
 
     /**
-     * Returns the correct format for this command.
+     * Returns the correct format for the rename command.
      * 
      * @return correct rename command format.
      */
-    public String getCorrectCommandFormat() {
+    public static String getCorrectCommandFormat() {
         return correctCommandFormat;
     }
 }
