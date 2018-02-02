@@ -74,7 +74,13 @@ public class Manage {
 
     // returns new command object for the specific command
     private static Command classifyCommand(String command) throws InvalidCommandException {
-        switch(command.substring(0, command.indexOf(" ")).toLowerCase()) {
+        String commandToCheck = command;
+        
+        if(command.contains(" ")) {
+            commandToCheck = command.substring(0, command.indexOf(" "));
+        }
+        
+        switch(commandToCheck.toLowerCase()) {
             case "add":
                 return new AddCommand(command);
             case "complete":
