@@ -30,6 +30,7 @@ public class RenameCommand extends Command {
      */
     public RenameCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.RENAME_COMMAND);
     }
 
     /**

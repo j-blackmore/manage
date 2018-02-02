@@ -26,6 +26,7 @@ public class CreateCommand extends Command {
      */
     public CreateCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.CREATE_COMMAND);
     }
 
     /**

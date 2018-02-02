@@ -23,9 +23,9 @@ public class Manage {
         do {
             try {
                 System.out.print("> ");
-                inputCommand = new Command(input.readLine());
-                inputCommand = reclassifyCommand(inputCommand);
+                inputCommand = classifyCommand(input.readLine());
 
+                CommandValidator.validateCommand(inputCommand);
                 inputCommand.completeAction(userProfile);
             } catch (InvalidCommandException e) {
                 System.err.println(e.getMessage());
@@ -73,28 +73,26 @@ public class Manage {
     }
 
     // returns new command object for the specific command
-    private static Command reclassifyCommand(Command command) throws InvalidCommandException {
-        switch(command.getCommandType()) {
-            case Command.ADD_COMMAND:
-                return new AddCommand(command.toString());
-            case Command.COMPLETE_COMMAND:
-                return new CompleteCommand(command.toString());
-            case Command.CREATE_COMMAND:
-                return new CreateCommand(command.toString());
-            case Command.PRINT_COMMAND:
-                return new PrintCommand(command.toString());
-            case Command.REMOVE_COMMAND:
-                return new RemoveCommand(command.toString());
-            case Command.RENAME_COMMAND:
-                return new RenameCommand(command.toString());
-            case Command.SAVE_COMMAND:
-                return new SaveCommand(command.toString());
-            case Command.UNCOMPLETE_COMMAND:
-                return new UncompleteCommand(command.toString());
-            case Command.UNKNOWN_COMMAND:
-                return new Command(command.toString());
+    private static Command classifyCommand(String command) throws InvalidCommandException {
+        switch(command.substring(0, command.indexOf(" ")).toLowerCase()) {
+            case "add":
+                return new AddCommand(command);
+            case "complete":
+                return new CompleteCommand(command);
+            case "create":
+                return new CreateCommand(command);
+            case "print":
+                return new PrintCommand(command);
+            case "remove":
+                return new RemoveCommand(command);
+            case "rename":
+                return new RenameCommand(command);
+            case "save":
+                return new SaveCommand(command);
+            case "uncomplete":
+                return new UncompleteCommand(command);
             default:
-                throw new InvalidCommandException(command);
+                throw new InvalidCommandException("Unknown command, type help for more commands");
         }
     }
 }

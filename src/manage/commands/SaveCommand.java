@@ -25,6 +25,7 @@ public class SaveCommand extends Command {
      */
     public SaveCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.SAVE_COMMAND);
     }
 
     /**

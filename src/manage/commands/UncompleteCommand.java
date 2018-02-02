@@ -30,6 +30,7 @@ public class UncompleteCommand extends Command {
      */
     public UncompleteCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.UNCOMPLETE_COMMAND);
     }
 
     /**

@@ -25,6 +25,7 @@ public class PrintCommand extends Command {
      */
     public PrintCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.PRINT_COMMAND);
     }
 
     /**

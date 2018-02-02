@@ -30,6 +30,7 @@ public class RemoveCommand extends Command {
      */
     public RemoveCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.REMOVE_COMMAND);
     }
 
     /**

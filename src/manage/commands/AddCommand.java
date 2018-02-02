@@ -29,6 +29,7 @@ public class AddCommand extends Command{
      */
     public AddCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.ADD_COMMAND);
     }
 
     /**

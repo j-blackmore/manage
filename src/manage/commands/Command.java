@@ -65,7 +65,6 @@ public class Command {
             this.command = command;
 
         args = splitArgs(command);
-        commandType = classifyCommand(this);
     }
 
     /**
@@ -76,21 +75,15 @@ public class Command {
         args = null;
     }
 
-    // returns the type of the command - unknown if cannot be classified.
-    private static int classifyCommand(Command command) throws InvalidCommandException {
-        CommandValidator commandValidator = new CommandValidator();
-        return commandValidator.validateCommand(command);
-    }
-
     /**
-     * Executes the action for this command. Default action is for unknown Commands.
+     * Executes the action for this command. Default action is do nothing.
      * Method must be overwritten in subclasses.
      * 
      * @param user Profile of the user
      * @throws Exception for any error caused when trying to execute the command action.
      */
     public void completeAction(Profile user) throws Exception {
-        System.out.println("Unknown Command, type 'help' for a list of commands");
+    
     }
     
     /**
@@ -134,6 +127,15 @@ public class Command {
      */
     public int numOfArgs() {
         return args.size();
+    }
+
+    /**
+     * Sets the commands command type to the given commandType
+     * 
+     * @param commandType the command type
+     */
+    public void setCommandType(int commandType) {
+        this.commandType = commandType;
     }
 
     // splits the command into its arguments and returns array list of arguments.

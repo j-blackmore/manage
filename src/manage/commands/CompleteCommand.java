@@ -29,6 +29,7 @@ public class CompleteCommand extends Command {
      */
     public CompleteCommand(String command) throws InvalidCommandException {
         super(command);
+        setCommandType(Command.COMPLETE_COMMAND);
     }
 
     /**

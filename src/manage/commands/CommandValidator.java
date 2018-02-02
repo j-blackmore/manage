@@ -10,12 +10,6 @@ import manage.commands.exceptions.*;
 public class CommandValidator {
 
     /**
-     * Creates a CommandValidator.
-     */
-    public CommandValidator() {
-    }
-
-    /**
      * Validates a command by calling the respective method given the type of command. Returns true 
      * for a valid command, exception is thrown for invalid commands.
      * 
@@ -24,41 +18,31 @@ public class CommandValidator {
      * @throws InvalidCommandException for invalid commands, more specific InvalidCommandExceptions 
      * are thrown for known commands.
      */
-    public int validateCommand(Command command) throws InvalidCommandException {
+    public static boolean validateCommand(Command command) throws InvalidCommandException {
         switch(command.getCommand().toLowerCase()) {
             case "add":
-                if(isAddCommandValid(command)) return Command.ADD_COMMAND;
-                else throw new InvalidAddCommandException((AddCommand)command);
+                return isAddCommandValid(command);
             case "complete":
-                if(isCompleteCommandValid(command)) return Command.COMPLETE_COMMAND;
-                else throw new InvalidCompleteCommandException((CompleteCommand)command);
+                return isCompleteCommandValid(command);
             case "create":
-                if(isCreateCommandValid(command)) return Command.CREATE_COMMAND;
-                else throw new InvalidCreateCommandException((CreateCommand)command);
+                return isCreateCommandValid(command);
             case "print":
-                if(isPrintCommandValid(command)) return Command.PRINT_COMMAND;
-                else throw new InvalidPrintCommandException((PrintCommand)command);
+                return isPrintCommandValid(command);
             case "remove":
-                if(isRemoveCommandValid(command)) return Command.REMOVE_COMMAND;
-                else throw new InvalidRemoveCommandException((RemoveCommand)command);
+                return isRemoveCommandValid(command);
             case "rename":
-                if(isRenameCommandValid(command)) return Command.RENAME_COMMAND;
-                else throw new InvalidRenameCommandException((RenameCommand)command);
+                return isRenameCommandValid(command);
             case "save":
-                if(isSaveCommandValid(command)) return Command.SAVE_COMMAND;
-                else throw new InvalidSaveCommandException((SaveCommand)command);
+                return isSaveCommandValid(command);
             case "uncomplete":
-                if(isUncompleteCommandValid(command)) return Command.UNCOMPLETE_COMMAND;
-                else throw new InvalidUncompleteCommandException((UncompleteCommand)command);
-            case "exit": case "quit": case "close":
-                return Command.EXIT_COMMAND;
+                return isUncompleteCommandValid(command);
             default:
                 throw new InvalidCommandException(command.toString());
         }
     }
 
     // add command format: "add [task|todo] <name> <destination1> <destination2>"
-    private boolean isAddCommandValid(Command command) throws InvalidAddCommandException {
+    private static boolean isAddCommandValid(Command command) throws InvalidAddCommandException {
         if(command.numOfArgs() == 3) {
             String firstArg = command.getArg(1);
             if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
@@ -74,7 +58,7 @@ public class CommandValidator {
     }
 
     // complete command format: "complete [task|todo] <name> <location1> <location2>"
-    private boolean isCompleteCommandValid(Command command) throws InvalidCompleteCommandException {
+    private static boolean isCompleteCommandValid(Command command) throws InvalidCompleteCommandException {
         if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
             String firstArg = command.getArg(1);
             if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
@@ -90,7 +74,7 @@ public class CommandValidator {
     }
 
     // create command format: "create [task|todo|collection] <name>"
-    private boolean isCreateCommandValid(Command command) throws InvalidCreateCommandException {
+    private static boolean isCreateCommandValid(Command command) throws InvalidCreateCommandException {
         if(command.numOfArgs() == 2) {
             if(command.getArg(1).equalsIgnoreCase("task") || command.getArg(1).equalsIgnoreCase("todo") ||
                command.getArg(1).equalsIgnoreCase("collection")) {
@@ -101,7 +85,7 @@ public class CommandValidator {
     }
 
     // print command format: "print [tasks|todos|collections|all]"
-    private boolean isPrintCommandValid(Command command) throws InvalidPrintCommandException {
+    private static boolean isPrintCommandValid(Command command) throws InvalidPrintCommandException {
         if(command.numOfArgs() == 1) {
             if(command.getArg(1).equalsIgnoreCase("tasks") || command.getArg(1).equalsIgnoreCase("todos") ||
                command.getArg(1).equalsIgnoreCase("collections") || command.getArg(1).equalsIgnoreCase("all")) {
@@ -112,7 +96,7 @@ public class CommandValidator {
     }
 
     // remove command format: "remove [task|todo|collection] <name> <destination1> <destination2>"
-    private boolean isRemoveCommandValid(Command command) throws InvalidRemoveCommandException {
+    private static boolean isRemoveCommandValid(Command command) throws InvalidRemoveCommandException {
         if(command.numOfArgs() == 2 || command.numOfArgs() == 3 ) {
             String firstArg = command.getArg(1);
             if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
@@ -130,7 +114,7 @@ public class CommandValidator {
     }
 
     // rename command format: "rename [task|todo|collection] <newname> <oldname> <destination1> <destination2>"
-    private boolean isRenameCommandValid(Command command) throws InvalidRenameCommandException {
+    private static boolean isRenameCommandValid(Command command) throws InvalidRenameCommandException {
         if(command.numOfArgs() == 3 || command.numOfArgs() == 4) {
             String firstArg = command.getArg(1);
             if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
@@ -148,7 +132,7 @@ public class CommandValidator {
     }
 
     // save command format: "save"
-    private boolean isSaveCommandValid(Command command) throws InvalidSaveCommandException {
+    private static boolean isSaveCommandValid(Command command) throws InvalidSaveCommandException {
         if(command.numOfArgs() == 0) {
             return true;
         }
@@ -156,7 +140,7 @@ public class CommandValidator {
     }
 
     // uncomplete command format: "uncomplete [task|todo] <name> <destination1> <destination2>"
-    private boolean isUncompleteCommandValid(Command command) throws InvalidUncompleteCommandException {
+    private static boolean isUncompleteCommandValid(Command command) throws InvalidUncompleteCommandException {
         if(command.numOfArgs() == 2 || command.numOfArgs() == 3) {
             String firstArg = command.getArg(1);
             if(firstArg.equalsIgnoreCase("task") || firstArg.equalsIgnoreCase("todo")) {
