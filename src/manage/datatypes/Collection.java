@@ -578,7 +578,14 @@ public class Collection {
         String tempReturn = name  + ":";
         
         for (Todo todo: todos) {
-            tempReturn += "\n  " + todo ;
+            tempReturn += "\n  ";
+            String nextTodo = todo.toString();
+
+            while(nextTodo.contains("\n")) {
+                tempReturn += nextTodo.substring(0, nextTodo.indexOf("\n") + 2) + "  ";
+                nextTodo = nextTodo.substring(nextTodo.indexOf("\n") + 2);
+            }
+            tempReturn += nextTodo;
         }
         return tempReturn;
     }
