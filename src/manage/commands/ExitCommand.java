@@ -12,7 +12,7 @@ import manage.main.Profile;
 public class ExitCommand extends Command {
 
     /** Correct format of this command */
-    private static String correctCommandFormat = "\'[exit|close|quit]\'";
+    private static String correctCommandFormat = "\'(exit|close|quit)\'";
 
     /**
      * Constructs a new Exit Command from the command string. First argument must be either 'exit', 

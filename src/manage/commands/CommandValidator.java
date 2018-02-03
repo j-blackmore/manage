@@ -53,6 +53,12 @@ public class CommandValidator {
         } else if(command.numOfArgs() == 4) {
             if(command.getArg(1).equalsIgnoreCase("task")) {
                 return true;
+            } else if(command.getArg(1).equalsIgnoreCase("new") && command.getArg(2).equalsIgnoreCase("todo")) {
+                return true;
+            }
+        } else if(command.numOfArgs() == 5) {
+            if(command.getArg(1).equalsIgnoreCase("new") && command.getArg(2).equalsIgnoreCase("task")) {
+                return true;
             }
         }
 

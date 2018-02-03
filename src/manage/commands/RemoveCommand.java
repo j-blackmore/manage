@@ -16,9 +16,9 @@ public class RemoveCommand extends Command {
 
     /** Correct format of this command */
     private static String correctCommandFormat =
-        "\'remove [task|todo|collection] <name>\'\n" +
-        "\'remove [task|todo] <name> <destination1>\'\n" +
-        "\'remove [task] <name> <destination1> <destination2>\'";
+        "\'remove (task|todo|collection) <name>\'\n" +
+        "\'remove (task|todo) <name> <destination1>\'\n" +
+        "\'remove task <name> <destination1> <destination2>\'";
 
     /**
      * Constructs a new Remove Command from the command string. First argument must be 'remove', 

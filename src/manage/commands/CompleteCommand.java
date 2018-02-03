@@ -16,8 +16,8 @@ public class CompleteCommand extends Command {
 
     /** Correct format of this command */
     private static String correctCommandFormat = 
-        "\'complete [task|todo] <name> <destination1>\'\n" +
-        "\'complete [task] <name> <destination1> <destination2>\'";
+        "\'complete (task|todo) <name> <destination1>\'\n" +
+        "\'complete task <name> <destination1> <destination2>\'";
 
     /**
      * Constructs a new Complete Command from the command string. First argument must be 'complete',

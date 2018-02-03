@@ -15,7 +15,7 @@ public class CreateCommand extends Command {
 
     /** Correct format of this command */
     private static String correctCommandFormat = 
-        "\'create [task|todo|collection] <name>\'";
+        "\'create (task|todo|collection) <name>\'";
 
     /**
      * Constructs a new Create Command from the command string. First argument must be 'create',

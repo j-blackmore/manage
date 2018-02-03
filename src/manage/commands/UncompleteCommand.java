@@ -16,9 +16,9 @@ public class UncompleteCommand extends Command {
 
     /** Correct format of this command */
     private static String correctCommandFormat =
-        "\'uncomplete [task|todo] <name>\'\n" +
-        "\'uncomplete [task|todo] <name> <destination1>\'\n" +
-        "\'uncomplete [task] <name> <destination1> <destination1>\'";
+        "\'uncomplete (task|todo) <name>\'\n" +
+        "\'uncomplete (task|todo) <name> <destination1>\'\n" +
+        "\'uncomplete task <name> <destination1> <destination1>\'";
 
     /**
      * Constructs a new Uncomplete Command from the command string. First argument must be 

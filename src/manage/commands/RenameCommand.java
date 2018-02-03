@@ -16,9 +16,9 @@ public class RenameCommand extends Command {
 
     /** Correct format of this command */
     private static String correctCommandFormat = 
-        "\'rename [task|todo|collection] <newname> <oldname>\'" +
-        "\'rename [task|todo] <newname> <oldname> <destination1>\'\n" +
-        "\'rename [task] <newname> <oldname> <destination1> <destination2>\'\n";
+        "\'rename (task|todo|collection) <newname> <oldname>\'" +
+        "\'rename (task|todo) <newname> <oldname> <destination1>\'\n" +
+        "\'rename task <newname> <oldname> <destination1> <destination2>\'\n";
 
     /**
      * Constructs a new Rename Command from the command string. First argument must be 'rename', 

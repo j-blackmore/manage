@@ -16,8 +16,8 @@ public class AddCommand extends Command{
 
     /** Correct format of this command */
     private static String correctCommandFormat = 
-        "\'add [task|todo] <name> <destination1>\'\n" + 
-        "\'add [task] <name> <destination1> <destination2>\'";
+        "\'add [new] (task|todo) <name> <destination1>\'\n" + 
+        "\'add [new] task <name> <destination1> <destination2>\'";
 
     /**
      * Constructs a new Add Command from the command string. First argument must be 'add', the 
@@ -34,7 +34,8 @@ public class AddCommand extends Command{
 
     /**
      * Performs the action for the add command - add data object to another, both specified by 
-     * the command. For invalid commands (non-existing objects) an exception is thrown.
+     * the command. For invalid commands (non-existing objects) an exception is thrown, unless new 
+     * is specified before data object, then a new object is created and added.
      * 
      * @param user The profile the command is to be executed on.
      * @throws TaskNotFoundException when the task to be added was not found.
@@ -66,6 +67,27 @@ public class AddCommand extends Command{
                 targetCollection.addTodo(todoToAdd);
                 user.todos.remove(todoToAdd);
                 break;
+            case "new":
+                if(getArg(2).toLowerCase().equalsIgnoreCase("task")) {
+                    Task newTask = new Task(getArg(3));
+
+                    if(numOfArgs() == 5) {
+                        targetCollection = user.getCollection(getArg(5));
+                        targetCollection.addTask(newTask, getArg(4));
+                    } else if(numOfArgs() == 4) {
+                        Todo targetTodo = user.getTodo(getArg(4));
+                        targetTodo.addTask(newTask);
+                    }
+                    break;
+                } else if(getArg(2).toLowerCase().equalsIgnoreCase("todo")) {
+                    Todo newTodo = new Todo(getArg(3));
+                    targetCollection = user.getCollection(getArg(4));
+
+                    targetCollection.addTodo(newTodo);
+                    break;
+                } else {
+                    throw new InvalidAddCommandException(this);
+                }
             default:
                 throw new InvalidAddCommandException(this);
         }
