@@ -26,6 +26,8 @@ public class CommandValidator {
                 return isCompleteCommandValid(command);
             case "create":
                 return isCreateCommandValid(command);
+            case "help":
+                return isHelpCommandValid(command);
             case "print":
                 return isPrintCommandValid(command);
             case "remove":
@@ -97,6 +99,23 @@ public class CommandValidator {
             return true;
         }
         throw new InvalidExitCommandException(command);
+    }
+
+    //help command format: "help [<command>]"
+    private static boolean isHelpCommandValid(Command command) throws InvalidHelpCommandException {
+        if(command.numOfArgs() == 0) {
+            return true;
+        } else if (command.numOfArgs() == 1) {
+            switch(command.getArg(1).toLowerCase()){
+                case "add": case "close": case "complete": case "create":
+                case "exit": case "print": case "quit": case "remove":
+                case "rename": case "save": case "uncomplete":
+                    return true;
+                default:
+                    throw new InvalidHelpCommandException(command);
+            }
+        }
+        throw new InvalidHelpCommandException(command);
     }
 
     // print command format: "print [tasks|todos|collections|all]"

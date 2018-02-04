@@ -87,6 +87,8 @@ public class Manage {
                 return new CompleteCommand(command);
             case "create":
                 return new CreateCommand(command);
+            case "help":
+                return new HelpCommand(command);
             case "print":
                 return new PrintCommand(command);
             case "remove":

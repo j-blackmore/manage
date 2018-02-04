@@ -39,6 +39,9 @@ public class Command {
     /** Save Command */
     public static final int SAVE_COMMAND = 8;
 
+    /** Help Command */
+    public static final int HELP_COMMAND = 9;
+
     /** Print Command */
     public static final int PRINT_COMMAND = 10;
 
