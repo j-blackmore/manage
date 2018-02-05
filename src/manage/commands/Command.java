@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import manage.commands.exceptions.InvalidCommandException;
 import manage.main.Profile;
+
 /**
  * Default Command for Manage, contains static info about all Commands.
  * Created whenever a command is entered in Manage.
@@ -54,6 +55,9 @@ public class Command {
     /** Command's arguments */
     private ArrayList<String> args;
 
+    /** Command's options */
+    private ArrayList<String> options;
+
     /**
      * Constructs a new command from the command string. First argument is the command,
      * the subsequent ones are it's arguments.
@@ -68,6 +72,7 @@ public class Command {
             this.command = command;
 
         args = splitArgs(command);
+        options = extractOptions(command);
     }
 
     /**
@@ -76,6 +81,7 @@ public class Command {
     public Command() {
         command = null;
         args = null;
+        options = null;
     }
 
     /**
@@ -87,6 +93,22 @@ public class Command {
      */
     public void completeAction(Profile user) throws Exception {
     
+    }
+
+    private static ArrayList<String> extractOptions(String command) {
+        ArrayList<String> options = null;
+        String remainingCommand = command.substring(command.indexOf(" ") + 1).trim();
+
+        if(Character.compare(remainingCommand.charAt(0), '-') == 0) {
+            options = new ArrayList<String>();
+            remainingCommand = remainingCommand.substring(1, remainingCommand.indexOf(" "));
+            for(int i = 0; i < remainingCommand.length(); i++) {
+                options.add(i, remainingCommand.substring(0, 1));
+                remainingCommand = remainingCommand.substring(1);
+            }
+        }
+
+        return options;
     }
     
     /**
@@ -120,6 +142,38 @@ public class Command {
      */
     public int getCommandType() {
         return commandType;
+    }
+
+    /**
+     * Returns the string of the option specified by option. Indexing begins at 1. Null is returned 
+     * for option value out of bounds. Options are signified by a '-' preceeding them, and are 
+     * currently only 1 character long.
+     * 
+     * @param option the specified option.
+     * @return option specified by option.
+     */
+    public String getOption(int option) {
+        if(option > options.size()) {
+            return null;
+        }
+        return options.get(option-1);
+    }
+
+    /**
+     * Returns the string representation of all options, null if none exist.
+     * 
+     * @return string representation of all options.
+     */
+    public String getOptions() {
+        if(this.options == null) {
+            return null;
+        }
+
+        String options = "";
+        for(int i = 0; i < this.options.size(); i++) {
+            options += this.options.get(i);
+        }
+        return options;
     }
 
     /**
@@ -157,6 +211,9 @@ public class Command {
                 } else if(Character.compare(remainingCommand.charAt(0), '\'') == 0) {
                     args.add(remainingCommand.substring(1, remainingCommand.indexOf("\'", 1)));
                     remainingCommand = remainingCommand.substring(remainingCommand.indexOf("\'", 1) + 1);
+                } else if(Character.compare(remainingCommand.charAt(0), '-') == 0) {
+                    // if an option, skip it - options are extracted else where
+                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ") + 1);
                 } else {
                     args.add(remainingCommand.substring(0, remainingCommand.indexOf(" ", 1)));
                     remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ", 1) + 1);
