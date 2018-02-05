@@ -16,6 +16,9 @@ public class PrintCommand extends Command {
     private static String correctCommandFormat = 
         "\'print (all|tasks|todos|collections)\'";
 
+    /** Valid options for this command */
+    private static String[] validOptions = {"i", "c"};
+
     /** 
      * Constructs a new Print Command from the command string. First argument must be 'print', 
      * the subsequent one is what to print.
@@ -62,5 +65,19 @@ public class PrintCommand extends Command {
      */
     public static String getCorrectCommandFormat() {
         return correctCommandFormat;
+    }
+
+    /**
+     * Returns true if the option specified is valid for the print command, false otherwise.
+     * 
+     * @return boolean for if the option is valid.
+     */
+    public static boolean isOptionValid(String option) {
+        for (int i = 0; i < validOptions.length; i++) {
+            if(option.compareTo(validOptions[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 }

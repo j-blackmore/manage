@@ -120,11 +120,20 @@ public class CommandValidator {
 
     // print command format: "print [tasks|todos|collections|all]"
     private static boolean isPrintCommandValid(Command command) throws InvalidPrintCommandException {
+        
         if(command.numOfArgs() == 1) {
             if(command.getArg(1).equalsIgnoreCase("tasks") || command.getArg(1).equalsIgnoreCase("todos") ||
                command.getArg(1).equalsIgnoreCase("collections") || command.getArg(1).equalsIgnoreCase("all")) {
-                return true;
-               }
+                if(command.getOptions() != null) {
+                    if(command.getOptions().length() == 1) {
+                        if(PrintCommand.isOptionValid(command.getOption(0))) {
+                            return true;
+                        }
+                    }
+                } else {
+                    return true;
+                }
+            }
         }
         throw new InvalidPrintCommandException(command);
     }
