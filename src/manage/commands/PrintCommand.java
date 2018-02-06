@@ -74,7 +74,7 @@ public class PrintCommand extends Command {
      */
     public static boolean isOptionValid(String option) {
         for (int i = 0; i < validOptions.length; i++) {
-            if(option.compareTo(validOptions[i])) {
+            if(option.compareTo(validOptions[i]) == 0) {
                 return true;
             }
         }

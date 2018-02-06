@@ -45,7 +45,7 @@ public class CommandValidator {
         }
     }
 
-    // add command format: "add [task|todo] <name> <destination1> <destination2>"
+    // add command format: "add [new] (task|todo) <name> <destination1> <destination2>"
     private static boolean isAddCommandValid(Command command) throws InvalidAddCommandException {
         if(command.numOfArgs() == 3) {
             String firstArg = command.getArg(1);
@@ -53,9 +53,12 @@ public class CommandValidator {
                 return true;
             }
         } else if(command.numOfArgs() == 4) {
-            if(command.getArg(1).equalsIgnoreCase("task")) {
+            String firstArg = command.getArg(1);
+            String secondArg = command.getArg(2);
+            if(firstArg.equalsIgnoreCase("task")) {
                 return true;
-            } else if(command.getArg(1).equalsIgnoreCase("new") && command.getArg(2).equalsIgnoreCase("todo")) {
+            } else if(firstArg.equalsIgnoreCase("new") && 
+                      (secondArg.equalsIgnoreCase("task") || secondArg.equalsIgnoreCase("todo"))) {
                 return true;
             }
         } else if(command.numOfArgs() == 5) {
@@ -63,7 +66,7 @@ public class CommandValidator {
                 return true;
             }
         }
-
+        
         throw new InvalidAddCommandException(command);
     }
 

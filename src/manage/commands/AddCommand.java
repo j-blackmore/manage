@@ -46,44 +46,49 @@ public class AddCommand extends Command{
     @Override
     public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException, 
                                            CollectionNotFoundException, InvalidAddCommandException {
+
+        Collection targetCollection;
+        Todo targetTodo, todoToAdd;
+        Task taskToAdd;
+
         switch (getArg(1).toLowerCase()) {
             case "task":
-                Task taskToAdd = user.getTask(getArg(2));
+                taskToAdd = user.getTask(getArg(2));
 
                 if (numOfArgs() == 4) {
-                    Collection targetCollection = user.getCollection(getArg(4));
+                    targetCollection = user.getCollection(getArg(4));
                     targetCollection.addTask(taskToAdd, getArg(3));
                 } else if (numOfArgs() == 3) {
-                    Todo targetTodo = user.getTodo(getArg(3));
+                    targetTodo = user.getTodo(getArg(3));
                     targetTodo.addTask(getArg(2));
                 }
 
                 user.tasks.remove(taskToAdd);
                 break;
             case "todo":
-                Todo todoToAdd = user.getTodo(getArg(2));
-                Collection targetCollection = user.getCollection(getArg(3));
+                todoToAdd = user.getTodo(getArg(2));
+                targetCollection = user.getCollection(getArg(3));
 
                 targetCollection.addTodo(todoToAdd);
                 user.todos.remove(todoToAdd);
                 break;
             case "new":
                 if(getArg(2).toLowerCase().equalsIgnoreCase("task")) {
-                    Task newTask = new Task(getArg(3));
+                    taskToAdd = new Task(getArg(3));
 
                     if(numOfArgs() == 5) {
                         targetCollection = user.getCollection(getArg(5));
-                        targetCollection.addTask(newTask, getArg(4));
+                        targetCollection.addTask(taskToAdd, getArg(4));
                     } else if(numOfArgs() == 4) {
-                        Todo targetTodo = user.getTodo(getArg(4));
-                        targetTodo.addTask(newTask);
+                        targetTodo = user.getTodo(getArg(4));
+                        targetTodo.addTask(taskToAdd);
                     }
                     break;
                 } else if(getArg(2).toLowerCase().equalsIgnoreCase("todo")) {
-                    Todo newTodo = new Todo(getArg(3));
+                    todoToAdd = new Todo(getArg(3));
                     targetCollection = user.getCollection(getArg(4));
 
-                    targetCollection.addTodo(newTodo);
+                    targetCollection.addTodo(todoToAdd);
                     break;
                 } else {
                     throw new InvalidAddCommandException(this);
