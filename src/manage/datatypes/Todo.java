@@ -79,9 +79,9 @@ public class Todo {
      */
     public void changeTaskDesc(String taskDesc, String newTaskDesc) throws TaskNotFoundException {
         for(int i = 0; i < tasks.size(); i++) {
-            if(tasks.get(i).getDesc().equalsIgnoreCase(newTaskDesc)) {
+            if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
                 tasks.get(i).changeDesc(newTaskDesc);
-                break;
+                return;
             }
         }
         throw new TaskNotFoundException(taskDesc, "Todo \'" + this.getName() +"\'");

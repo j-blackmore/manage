@@ -174,7 +174,7 @@ public class Collection {
      */
     public void changeTodoName(String todoName, String newTodoName) throws TodoNotFoundException {
         for(int i = 0; i < todos.size(); i++) {
-            if(todos.get(i).getName().equalsIgnoreCase(newTodoName)) {
+            if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 todos.get(i).changeName(newTodoName);
                 return;
             }
