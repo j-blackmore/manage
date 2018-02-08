@@ -68,6 +68,17 @@ public class Profile {
     }
 
     /**
+     * Returns string representation of all collections, todos and tasks in the profile which match 
+     * the option condition. 
+     * 
+     * @param option the retrieval condition.
+     * @return string representation of contents in profile matching option condition.
+     */
+    public String getAll(String option) {
+        return getCollections(option) + getTodos(option) + getTasks(option);
+    }
+
+    /**
      * Returns Collection object of Collection with name of collectionName if it exists, else null.
      * 
      * @param collectionName String of Collection name.
@@ -92,6 +103,22 @@ public class Profile {
         String allCollections = "";
         for (Collection collection : collections){
             allCollections += collection.toString() + "\n";
+        }
+        return allCollections;
+    }
+
+    /**
+     * Returns string representation of all collections in the profile which match the option
+     * condition. Condition can be 'c' for complete or 'i' for incomplete, else empty string is 
+     * returned.
+     * 
+     * @param option the condition for retrieval.
+     * @return string representation of all collections matching option condition.
+     */
+    public String getCollections(String option) {
+        String allCollections = "";
+        for(Collection collection : collections) {
+            allCollections += collection.print(option);
         }
         return allCollections;
     }
@@ -125,6 +152,22 @@ public class Profile {
     }
 
     /**
+     * Returns string representation of all tasks in the profile, not in todos or collections which
+     * match the option condition. Condition can be 'c' for complete or 'i' for incomplete, else 
+     * empty string is returned.
+     * 
+     * @param option the condition for retrieval.
+     * @return string representation of all tasks matching option condition.
+     */
+    public String getTasks(String option) {
+        String allTasks = "";
+        for(Task task : tasks) {
+            allTasks += task.print(option);
+        }
+        return allTasks;
+    }
+
+    /**
      * Returns Todo object of Todo with name of todoName if it exists, else null.
      * 
      * @param todoName String of Todo name.
@@ -149,6 +192,23 @@ public class Profile {
         String allTodos = "";
         for (Todo todo : todos) {
             allTodos += todo.toString() + "\n";
+        }
+        return allTodos;
+    }
+
+    /**
+     * Returns string representation of all todos in the profile, not in collections which
+     * match the option condition. Condition can be 'c' for complete or 'i' for incomplete, else 
+     * empty string is returned. If a todo is complete, return it all, if a todo is incomplete 
+     * then return only incomplete tasks.
+     * 
+     * @param option the condition for retrieval.
+     * @return string representation of all todos matching option condition.
+     */
+    public String getTodos(String option) {
+        String allTodos = "";
+        for(Todo todo : todos) {
+            allTodos += todo.print(option);
         }
         return allTodos;
     }
