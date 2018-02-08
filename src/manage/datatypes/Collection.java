@@ -399,6 +399,29 @@ public class Collection {
         }
         return tempReturn;
     }
+
+    /**
+     * Returns the conditional contents the collection for where the option holds. If option is
+     * complete and all todos are incomplete, just returns collections name.
+     * 
+     * @param option the condition for returning the todos.
+     * @return the conditional toString of the collection.
+     */
+    public String print(String option) {
+        String result = getName() + ":\n";
+        
+        for(Todo todo : todos) {
+            String nextTodo = todo.print(option);
+
+            while(nextTodo.contains("\n")) {
+                result += "  " + nextTodo.substring(0, nextTodo.indexOf("\n") + 2);
+                nextTodo = nextTodo.substring(nextTodo.indexOf("\n") + 2);
+            }
+            if(nextTodo.length() > 0)
+                result += "  " + nextTodo + "\n";
+        }
+        return result;
+    }
     
     /**
      * Gets a string representation of all the tasks in a todo specified by its position in this collection.

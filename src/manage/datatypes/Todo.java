@@ -205,6 +205,33 @@ public class Todo {
     public boolean isComplete() {
         return complete;
     }
+
+    /**
+     * Returns the conditional toString of the todo for if the option holds, else empty string.
+     * If the todo and option are complete , it will print all tasks regardless, if option is 
+     * incomplete then it'll only print incomplete tasks.
+     * 
+     * @param option the condition for printing.
+     * @return conditional toString of the task if the condition matches
+     */
+    public String print(String option) {
+        String result = getName() + ":\n";
+        
+        if(option.compareTo("c") == 0 && complete) {
+            return toString() + "\n";
+        } else if(option.compareTo("i") == 0 && !complete) {
+            for(Task task : tasks) {
+                if(task.isComplete()) {
+                    result += "  " + task + "\n";
+                }
+            }
+            return result + "\n";
+        } else if(option.compareTo("") == 0) {
+            return toString() + "\n";
+        } else {
+            return "";
+        }
+    }
     
     /**
      * Gets a string representation of all the tasks in this todo. Each list is on a new line.

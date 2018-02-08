@@ -75,6 +75,22 @@ public class Task {
     }
 
     /**
+     * Returns the conditional toString of the task for if the option holds, else empty string.
+     * 
+     * @param option the condition for printing.
+     * @return conditional toString of the task if the condition matches.
+     */
+    public String print(String option) {
+        if(option.compareTo("c") == 0 && complete) {
+            return toString() + "\n";
+        } else if(option.compareTo("i") == 0 && !complete) {
+            return toString() + "\n";
+        } else {
+            return "";
+        }
+    }
+
+    /**
      * Sets this tasks completion status to boolean value of status.
      * 
      * @param status completion status.
