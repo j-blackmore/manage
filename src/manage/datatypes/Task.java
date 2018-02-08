@@ -66,6 +66,15 @@ public class Task {
     }
 
     /**
+     * Returns the completion status for this task
+     * 
+     * @return completion status.
+     */
+    public boolean isComplete() {
+        return complete;
+    }
+
+    /**
      * Sets this tasks completion status to boolean value of status.
      * 
      * @param status completion status.

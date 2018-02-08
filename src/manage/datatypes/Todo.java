@@ -196,6 +196,15 @@ public class Todo {
         else
             return tasks.get(taskNum).getDesc();
     }
+
+    /**
+     * Returns the completion status of this todo.
+     * 
+     * @return completion status;
+     */
+    public boolean isComplete() {
+        return complete;
+    }
     
     /**
      * Gets a string representation of all the tasks in this todo. Each list is on a new line.
