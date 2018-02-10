@@ -221,11 +221,11 @@ public class Todo {
             return toString() + "\n";
         } else if(option.compareTo("i") == 0 && !complete) {
             for(Task task : tasks) {
-                if(task.isComplete()) {
+                if(!task.isComplete()) {
                     result += "  " + task + "\n";
                 }
             }
-            return result + "\n";
+            return result;
         } else if(option.compareTo("") == 0) {
             return toString() + "\n";
         } else {

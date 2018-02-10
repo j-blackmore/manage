@@ -414,8 +414,8 @@ public class Collection {
             String nextTodo = todo.print(option);
 
             while(nextTodo.contains("\n")) {
-                result += "  " + nextTodo.substring(0, nextTodo.indexOf("\n") + 2);
-                nextTodo = nextTodo.substring(nextTodo.indexOf("\n") + 2);
+                result += "  " + nextTodo.substring(0, nextTodo.indexOf("\n"));
+                nextTodo = nextTodo.substring(nextTodo.indexOf("\n") + 1);
             }
             if(nextTodo.length() > 0)
                 result += "  " + nextTodo + "\n";

@@ -42,16 +42,32 @@ public class PrintCommand extends Command {
     public void completeAction(Profile user) throws InvalidPrintCommandException {
         switch(getArg(1).toLowerCase()) {
             case "all":
-                System.out.println(user.getAll());
+                if(getOptions() == null) {
+                    System.out.println(user.getAll());
+                } else {
+                    System.out.println(user.getAll(getOption(1)));
+                }
                 break;
             case "tasks":
-                System.out.println(user.getTasks());
+                if(getOptions() == null) {
+                    System.out.println(user.getTasks());
+                } else {
+                    System.out.println(user.getTasks(getOption(1)));
+                }
                 break;
             case "todos":
-                System.out.println(user.getTodos());
+                if(getOptions() == null) {
+                    System.out.println(user.getTodos());
+                } else {
+                    System.out.println(user.getTodos(getOption(1)));
+                }
                 break;
             case "collections":
-                System.out.println(user.getCollections());
+                if(getOptions() == null) {
+                    System.out.println(user.getCollections());
+                } else {
+                    System.out.println(user.getCollections(getOption(1)));
+                }
                 break;
             default:
                 throw new InvalidPrintCommandException(this);

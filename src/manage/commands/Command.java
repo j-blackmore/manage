@@ -160,11 +160,20 @@ public class Command {
     }
 
     /**
+     * Returns the ArrayList of all options for this command.
+     * 
+     * @return list of options.
+     */
+    public ArrayList<String> getOptions() {
+        return options;
+    }
+
+    /**
      * Returns the string representation of all options, null if none exist.
      * 
      * @return string representation of all options.
      */
-    public String getOptions() {
+    public String getOptionsString() {
         if(this.options == null) {
             return null;
         }

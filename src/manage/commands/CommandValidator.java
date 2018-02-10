@@ -1,5 +1,7 @@
 package manage.commands;
 
+import java.util.ArrayList;
+
 import manage.commands.exceptions.*;
 
 /**
@@ -42,6 +44,26 @@ public class CommandValidator {
                 return isExitCommandValid(command);
             default:
                 throw new InvalidCommandException(command);
+        }
+    }
+
+    private static boolean areOptionsValid(int commandType, ArrayList<String> options) {
+        switch(commandType) {
+            case Command.PRINT_COMMAND:
+                if(options == null) {
+                    return true;
+                } else if(options.size() == 1) {
+                    String option = options.get(0);
+                    if(option.compareTo("c") == 0 || option.compareTo("i") == 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            default:
+                return false;
         }
     }
 
@@ -127,14 +149,8 @@ public class CommandValidator {
         if(command.numOfArgs() == 1) {
             if(command.getArg(1).equalsIgnoreCase("tasks") || command.getArg(1).equalsIgnoreCase("todos") ||
                command.getArg(1).equalsIgnoreCase("collections") || command.getArg(1).equalsIgnoreCase("all")) {
-                if(command.getOptions() != null) {
-                    if(command.getOptions().length() == 1) {
-                        if(PrintCommand.isOptionValid(command.getOption(0))) {
-                            return true;
-                        }
-                    }
-                } else {
-                    return true;
+                if(areOptionsValid(command.getCommandType(), command.getOptions())) {
+                        return true;
                 }
             }
         }

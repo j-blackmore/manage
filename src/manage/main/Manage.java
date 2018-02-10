@@ -17,6 +17,7 @@ public class Manage {
     private static BufferedReader input = null;
 
     public static void main(String[] args) {
+
         initializeManage();
         Command inputCommand = new Command();
 
