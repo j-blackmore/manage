@@ -14,10 +14,12 @@ public class PrintCommand extends Command {
 
     /** Correct format of this command */
     private static String correctCommandFormat = 
-        "\'print (all|tasks|todos|collections)\'";
+        "\'print [option] (all|tasks|todos|collections)\'";
 
     /** Valid options for this command */
-    private static String[] validOptions = {"i", "c"};
+    private static String validOptions = 
+        "  -i\t Print only incomplete tasks and todos.\n" + 
+        "  -c\t Print only complete tasks and todos.";
 
     /** 
      * Constructs a new Print Command from the command string. First argument must be 'print', 
@@ -84,16 +86,11 @@ public class PrintCommand extends Command {
     }
 
     /**
-     * Returns true if the option specified is valid for the print command, false otherwise.
+     * Returns the valid options and information about them for the print command.
      * 
-     * @return boolean for if the option is valid.
+     * @return valid options.
      */
-    public static boolean isOptionValid(String option) {
-        for (int i = 0; i < validOptions.length; i++) {
-            if(option.compareTo(validOptions[i]) == 0) {
-                return true;
-            }
-        }
-        return false;
+    public static String getValidOptions() {
+        return validOptions;
     }
 }

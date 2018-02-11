@@ -26,6 +26,7 @@ public class InvalidPrintCommandException extends InvalidCommandException {
      */
     public InvalidPrintCommandException(Command command) {
         this("Invalid print command: \'" + command + "\', must follow format:\n" +
-             PrintCommand.getCorrectCommandFormat());
+             PrintCommand.getCorrectCommandFormat() + "\nOptions:\n" + 
+             PrintCommand.getValidOptions());
     }
 }

@@ -75,6 +75,7 @@ public class HelpCommand extends Command {
                 case "print":
                     System.out.println("Print command prints the specified data objects or all");
                     System.out.println(PrintCommand.getCorrectCommandFormat());
+                    System.out.println("Options:\n" + PrintCommand.getValidOptions());
                     break;
                 case "quit":
                     System.out.println("Quit command saves and closes the program");
