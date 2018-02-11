@@ -277,6 +277,7 @@ public class Todo {
         for(int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getDesc().equalsIgnoreCase(taskDesc)) {
                 tasks.remove(i);
+                numOfTasks = tasks.size();
                 return;
             }
         }

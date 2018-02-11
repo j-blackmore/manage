@@ -465,8 +465,10 @@ public class Collection {
     public void removeTask(int todoNum, int taskNum) {
         if (todoNum > (numOfTodos - 1) || todoNum < 0)
             System.out.println("Todo number invalid, please enter a value between 0 and " + (numOfTodos - 1));
-        else
+        else {
             todos.get(todoNum).removeTask(taskNum);
+            numOfTodos = todos.size();
+        }
     }
 
     /**
@@ -519,6 +521,7 @@ public class Collection {
         for(int i = 0; i < todos.size(); i++) {
             if(todos.get(i).getName().equalsIgnoreCase(todoName)) {
                 todos.remove(i);
+                numOfTodos = todos.size();
                 return;
             }
         }
