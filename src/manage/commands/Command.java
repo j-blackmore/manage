@@ -97,6 +97,10 @@ public class Command {
 
     private static ArrayList<String> extractOptions(String command) {
         ArrayList<String> options = null;
+        if(!command.contains(" ")) {
+            return options;
+        }
+
         String remainingCommand = command.substring(command.indexOf(" ") + 1).trim();
 
         if(Character.compare(remainingCommand.charAt(0), '-') == 0) {

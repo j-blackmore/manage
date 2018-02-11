@@ -24,7 +24,7 @@ public class Manage {
         do {
             try {
                 System.out.print("> ");
-                inputCommand = classifyCommand(input.readLine());
+                inputCommand = classifyCommand(input.readLine().trim());
 
                 CommandValidator.validateCommand(inputCommand);
                 inputCommand.completeAction(userProfile);
