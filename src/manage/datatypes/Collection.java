@@ -2,7 +2,6 @@ package manage.datatypes;
 
 import java.util.ArrayList;
 
-import jdk.nashorn.internal.runtime.regexp.joni.SearchAlgorithm;
 import manage.datatypes.exceptions.TaskNotFoundException;
 import manage.datatypes.exceptions.TodoNotFoundException;
 /**

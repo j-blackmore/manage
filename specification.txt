@@ -51,13 +51,12 @@ then work on the GUI, as that would allow me to adapt the GUI whenever I like - 
 serious planning and continuous editing whilst making the GUI
 
 
-
 Command line planning:
-[x] Read the command the user typed in
-[ ] Is the command valid (e.g. 'Hack' isnt a command but 'add' is)
-[ ] Is the format of the command valid (e.g. cant just type add) - correct num of args
-[ ] Is the command semantically correct (e.g. add task "help" to todo1 - but todo1 doesn't exist)
-[ ] Now execute the command and repeat
+Read the command the user typed in
+Is the command valid (e.g. 'Hack' isnt a command but 'add' is)
+Is the format of the command valid (e.g. cant just type add) - correct num of args
+Is the command semantically correct (e.g. add task "help" to todo1 - but todo1 doesn't exist)
+Now execute the command and repeat
 
 
 Command Data Structures:
@@ -78,10 +77,5 @@ Commands to add:
 [x] complete
 [x] uncomplete
 [x] rename
-[ ] save (requires saving first)
-[ ] exit
-
-// TODO: //
-# Remaining commands
-# New class for getting input from user
-# Tidy up code
+[x] save
+[x] exit
