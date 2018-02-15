@@ -80,12 +80,23 @@ public class CommandValidator {
             if(firstArg.equalsIgnoreCase("task")) {
                 return true;
             } else if(firstArg.equalsIgnoreCase("new") && 
-                      (secondArg.equalsIgnoreCase("task") || secondArg.equalsIgnoreCase("todo"))) {
-                return true;
+                (secondArg.equalsIgnoreCase("task") || secondArg.equalsIgnoreCase("todo"))) {
+                
+                String objectName = command.getArg(3);
+                if(objectName.contains(":") || objectName.contains(";")) {
+                    throw new InvalidAddCommandException("Invalid add command, names must not contain : or ;");
+                } else {
+                    return true;
+                }
             }
         } else if(command.numOfArgs() == 5) {
             if(command.getArg(1).equalsIgnoreCase("new") && command.getArg(2).equalsIgnoreCase("task")) {
-                return true;
+                String objectName = command.getArg(3);
+                if(objectName.contains(":") || objectName.contains(";")) {
+                    throw new InvalidAddCommandException("Invalid add command, names must not contain : or ;");
+                } else {
+                    return true;
+                }
             }
         }
         
@@ -113,7 +124,12 @@ public class CommandValidator {
         if(command.numOfArgs() == 2) {
             if(command.getArg(1).equalsIgnoreCase("task") || command.getArg(1).equalsIgnoreCase("todo") ||
                command.getArg(1).equalsIgnoreCase("collection")) {
-                return true;
+                String objectName = command.getArg(2);
+                if(objectName.contains(":") || objectName.contains(";")) {
+                    throw new InvalidCreateCommandException("Invalid create command, names must not contain : or ;");
+                } else {
+                    return true;
+                }
             }
         }
         throw new InvalidCreateCommandException(command);
