@@ -1,4 +1,4 @@
- Ultimate Calander / To-Do list / Organiser application: Manage.
+ Ultimate Calender / To-Do list / Organizer application: Manage.
 
 Initial Idea:
 Maintaining productivity is difficult over long periods of time, due to the 
@@ -6,8 +6,8 @@ many distractions we allow ourselves to be susceptible to. I tend to make lists
 in multiple formats; in my notebook, on my desk planner on my phone - but theres
 no way to access these multiple lists if I do not have all three mediums on me
 at the same time. I want to make an application which will combine all of these 
-mediums into one place. To-Do lists as well as notes, all organised nicely with 
-an adjoining calendar. It'll be like all the lists youve made on paper and the 
+mediums into one place. To-Do lists as well as notes, all organized nicely with 
+an adjoining calendar. It'll be like all the lists you've made on paper and the 
 notes you make on google keep all together synced with a vastly improved google 
 calendar - all inside "manage."
 
@@ -53,7 +53,7 @@ serious planning and continuous editing whilst making the GUI
 
 Command line planning:
 Read the command the user typed in
-Is the command valid (e.g. 'Hack' isnt a command but 'add' is)
+Is the command valid (e.g. 'Hack' is not a command but 'add' is)
 Is the format of the command valid (e.g. cant just type add) - correct num of args
 Is the command semantically correct (e.g. add task "help" to todo1 - but todo1 doesn't exist)
 Now execute the command and repeat

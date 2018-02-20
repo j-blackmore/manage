@@ -162,12 +162,9 @@ public class CommandValidator {
     // print command format: "print [tasks|todos|collections|all]"
     private static boolean isPrintCommandValid(Command command) throws InvalidPrintCommandException {
         
-        if(command.numOfArgs() == 1) {
-            if(command.getArg(1).equalsIgnoreCase("tasks") || command.getArg(1).equalsIgnoreCase("todos") ||
-               command.getArg(1).equalsIgnoreCase("collections") || command.getArg(1).equalsIgnoreCase("all")) {
-                if(areOptionsValid(command.getCommandType(), command.getOptions())) {
-                        return true;
-                }
+        if(command.numOfArgs() == 1) {  
+            if(areOptionsValid(command.getCommandType(), command.getOptions())) {
+                return true;
             }
         }
         throw new InvalidPrintCommandException(command);

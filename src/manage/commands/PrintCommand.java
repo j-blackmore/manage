@@ -1,5 +1,6 @@
 package manage.commands;
 
+import manage.datatypes.exceptions.CollectionNotFoundException;
 import manage.commands.exceptions.InvalidCommandException;
 import manage.commands.exceptions.InvalidPrintCommandException;
 import manage.main.Profile;
@@ -39,9 +40,11 @@ public class PrintCommand extends Command {
      * 
      * @param user The profile the command is to be executed on.
      * @throws InvalidPrintCommandException for invalid print commands.
+     * @throws CollectionNotFoundException for trying to print collections which don't exist.
      */
     @Override
-    public void completeAction(Profile user) throws InvalidPrintCommandException {
+    public void completeAction(Profile user) throws InvalidPrintCommandException, 
+                                                                    CollectionNotFoundException {
         switch(getArg(1).toLowerCase()) {
             case "all":
                 if(getOptions() == null) {
@@ -71,8 +74,12 @@ public class PrintCommand extends Command {
                     System.out.println(user.getCollections(getOption(1)));
                 }
                 break;
-            default:
-                throw new InvalidPrintCommandException(this);
+            default:    // assumes arg was a data object to print, attempts to print that
+                if(getOptions() != null) {
+                    System.out.println(user.getCollection(getArg(1), getOption(1)));
+                } else {
+                    System.out.println(user.getCollection(getArg(1)));
+                }
         }
     }
 

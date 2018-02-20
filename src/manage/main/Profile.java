@@ -95,6 +95,24 @@ public class Profile {
     }
 
     /**
+     * Returns Collection object of Collection with name collectionName if it exists and satisfies 
+     * the option given, else an exception is thrown.
+     * 
+     * @param collectionName the collection name.
+     * @param option the condition for retrieval.
+     * @return conditional toString of the collection specified by collectionName satisfying option.
+     * @throws CollectionNotFoundException when the collection of collectionName is not found or doesn't satisfy option.
+     */
+    public String getCollection(String collectionName, String option) throws CollectionNotFoundException {
+        for (int i = 0; i < collections.size(); i++) {
+            if(collections.get(i).getName().equalsIgnoreCase(collectionName)) {
+                return collections.get(i).print(option);
+            }
+        }
+        throw new CollectionNotFoundException(collectionName);  // more specific exception needed
+    }
+
+    /**
      * Returns string representation of all Collections in the profile.
      * 
      * @return String of all collections.
