@@ -36,15 +36,14 @@ public class HelpCommand extends Command {
      */
     @Override
     public void completeAction(Profile user) throws InvalidHelpCommandException {
-        if(numOfArgs() == 0) {
+        if(numOfArgs() == 0) { 
             System.out.println("Add \t\t  |  Add a new or pre existing object to another");
             System.out.println("Close \t\t  |  Saves and closes the program");
             System.out.println("Complete \t  |  Set completion status of a data object to true");
             System.out.println("Create \t\t  |  Create a new data object");
             System.out.println("Exit \t\t  |  Saves and closes the program");
-            System.out.println("Help \t\t  |  Prints list of available commands. If a command is " + 
-                               "specified after, prints a detailed explanation of that command");
-            System.out.println("Print \t\t  |  Prints the specified data objects, or all");
+            System.out.println("Help \t\t  |  Prints list of available commands, or specific help if specified");
+            System.out.println("Print \t\t  |  Prints the specified data object(s)");
             System.out.println("Quit \t\t  |  Saves and closes the program");
             System.out.println("Remove \t\t  |  Removes a pre existing data object");
             System.out.println("Rename \t\t  |  Renames a pre existing data object");
@@ -73,7 +72,7 @@ public class HelpCommand extends Command {
                     System.out.println(ExitCommand.getCorrectCommandFormat());
                     break;
                 case "print":
-                    System.out.println("Print command prints the specified data objects or all");
+                    System.out.println("Print command prints the specified data object(s)");
                     System.out.println(PrintCommand.getCorrectCommandFormat());
                     System.out.println("Options:\n" + PrintCommand.getValidOptions());
                     break;

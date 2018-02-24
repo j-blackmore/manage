@@ -15,7 +15,7 @@ public class PrintCommand extends Command {
 
     /** Correct format of this command */
     private static String correctCommandFormat = 
-        "\'print [option] (all|tasks|todos|collections)\'";
+        "\'print [option] (all|tasks|todos|collections|<collection>)\'";
 
     /** Valid options for this command */
     private static String validOptions = 

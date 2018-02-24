@@ -48,9 +48,6 @@ public class Manage {
                 System.err.println("Collection \'" + e.getMessage() + "\' not found");
             } catch (Exception e) {
                 System.err.println("Unexpected error occurred - seek administrator help");
-                System.err.println(e);
-                e.printStackTrace();
-
             }
         } while (inputCommand.getCommandType() != Command.EXIT_COMMAND);
 
@@ -59,7 +56,7 @@ public class Manage {
 
     // welcomes and loads the profile from file
     private static void initializeManage() {
-        System.out.println("Manage. Version 1.0. Author J Blackmore.");
+        System.out.println("Manage. Version 1.10. Author J Blackmore.");
         FileHandler fileHandler;
         
         try {
