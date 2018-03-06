@@ -1,6 +1,7 @@
 package manage.commands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import manage.commands.exceptions.InvalidCommandException;
 import manage.main.Profile;
@@ -47,7 +48,10 @@ public class Command {
     public static final int PRINT_COMMAND = 10;
 
     /** The command without it's arguments */
-    private String command;
+    private final String command;
+
+    /** The original full command  */
+    private final String fullCommand; 
 
     /** The commands type, default is unknown command */
     private int commandType = UNKNOWN_COMMAND;
@@ -66,13 +70,14 @@ public class Command {
      * @throws InvalidCommandException when the command created is an unknown command.
      */
     public Command(String command) throws InvalidCommandException {
+        fullCommand = command;
+
         if(command.contains(" "))
             this.command = command.trim().substring(0, command.indexOf(" "));
         else
             this.command = command;
 
-        args = splitArgs(command);
-        options = extractOptions(command);
+        args = splitArgs(this);
     }
 
     /**
@@ -80,6 +85,7 @@ public class Command {
      */
     public Command() {
         command = null;
+        fullCommand = null;
         args = null;
         options = null;
     }
@@ -95,24 +101,13 @@ public class Command {
     
     }
 
-    private static ArrayList<String> extractOptions(String command) {
-        ArrayList<String> options = null;
-        if(!command.contains(" ")) {
-            return options;
+    // split the options up into individual characters and add to aCommand
+    private static void addOptions(Command aCommand, String options) {
+        if(aCommand.options == null) {
+            aCommand.options = new ArrayList<String>(Arrays.asList(options.split("")));
+        } else {
+            aCommand.options.addAll(new ArrayList<String>(Arrays.asList(options.split(""))));
         }
-
-        String remainingCommand = command.substring(command.indexOf(" ") + 1).trim();
-
-        if(Character.compare(remainingCommand.charAt(0), '-') == 0) {
-            options = new ArrayList<String>();
-            remainingCommand = remainingCommand.substring(1, remainingCommand.indexOf(" "));
-            for(int i = 0; i < remainingCommand.length(); i++) {
-                options.add(i, remainingCommand.substring(0, 1));
-                remainingCommand = remainingCommand.substring(1);
-            }
-        }
-
-        return options;
     }
     
     /**
@@ -190,8 +185,8 @@ public class Command {
     }
 
     /**
-     * Returns the number of arguments in this command. Arguments are distinguished by spaces or quotes.
-     * Excess white space before, between and after arguments is ignored.
+     * Returns the number of arguments in this command. Arguments are distinguished by spaces or
+     * quotes. Excess white space before, between and after arguments is ignored.
 
      * @return number of arguments
      */
@@ -209,41 +204,52 @@ public class Command {
     }
 
     // splits the command into its arguments and returns array list of arguments.
-    private static ArrayList<String> splitArgs(String command) {
+    // if an argument begins with '-', this means an option so add that instead
+    private static ArrayList<String> splitArgs(Command aCommand) {
         ArrayList<String> args = new ArrayList<String>();
-        String remainingCommand = command.trim();
 
-        // avoids StringIndexOutOfBounds if no spaces in command
-        if(remainingCommand.contains(" ")) {
-            remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ") + 1).trim();
+        // remove command name from the full command, store as remaining command
+        // note no seperation by space to avoid IndexOutOfBoundsException for 1 word commands
+        String remCommand = aCommand.fullCommand;
+        remCommand = remCommand.substring(aCommand.command.length()).trim();
 
-            while(remainingCommand.contains(" ")) {
-                if(Character.compare(remainingCommand.charAt(0), '\"') == 0) {
-                    args.add(remainingCommand.substring(1, remainingCommand.indexOf('\"', 1)));
-                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf('\"', 1) + 1);
-                } else if(Character.compare(remainingCommand.charAt(0), '\'') == 0) {
-                    args.add(remainingCommand.substring(1, remainingCommand.indexOf("\'", 1)));
-                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf("\'", 1) + 1);
-                } else if(Character.compare(remainingCommand.charAt(0), '-') == 0) {
-                    // if an option, skip it - options are extracted else where
-                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ") + 1);
-                } else {
-                    args.add(remainingCommand.substring(0, remainingCommand.indexOf(" ", 1)));
-                    remainingCommand = remainingCommand.substring(remainingCommand.indexOf(" ", 1) + 1);
+        // keep spliting whilst there are more
+        while(remCommand.length() > 0) {
+
+            if(remCommand.contains(" ")) {  // if space exists, we can split by that
+                String argToAdd = null;
+
+                if(remCommand.charAt(0) == '-') {   // argument is an option
+                    String options = remCommand.substring(1, remCommand.indexOf(" "));
+                    addOptions(aCommand, options);
+                    remCommand = remCommand.substring(remCommand.indexOf(" ") + 1);
+                } else if(remCommand.charAt(0) == '\'') {   // argument defined by single quotes
+                    argToAdd = remCommand.substring(1,remCommand.indexOf("\'",1));
+                    remCommand = remCommand.substring(remCommand.indexOf("\'", 1) + 1);
+                } else if(remCommand.charAt(0) == '\"') {   // argument defined by double quotes
+                    argToAdd = remCommand.substring(1,remCommand.indexOf("\"",1));
+                    remCommand = remCommand.substring(remCommand.indexOf("\"", 1) + 1);
+                } else {    // argument can be seperated by a space
+                    argToAdd = remCommand.substring(0,remCommand.indexOf(" "));
+                    remCommand = remCommand.substring(remCommand.indexOf(" ") + 1);
                 }
 
-                remainingCommand = remainingCommand.trim();
+                args.add(argToAdd);
+
+            } else {    // no spaces, so see if option or argument
+
+                if(remCommand.charAt(0) == '-') {   // argument is options
+                    addOptions(aCommand, remCommand.substring(1));
+                } else {    // add normal arg
+                    args.add(remCommand);
+                }
+
+                // reset remaining command
+                remCommand = "";
             }
 
-            // add final argument, if it exists
-            if(remainingCommand.length() != 0) {
-                if(Character.compare(remainingCommand.charAt(0), '\"') == 0 ||
-                   Character.compare(remainingCommand.charAt(0), '\'') == 0) {
-                    args.add(remainingCommand.substring(1, remainingCommand.length() - 1));
-                } else {
-                    args.add(remainingCommand);
-                }
-            }
+            // trim any excess whitespace that may have been between arguments
+            remCommand = remCommand.trim();
         }
 
         return args;
