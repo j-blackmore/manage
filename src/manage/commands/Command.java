@@ -234,7 +234,8 @@ public class Command {
                     remCommand = remCommand.substring(remCommand.indexOf(" ") + 1);
                 }
 
-                args.add(argToAdd);
+                // only add arg if not null
+                if(argToAdd != null) { args.add(argToAdd); }
 
             } else {    // no spaces, so see if option or argument
 
