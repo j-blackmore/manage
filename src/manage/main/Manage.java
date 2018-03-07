@@ -46,6 +46,8 @@ public class Manage {
                 }
             } catch (CollectionNotFoundException e) {
                 System.err.println("Collection \'" + e.getMessage() + "\' not found");
+            } catch (DataObjectNotFoundException e) {
+                System.err.println("Data object \'" + e.getMessage() + "\' not found");
             } catch (Exception e) {
                 System.err.println("Unexpected error occurred - seek administrator help");
             }

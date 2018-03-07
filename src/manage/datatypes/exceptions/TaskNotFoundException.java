@@ -5,7 +5,7 @@ package manage.datatypes.exceptions;
  * 
  * @author J Blackmore
  */
-public class TaskNotFoundException extends Exception {
+public class TaskNotFoundException extends DataObjectNotFoundException {
 
     /** location where the task was trying to be located. */
     private String searchLocation = null;

@@ -5,7 +5,7 @@ package manage.datatypes.exceptions;
  * 
  * @author J Blackmore
  */
-public class CollectionNotFoundException extends Exception {
+public class CollectionNotFoundException extends DataObjectNotFoundException {
 
     /**
      * Creates a CollectionNotFoundException where the message is the collection name.

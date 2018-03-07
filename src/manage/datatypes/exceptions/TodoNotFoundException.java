@@ -5,7 +5,7 @@ package manage.datatypes.exceptions;
  * 
  * @author J Blackmore
  */
-public class TodoNotFoundException extends Exception {
+public class TodoNotFoundException extends DataObjectNotFoundException {
 
     /** location where the todo was trying to be located. */
     private String searchLocation = null;
