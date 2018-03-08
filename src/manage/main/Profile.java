@@ -59,6 +59,49 @@ public class Profile {
     }
 
     /**
+     * Returns conditional String of the collection or todo for the first match that is found if 
+     * the option is given, first searching collections, todos then tasks. If no option is given 
+     * then normal to string is returned. If no match is found a data object exception is thrown. 
+     * 
+     * @param name The name of the data object to get.
+     * @param option The retrieval condition.
+     * @return String of the data object found, else null.
+     */
+    public String get(String name, String option ) throws DataObjectNotFoundException {
+        Collection collection = null;
+        for(int i = 0; i < collections.size(); i++) {
+            if(collections.get(i).getName().equalsIgnoreCase(name)) {
+                collection = collections.get(i);
+                break;
+            }
+        }
+        if(collection != null) {
+            if(option != null) {
+                return collection.print(option);
+            } else {
+                return collection.toString();
+            }
+        }
+
+        Todo todo = null;
+        for(int i = 0; i < todos.size(); i++) {
+            if(todos.get(i).getName().equalsIgnoreCase(name)) {
+                todo = todos.get(i);
+                break;
+            }
+        }
+        if(todo != null) {
+            if(option != null) {
+                return todo.print(option);
+            } else {
+                return todo.toString();
+            }
+        }
+
+        throw new DataObjectNotFoundException(name);
+    }
+
+    /**
      * Returns string representation of all collections, todos and tasks in the profile.
      * 
      * @return String of contents in profile
