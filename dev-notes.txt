@@ -1,4 +1,4 @@
- Ultimate Calender / To-Do list / Organizer application: Manage.
+ Ultimate Calender / To-Do list / Organizer application: manage.
 
 Initial Idea:
 Maintaining productivity is difficult over long periods of time, due to the 
@@ -10,24 +10,6 @@ mediums into one place. To-Do lists as well as notes, all organized nicely with
 an adjoining calendar. It'll be like all the lists you've made on paper and the 
 notes you make on google keep all together synced with a vastly improved google 
 calendar - all inside "manage."
-
-Functions:
-
-====================================================================================================
-
-  # Finish data structures [done]
-  # test data structures  []
-  # write test program for command line []
-  # research and learn custom GUI []
-  # write GUI and functionality []
-  
-
-** Currently trying to work out how I will code the project in terms of classes
-and what will be objects, and when they will be created and by what. And what
-will then subsequently be created by creating that object. (Make a list button 
-will be made by the window, so now I need to plan how the window will be coded)
-Need to get plain paper to draw window and then annotate so establish how I
-will code it. 
 
 ====================================================================================================
 
@@ -46,10 +28,7 @@ https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
 
 JavaFX package
 
-Maybe change the way I was going to develop the program, do the underlying components first
-then work on the GUI, as that would allow me to adapt the GUI whenever I like - this will require
-serious planning and continuous editing whilst making the GUI
-
+====================================================================================================
 
 Command line planning:
 Read the command the user typed in
@@ -58,6 +37,7 @@ Is the format of the command valid (e.g. cant just type add) - correct num of ar
 Is the command semantically correct (e.g. add task "help" to todo1 - but todo1 doesn't exist)
 Now execute the command and repeat
 
+====================================================================================================
 
 Command Data Structures:
 
@@ -66,7 +46,7 @@ Command(String)
 - String command
 + numOfArgs(): int
 + getArg(int): String
-- removeFirstArg(String): String
+- splitArgs(String): ArrayList<String>
 + toString(): String
 
 Commands to add:
