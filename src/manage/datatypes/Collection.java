@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import manage.datatypes.exceptions.TaskNotFoundException;
 import manage.datatypes.exceptions.TodoNotFoundException;
+
 /**
  * Collection data structure for manage. It consists of Todos, with various methods for manipulating a Collection.
  * 

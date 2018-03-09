@@ -12,8 +12,14 @@ import manage.datatypes.exceptions.*;
  * @author J Blackmore
  */
 public class Profile {
+
+    /** This profile's collections */
     public ArrayList<Collection> collections;
+
+    /** This profile's todos */
     public ArrayList<Todo> todos;
+
+    /** This profile's tasks */
     public ArrayList<Task> tasks;
 
     private String userName;

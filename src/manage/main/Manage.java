@@ -10,17 +10,33 @@ import manage.commands.*;
 import manage.commands.exceptions.*;
 import manage.datatypes.exceptions.*;
 
+/**
+ * 'manage' a command line command-driven management program where the user can create, customise 
+ * and organise hierarchical 'to-do lists' in the form of Collections, Todos and Tasks.
+ * 
+ * @author J Blackmore
+ * @version 1.10
+ * @since 24-02-2018
+ */
 public class Manage {
 
     private static Profile userProfile = null;
 
     private static BufferedReader input = null;
 
+    /**
+     * Main manage program loop, continually requests user input until an exit command is entered. 
+     * For all valid commands, they are executed on the current profile; for any invalid ones an 
+     * exception is thrown and caught, where it is reported to the user. 
+     * 
+     * @param args the program arguments - unused.
+     */
     public static void main(String[] args) {
 
         initializeManage();
         Command inputCommand = new Command();
 
+        // main program loop
         do {
             try {
                 System.out.print("> ");
