@@ -1,13 +1,13 @@
 #!/bin/bash
-
-echo "Script to compile manage classes into an executable jar"
+# Script to compile and pack up all the classes into a jar file manage.jar
 
 # compile all the java classes
 ./compile
 
-# change into the src directory
+# cd into the src directory, as classes must be added from the root of the package directory
 cd src/
 
+# create jar file or update it if it exists
 if [ -e ../manage.jar ]
 then 
   find manage -type f ! -name "*.java" | xargs jar uefv manage/main/Manage ../manage.jar
@@ -15,4 +15,5 @@ else
   find manage -type f ! -name "*.java" | xargs jar cefv manage/main/Manage ../manage.jar
 fi
 
+# cd back into the manage directory
 cd ..

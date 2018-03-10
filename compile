@@ -1,10 +1,12 @@
 #!/bin/bash
+# Script to compile all the java classes in the repo
 
-# cd into the src directory
+# cd into the src directory, as compilation must occur from the root of the pacakge directory 
 cd src/
 
 echo "compiling all classes..." 
 # find all java files and compile
 find manage -type f -name "*.java" | xargs javac
 
+# cd back into the manage directory
 cd ../

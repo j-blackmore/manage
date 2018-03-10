@@ -1,7 +1,11 @@
 #!/bin/bash
+# Script to compile then run the current source code in the repo
+# Not to be used for installed program 
+
 
 ./compile
 
+# cd into src directory to run the program, as must be run from pacakge root
 cd src/
 java manage.main.Manage
 cd ../
