@@ -1,0 +1,17 @@
+#!/bin/bash
+# Install script for manage program, only works if manage.jar is in the directory
+# that the script is run from. If cloned from git, this script will work.
+
+./jarcompile    # compile classes
+
+# move the jar to user space, and set permissions
+sudo mv manage.jar /usr/share/java/
+sudo chmod og-wx /usr/share/java/manage.jar
+
+# write the run script and place in user space
+cat > manage << EOF
+#!/bin/bash
+java -jar /usr/share/java/manage.jar
+EOF
+
+sudo mv manage /usr/bin/
