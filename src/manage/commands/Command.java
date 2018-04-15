@@ -102,11 +102,12 @@ public class Command {
     }
 
     // split the options up into individual characters and add to aCommand
-    private static void addOptions(Command aCommand, String options) {
-        if(aCommand.options == null) {
-            aCommand.options = new ArrayList<String>(Arrays.asList(options.split("")));
+    private static void addOptions(Command command, String options) {
+        // if the options is empty string, throw exception
+        if(command.options == null) {
+            command.options = new ArrayList<String>(Arrays.asList(options.split("")));
         } else {
-            aCommand.options.addAll(new ArrayList<String>(Arrays.asList(options.split(""))));
+            command.options.addAll(new ArrayList<String>(Arrays.asList(options.split(""))));
         }
     }
     
@@ -205,54 +206,70 @@ public class Command {
 
     // splits the command into its arguments and returns array list of arguments.
     // if an argument begins with '-', this means an option so add that instead
-    private static ArrayList<String> splitArgs(Command aCommand) {
+    private static ArrayList<String> splitArgs(Command command) throws InvalidCommandException {
         ArrayList<String> args = new ArrayList<String>();
 
-        // remove command name from the full command, store as remaining command
-        // note no seperation by space to avoid IndexOutOfBoundsException for 1 word commands
-        String remCommand = aCommand.fullCommand;
-        remCommand = remCommand.substring(aCommand.command.length()).trim();
+        // remove command name from the full command, store as input
+        // append a space so the final argument will get added
+        String input = command.fullCommand.substring(command.command.length()).trim() + " ";
 
-        // keep spliting whilst there are more
-        while(remCommand.length() > 0) {
+        char c;
+        String currentArg = "";
+        int splitMode = -1;  // -1 = waiting, 0 = space, 1 = -, 2 = ", 3 = '
+        for(int i = 0; i < input.length(); i++) {
+            c = input.charAt(i);
 
-            if(remCommand.contains(" ")) {  // if space exists, we can split by that
-                String argToAdd = null;
-
-                if(remCommand.charAt(0) == '-') {   // argument is an option
-                    String options = remCommand.substring(1, remCommand.indexOf(" "));
-                    addOptions(aCommand, options);
-                    remCommand = remCommand.substring(remCommand.indexOf(" ") + 1);
-                } else if(remCommand.charAt(0) == '\'') {   // argument defined by single quotes
-                    argToAdd = remCommand.substring(1,remCommand.indexOf("\'",1));
-                    remCommand = remCommand.substring(remCommand.indexOf("\'", 1) + 1);
-                } else if(remCommand.charAt(0) == '\"') {   // argument defined by double quotes
-                    argToAdd = remCommand.substring(1,remCommand.indexOf("\"",1));
-                    remCommand = remCommand.substring(remCommand.indexOf("\"", 1) + 1);
-                } else {    // argument can be seperated by a space
-                    argToAdd = remCommand.substring(0,remCommand.indexOf(" "));
-                    remCommand = remCommand.substring(remCommand.indexOf(" ") + 1);
+            if(c == ' ') {
+                if(splitMode == 0) {
+                    args.add(currentArg);
+                    currentArg = "";
+                    splitMode = -1;
+                } else if(splitMode == 1) {
+                    addOptions(command, currentArg);
+                    currentArg = "";
+                    splitMode = -1;
+                } else if(splitMode != -1) {
+                    currentArg += c;
                 }
-
-                // only add arg if not null
-                if(argToAdd != null) { args.add(argToAdd); }
-
-            } else {    // no spaces, so see if option or argument
-
-                if(remCommand.charAt(0) == '-') {   // argument is options
-                    addOptions(aCommand, remCommand.substring(1));
-                } else {    // add normal arg
-                    args.add(remCommand);
+            } else if(c == '-') {
+                if(splitMode == -1) {
+                    splitMode = 1;
+                } else {
+                    currentArg += c;
                 }
-
-                // reset remaining command
-                remCommand = "";
+            } else if(c == '\'') {
+                if(splitMode == -1) {
+                    splitMode = 3;
+                } else if(splitMode == 3) {
+                    args.add(currentArg);
+                    currentArg = "";
+                    splitMode = -1;
+                } else {
+                    currentArg += c;
+                }
+            } else if(c == '\"') {
+                if(splitMode == -1) {
+                    splitMode = 2;
+                } else if(splitMode == 2) {
+                    args.add(currentArg);
+                    currentArg = "";
+                    splitMode = -1;
+                } else {
+                    currentArg += c;
+                }
+            } else {
+                if(splitMode == -1) {
+                    splitMode = 0;
+                }
+                currentArg += c;
             }
 
-            // trim any excess whitespace that may have been between arguments
-            remCommand = remCommand.trim();
         }
 
+        // thrown when an argument with quotes was not ended
+        if(currentArg.length() != 0) {
+            throw new InvalidCommandException(command);
+        }
         return args;
     }
 
@@ -262,14 +279,6 @@ public class Command {
      * @return the full command
      */
     public String toString() {
-        String commandToReturn = command;
-        for(int i = 0; i < args.size(); i++) {
-            if (args.get(i).contains(" "))
-                commandToReturn += " \"" + args.get(i) + "\"";
-            else 
-                commandToReturn += " " + args.get(i);
-        }
-
-        return commandToReturn;
+        return fullCommand;
     }
 }
