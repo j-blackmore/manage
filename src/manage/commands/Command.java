@@ -12,7 +12,7 @@ import manage.main.Profile;
  * 
  * @author J Blackmore
  */
-public class Command {
+public class Command implements CommandInterface {
 
     /** Unknown Command */
     public static final int UNKNOWN_COMMAND = 0;

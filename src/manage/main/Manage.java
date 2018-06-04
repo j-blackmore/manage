@@ -1,4 +1,3 @@
-// Main 
 package manage.main;
 
 import java.io.BufferedReader;
@@ -42,8 +41,11 @@ public class Manage {
                 System.out.print("> ");
                 inputCommand = classifyCommand(input.readLine().trim());
 
-                CommandValidator.validateCommand(inputCommand);
-                inputCommand.completeAction(userProfile);
+                boolean commandIsValid = CommandValidator.validateCommand(inputCommand);
+
+                if(commandIsValid) { inputCommand.completeAction(userProfile); }
+                else { System.out.println("Invalid command: \'" + inputCommand + "\'"); }
+
             } catch (InvalidCommandException e) {
                 System.err.println(e.getMessage());
             } catch (TaskNotFoundException e) {

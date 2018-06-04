@@ -1,6 +1,5 @@
 package manage.commands;
 
-import manage.commands.exceptions.InvalidRenameCommandException;
 import manage.commands.exceptions.InvalidCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
@@ -41,11 +40,11 @@ public class RenameCommand extends Command {
      * @throws TaskNotFoundException when the task to be renamed was not found.
      * @throws TodoNotFoundException when the todo to be renamed or accessed from was not found.
      * @throws CollectionNotFoundException when the collection to be renamed or accessed from was not found.
-     * @throws InvalidRenameCommandException for invalid rename commands.
+     * @throws InvalidCommandException for unexpected errors in the command.
      */
     @Override
     public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException, 
-                                    CollectionNotFoundException, InvalidRenameCommandException {
+                                    CollectionNotFoundException, InvalidCommandException {
         switch(getArg(1).toLowerCase()) {
             case "task":
                 if(numOfArgs() == 5) {
@@ -61,7 +60,7 @@ public class RenameCommand extends Command {
                     taskToRename.changeDesc(getArg(2));
                     break;
                 } else {
-                    throw new InvalidRenameCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             case "todo":
                 if(numOfArgs() == 4) {
@@ -73,7 +72,7 @@ public class RenameCommand extends Command {
                     todoToRename.changeName(getArg(2));
                     break;
                 } else {
-                    throw new InvalidRenameCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             case "collection":
                 if(numOfArgs() == 3) {
@@ -81,10 +80,10 @@ public class RenameCommand extends Command {
                     collectionToRename.changeName(getArg(2));
                     break;
                 } else {
-                    throw new InvalidRenameCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             default:
-                throw new InvalidRenameCommandException(this);
+                throw new InvalidCommandException(this);
         }
     }
 

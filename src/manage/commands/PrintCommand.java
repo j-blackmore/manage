@@ -1,9 +1,7 @@
 package manage.commands;
 
-import manage.datatypes.exceptions.CollectionNotFoundException;
 import manage.datatypes.exceptions.DataObjectNotFoundException;
 import manage.commands.exceptions.InvalidCommandException;
-import manage.commands.exceptions.InvalidPrintCommandException;
 import manage.main.Profile;
 
 /**
@@ -40,12 +38,10 @@ public class PrintCommand extends Command {
      * argument. For invalid comamnds (unknown first argument) an exception is thrown.
      * 
      * @param user The profile the command is to be executed on.
-     * @throws InvalidPrintCommandException for invalid print commands.
      * @throws DataObjectNotFoundException for trying to print data object which don't exist.
      */
     @Override
-    public void completeAction(Profile user) throws InvalidPrintCommandException, 
-                                                                    DataObjectNotFoundException {
+    public void completeAction(Profile user) throws DataObjectNotFoundException {
         switch(getArg(1).toLowerCase()) {
             case "all":
                 if(getOptions() == null) {

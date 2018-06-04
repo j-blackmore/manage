@@ -1,6 +1,5 @@
 package manage.commands;
 
-import manage.commands.exceptions.InvalidAddCommandException;
 import manage.commands.exceptions.InvalidCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
@@ -38,14 +37,14 @@ public class AddCommand extends Command{
      * is specified before data object, then a new object is created and added.
      * 
      * @param user The profile the command is to be executed on.
-     * @throws TaskNotFoundException when the task to be added was not found.
+     * @throws TaskNotFoundException when the task toC be added was not found.
      * @throws TodoNotFoundException when the todo to be added or added to was not found.
      * @throws CollectionNotFoundException when the collection to be added to was not found.
-     * @throws InvalidAddCommandException for invalid add commands.
+     * @throws InvalidCommandException for unexpected errors in the command.
      */
     @Override
     public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException, 
-                                           CollectionNotFoundException, InvalidAddCommandException {
+                                           CollectionNotFoundException, InvalidCommandException {
 
         Collection targetCollection;
         Todo targetTodo, todoToAdd;
@@ -91,10 +90,10 @@ public class AddCommand extends Command{
                     targetCollection.addTodo(todoToAdd);
                     break;
                 } else {
-                    throw new InvalidAddCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             default:
-                throw new InvalidAddCommandException(this);
+                throw new InvalidCommandException(this);
         }
     }
 

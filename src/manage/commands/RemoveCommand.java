@@ -1,7 +1,6 @@
 package manage.commands;
 
 import manage.commands.exceptions.InvalidCommandException;
-import manage.commands.exceptions.InvalidRemoveCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
 import manage.main.Profile;
@@ -41,11 +40,11 @@ public class RemoveCommand extends Command {
      * @throws TaskNotFoundException when the task to be removed was not found.
      * @throws TodoNotFoundException when the todo to be removed or removed from was not found.
      * @throws CollectionNotFoundException when the collection to be removed or removed from was not found.
-     * @throws InvalidRemoveCommandException for invalid remove commands.
+     * @throws InvalidCommandException for unexpected errors in the command.
      */
     @Override
     public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException,
-                                        CollectionNotFoundException, InvalidRemoveCommandException {
+                                        CollectionNotFoundException, InvalidCommandException {
         switch(getArg(1).toLowerCase()) {
             case "task":
                 if(numOfArgs() == 4) {
@@ -71,7 +70,7 @@ public class RemoveCommand extends Command {
                     user.todos.remove(todoToRemove);
                     break;
                 } else {
-                    throw new InvalidRemoveCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             case "collection":
                 if(numOfArgs() == 2) {
@@ -79,10 +78,10 @@ public class RemoveCommand extends Command {
                     user.collections.remove(collectionToRemove);
                     break;
                 } else {
-                    throw new InvalidRemoveCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             default:
-                throw new InvalidRemoveCommandException(this);
+                throw new InvalidCommandException(this);
         }
     }
 

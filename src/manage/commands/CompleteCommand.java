@@ -1,7 +1,6 @@
 package manage.commands;
 
 import manage.commands.exceptions.InvalidCommandException;
-import manage.commands.exceptions.InvalidCompleteCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
 import manage.main.Profile;
@@ -40,11 +39,11 @@ public class CompleteCommand extends Command {
      * @throws TaskNotFoundException when the task to be completed was not found.
      * @throws TodoNotFoundException when the todo to completed or accessed was not found.
      * @throws CollectionNotFoundException when the collection to be accessed was not found.
-     * @throws InvalidCompleteCommandException for invalid complete commands.
+     * @throws InvalidCommandException for unexpected errors in the command.
      */
     @Override
     public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException,
-                                    CollectionNotFoundException, InvalidCompleteCommandException {
+                                    CollectionNotFoundException, InvalidCommandException {
         switch(getArg(1).toLowerCase()) {
             case "task":
                 if(numOfArgs() == 4) {
@@ -70,10 +69,10 @@ public class CompleteCommand extends Command {
                     todoToComplete.complete();
                     break;
                 } else {
-                    throw new InvalidCompleteCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             default:
-                throw new InvalidCompleteCommandException(this);
+                throw new InvalidCommandException(this);
         }
     }
 

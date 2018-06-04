@@ -1,6 +1,5 @@
 package manage.commands;
 
-import manage.commands.exceptions.InvalidUncompleteCommandException;
 import manage.commands.exceptions.InvalidCommandException;
 import manage.datatypes.*;
 import manage.datatypes.exceptions.*;
@@ -41,11 +40,11 @@ public class UncompleteCommand extends Command {
      * @throws TaskNotFoundException when the task to be uncompleted was not found.
      * @throws TodoNotFoundException when the todo to uncompleted or accessed was not found.
      * @throws CollectionNotFoundException when the collection to be accessed was not found.
-     * @throws InvalidUncompleteCommandException for invalid uncomplete commands.
+     * @throws InvalidCommandException for unexpected errors in the command.
      */
     @Override
     public void completeAction(Profile user) throws TaskNotFoundException, TodoNotFoundException, 
-                                CollectionNotFoundException, InvalidUncompleteCommandException {
+                                CollectionNotFoundException, InvalidCommandException {
         switch (getArg(1).toLowerCase()) {
             case "task":
                 if(numOfArgs() == 4) {
@@ -71,10 +70,10 @@ public class UncompleteCommand extends Command {
                     todoToUncomplete.unComplete();
                     break; 
                 } else {
-                    throw new InvalidUncompleteCommandException(this);
+                    throw new InvalidCommandException(this);
                 }
             default:
-                throw new InvalidUncompleteCommandException(this);
+                throw new InvalidCommandException(this);
         }
     }
 

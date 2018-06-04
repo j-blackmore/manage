@@ -1,6 +1,5 @@
 package manage.commands;
 
-import manage.commands.exceptions.InvalidCreateCommandException;
 import manage.commands.exceptions.InvalidCommandException;
 import manage.datatypes.*;
 import manage.main.Profile;
@@ -34,10 +33,10 @@ public class CreateCommand extends Command {
      * For invalid commands (first arg isn't task, todo or collection) an exception is thrown.
      * 
      * @param user The profile the command is to be executed on.
-     * @throws InvalidCreateCommandException for invalid create commands.
+     * @throws InvalidCommandException for unexpected errors in the command.
      */
     @Override
-    public void completeAction(Profile user) throws InvalidCreateCommandException {
+    public void completeAction(Profile user) throws InvalidCommandException {
         switch(getArg(1).toLowerCase()) {
             case "task":
                 user.add(new Task(getArg(2)));
@@ -49,7 +48,7 @@ public class CreateCommand extends Command {
                 user.add(new Collection(getArg(2)));
                 break;
             default:
-                throw new InvalidCreateCommandException(this);
+                throw new InvalidCommandException(this);
         }
     }
 

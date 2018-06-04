@@ -1,7 +1,6 @@
 package manage.commands;
 
 import manage.commands.exceptions.InvalidCommandException;
-import manage.commands.exceptions.InvalidHelpCommandException;
 import manage.main.Profile;
 
 /**
@@ -32,10 +31,10 @@ public class HelpCommand extends Command {
      * specific command. For invalid commands an exception is thrown.
      * 
      * @param user The profile the command is to be executed on.
-     * @throws InvalidHelpCommandException for invalid help commands.
+     * @throws InvalidCommandException for unexpected errors in the command.
      */
     @Override
-    public void completeAction(Profile user) throws InvalidHelpCommandException {
+    public void completeAction(Profile user) throws InvalidCommandException {
         if(numOfArgs() == 0) { 
             System.out.println("Add \t\t  |  Add a new or pre existing object to another");
             System.out.println("Close \t\t  |  Saves and closes the program");
@@ -97,10 +96,10 @@ public class HelpCommand extends Command {
                     System.out.println(UncompleteCommand.getCorrectCommandFormat());
                     break;
                 default:
-                    throw new InvalidHelpCommandException(this);
+                    throw new InvalidCommandException(this);
             }
         } else {
-            throw new InvalidHelpCommandException(this);
+            throw new InvalidCommandException(this);
         }
     }
 
